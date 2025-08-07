@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "eldenflasks:block/mixer", "y": 90},
+    "facing=south": { "model": "eldenflasks:block/mixer", "y": 270 },
+    "facing=west":  { "model": "eldenflasks:block/mixer", "y": 360 },
+    "facing=east":  { "model": "eldenflasks:block/mixer", "y": 180 }
+  }
+}

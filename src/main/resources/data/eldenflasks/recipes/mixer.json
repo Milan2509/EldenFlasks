@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "GAG",
+    "GGG"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_shovel"
+    },
+    "A": {
+      "item": "minecraft:echo_shard"
+    },
+    "G": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "eldenflasks:mixer",
+    "count": 1
+  }
+}

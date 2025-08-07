@@ -1,0 +1,26 @@
+{
+  "itemGroup.eldenflasks.generic": "Elden Flasks",
+
+  "block.eldenflasks.mixer": "Flask Mixer",
+  "item.eldenflasks.health_flask": "Flask of Healing",
+  "item.eldenflasks.pearl": "Pearl of a Thousand Souls",
+  "item.eldenflasks.sacred_tears": "Goblet of Sacred Tears",
+  "item.eldenflasks.rune": "Ancient Rune",
+
+  "text.config.eldenflasks/flasks_v1.title": "Elden Flasks Config",
+
+  "text.config.eldenflasks/flasks_v1.section.baseStats": "Base Stats",
+  "text.config.eldenflasks/flasks_v1.option.maxCharges": "Max Charges (Base)",
+  "text.config.eldenflasks/flasks_v1.option.healing": "Healing (Base)",
+  "text.config.eldenflasks/flasks_v1.option.drinkTime": "Drink Time (Base)",
+
+  "text.config.eldenflasks/flasks_v1.section.statLimits": "Stat Limits",
+  "text.config.eldenflasks/flasks_v1.option.maxChargeLimit": "Max Charges Limit",
+  "text.config.eldenflasks/flasks_v1.option.healingLimit": "Healing Limit",
+  "text.config.eldenflasks/flasks_v1.option.drinkTimeLimit": "Drink Time Limit",
+
+  "text.config.eldenflasks/flasks_v1.section.enhancerModifiers": "Enhancer Modifiers",
+  "text.config.eldenflasks/flasks_v1.option.maxChargeModifier": "Sacred Tears Enhancing Modifier",
+  "text.config.eldenflasks/flasks_v1.option.healingModifier": "Ancient Rune Enhancing Modifier",
+  "text.config.eldenflasks/flasks_v1.option.drinkTimeModifier": "Pearl Enhancing Modifier"
+}

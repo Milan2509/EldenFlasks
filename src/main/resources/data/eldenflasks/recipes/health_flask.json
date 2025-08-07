@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "AGA",
+    " A "
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:buttons"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "G": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "item": "eldenflasks:health_flask",
+    "count": 1
+  }
+}
