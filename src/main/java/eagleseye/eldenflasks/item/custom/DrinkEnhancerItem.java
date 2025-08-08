@@ -24,7 +24,7 @@ public class DrinkEnhancerItem extends Item {
         lore = Text.literal(loreString)
                 .formatted(Formatting.GOLD, Formatting.ITALIC);
         desc = Text.literal("-" + (float) modifier / 20 + " Drink Time to Flask of Healing" +
-                " (Max: " + (float) maxModifier / 20 + ")").formatted(Formatting.GRAY);
+                " (Max: " + (float) maxModifier / 20 + " Sec)").formatted(Formatting.GRAY);
     }
 
     @Override

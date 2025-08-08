@@ -20,7 +20,7 @@
   "text.config.eldenflasks/flasks_v1.option.drinkTimeLimit": "Drink Time Limit",
 
   "text.config.eldenflasks/flasks_v1.section.enhancerModifiers": "Enhancer Modifiers",
-  "text.config.eldenflasks/flasks_v1.option.maxChargeModifier": "Sacred Tears Enhancing Modifier",
-  "text.config.eldenflasks/flasks_v1.option.healingModifier": "Ancient Rune Enhancing Modifier",
-  "text.config.eldenflasks/flasks_v1.option.drinkTimeModifier": "Pearl Enhancing Modifier"
+  "text.config.eldenflasks/flasks_v1.option.maxChargeModifier": "Sacred Tears Enhancing Modifier (Charges)",
+  "text.config.eldenflasks/flasks_v1.option.healingModifier": "Ancient Rune Enhancing Modifier (Healing)",
+  "text.config.eldenflasks/flasks_v1.option.drinkTimeModifier": "Pearl Enhancing Modifier (Drink Time)"
 }

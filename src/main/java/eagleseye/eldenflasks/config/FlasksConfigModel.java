@@ -17,7 +17,7 @@ public class FlasksConfigModel {
     @SectionHeader("statLimits")
     public int maxChargeLimit = 6;
     public float healingLimit = 20;
-    public int drinkTimeLimit = 40;
+    public int drinkTimeLimit = 20;
 
     @SectionHeader("enhancerModifiers")
     public int maxChargeModifier = 1;
