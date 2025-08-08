@@ -9,6 +9,10 @@ import io.wispforest.owo.config.annotation.SectionHeader;
 @Modmenu(modId = EldenFlasks.MOD_ID)
 @Config(name = "eldenflasks/flasks_v1", wrapperName = "EldenFlasksFlaskConfig")
 public class FlasksConfigModel {
+    @SectionHeader("general")
+    @Comment("When more flasks are held then the flasks aren't usable.")
+    public int maxHeldHealingFlasks = 1;
+
     @SectionHeader("baseStats")
     public int maxCharges = 3;
     public float healing = 8;

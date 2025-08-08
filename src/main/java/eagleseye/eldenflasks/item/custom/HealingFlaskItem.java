@@ -1,6 +1,7 @@
 package eagleseye.eldenflasks.item.custom;
 
 import eagleseye.eldenflasks.EldenFlasks;
+import eagleseye.eldenflasks.item.ItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -8,6 +9,7 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
@@ -25,9 +27,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static eagleseye.eldenflasks.EldenFlasks.FLASKS_CONFIG;
+
 public class HealingFlaskItem extends Item {
-    public static final TagKey<Block> RECHARGE_BLOCKS = TagKey.of(RegistryKeys.BLOCK,
-            new Identifier(EldenFlasks.MOD_ID, "recharge_blocks"));
+//    public static final TagKey<Block> RECHARGE_BLOCKS = TagKey.of(RegistryKeys.BLOCK,
+//            new Identifier(EldenFlasks.MOD_ID, "recharge_blocks"));
 
     public HealingFlaskItem(Settings settings) {
         super(settings.maxCount(1).rarity(Rarity.UNCOMMON));
@@ -38,10 +42,10 @@ public class HealingFlaskItem extends Item {
         if(!stack.hasNbt()) {
             NbtCompound nbt = stack.getOrCreateNbt();
 
-            nbt.putInt("charges", EldenFlasks.FLASKS_CONFIG.maxCharges());
-            nbt.putInt("maxCharges", EldenFlasks.FLASKS_CONFIG.maxCharges());
-            nbt.putInt("drinkTime", EldenFlasks.FLASKS_CONFIG.drinkTime());
-            nbt.putFloat("healing", EldenFlasks.FLASKS_CONFIG.healing());
+            nbt.putInt("charges", FLASKS_CONFIG.maxCharges());
+            nbt.putInt("maxCharges", FLASKS_CONFIG.maxCharges());
+            nbt.putInt("drinkTime", FLASKS_CONFIG.drinkTime());
+            nbt.putFloat("healing", FLASKS_CONFIG.healing());
         } else {
             resetFlaskWhenOverEnhanced(stack);
         }
@@ -50,16 +54,16 @@ public class HealingFlaskItem extends Item {
     private void resetFlaskWhenOverEnhanced(ItemStack stack){
         NbtCompound nbt = stack.getNbt();
 
-        boolean charges = nbt.getInt("maxCharges") > EldenFlasks.FLASKS_CONFIG.maxChargeLimit();
-        boolean healing = nbt.getFloat("healing") > EldenFlasks.FLASKS_CONFIG.healingLimit();
-        boolean drinkTime = nbt.getInt("drinkTime") < EldenFlasks.FLASKS_CONFIG.drinkTimeLimit();
+        boolean charges = nbt.getInt("maxCharges") > FLASKS_CONFIG.maxChargeLimit();
+        boolean healing = nbt.getFloat("healing") > FLASKS_CONFIG.healingLimit();
+        boolean drinkTime = nbt.getInt("drinkTime") < FLASKS_CONFIG.drinkTimeLimit();
 
         if (charges) {
-            nbt.putInt("maxCharges", EldenFlasks.FLASKS_CONFIG.maxChargeLimit());
-            nbt.putInt("charges", EldenFlasks.FLASKS_CONFIG.maxChargeLimit());
+            nbt.putInt("maxCharges", FLASKS_CONFIG.maxChargeLimit());
+            nbt.putInt("charges", FLASKS_CONFIG.maxChargeLimit());
         }
-        if (healing) nbt.putFloat("healing", EldenFlasks.FLASKS_CONFIG.healingLimit());
-        if (drinkTime) nbt.putInt("drinkTime", EldenFlasks.FLASKS_CONFIG.drinkTimeLimit());
+        if (healing) nbt.putFloat("healing", FLASKS_CONFIG.healingLimit());
+        if (drinkTime) nbt.putInt("drinkTime", FLASKS_CONFIG.drinkTimeLimit());
     }
 
     @Override
@@ -73,6 +77,15 @@ public class HealingFlaskItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        PlayerInventory playerInventory = user.getInventory();
+
+        if(playerInventory.count(ItemRegistry.HEALTH_FLASK) > FLASKS_CONFIG.maxHeldHealingFlasks()){
+            user.applyDamageEffects(user, user);
+            user.sendMessage(Text.literal("The Power of Too Many Flasks is Too Strong For You").formatted(Formatting.DARK_RED), true);
+            return TypedActionResult.fail(user.getStackInHand(hand));
+        }
+
+
         if(user.getStackInHand(hand).getNbt().getInt("charges") > 0){
             return ItemUsage.consumeHeldItem(world, user, hand);
         } else {
@@ -105,7 +118,7 @@ public class HealingFlaskItem extends Item {
             }
         }
 
-        return ActionResult.FAIL;
+        return ActionResult.CONSUME;
     }
 
     @Override
@@ -137,9 +150,9 @@ public class HealingFlaskItem extends Item {
             tooltip.add(Text.literal("Healing: " + (int) healing + " HP").formatted(Formatting.GRAY));
             tooltip.add(Text.literal("Drink Speed: " + (float) drinkSpeed / 20 + " Sec").formatted(Formatting.GRAY));
         } else {
-            tooltip.add(Text.literal("Charges: " + EldenFlasks.FLASKS_CONFIG.maxCharges() + "/" + EldenFlasks.FLASKS_CONFIG.maxCharges()).formatted(Formatting.GOLD));
-            tooltip.add(Text.literal("Healing: " + (int) EldenFlasks.FLASKS_CONFIG.healing() + " HP").formatted(Formatting.GRAY));
-            tooltip.add(Text.literal("Drink Speed: " + (float) EldenFlasks.FLASKS_CONFIG.drinkTime() / 20 + " Sec").formatted(Formatting.GRAY));
+            tooltip.add(Text.literal("Charges: " + FLASKS_CONFIG.maxCharges() + "/" + FLASKS_CONFIG.maxCharges()).formatted(Formatting.GOLD));
+            tooltip.add(Text.literal("Healing: " + (int) FLASKS_CONFIG.healing() + " HP").formatted(Formatting.GRAY));
+            tooltip.add(Text.literal("Drink Speed: " + (float) FLASKS_CONFIG.drinkTime() / 20 + " Sec").formatted(Formatting.GRAY));
         }
     }
 

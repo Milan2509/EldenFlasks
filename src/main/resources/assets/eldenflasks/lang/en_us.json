@@ -9,6 +9,9 @@
 
   "text.config.eldenflasks/flasks_v1.title": "Elden Flasks Config",
 
+  "text.config.eldenflasks/flasks_v1.section.general": "General",
+  "text.config.eldenflasks/flasks_v1.option.maxHeldHealingFlasks": "Maximum Healing Flasks in Inventory",
+
   "text.config.eldenflasks/flasks_v1.section.baseStats": "Base Stats",
   "text.config.eldenflasks/flasks_v1.option.maxCharges": "Max Charges (Base)",
   "text.config.eldenflasks/flasks_v1.option.healing": "Healing (Base)",

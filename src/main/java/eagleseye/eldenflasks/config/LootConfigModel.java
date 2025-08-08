@@ -2,8 +2,6 @@ package eagleseye.eldenflasks.config;
 import blue.endless.jankson.Comment;
 import io.wispforest.owo.config.annotation.Config;
 
-import java.util.List;
-
 @Config(name = "eldenflasks/loot_v1", wrapperName = "EldenFlasksLootConfig")
 public class LootConfigModel {
     @Comment("""
@@ -11,8 +9,8 @@ public class LootConfigModel {
             
             Format: <IDENTIFIER>|<DROP_RATE>
             
-            <IDENTIFIER>: unique loot table identifier, can be found using the /loot command
-            <DROP_RATE>: float of drop chance 0-1 where 1 = 100%
+            <IDENTIFIER>: unique loot table identifier (modid:loot_table), can be found using the /loot command
+            <DROP_RATE>: drop chance 0-1 where 1 = 100%
             """)
     public String[] pearlLootTables = {
             "minecraft:chests/buried_treasure|0.8",
@@ -24,7 +22,7 @@ public class LootConfigModel {
     };
     public String[] tearsLootTable = {
             "minecraft:entities/ender_dragon|1.0",
-            "minecraft:chests/ancient_city|0.5",
+            "minecraft:chests/ancient_city|0.1",
             "minecraft:chests/end_city_treasure|0.3",
             "minecraft:entities/wither|1.0"
     };
