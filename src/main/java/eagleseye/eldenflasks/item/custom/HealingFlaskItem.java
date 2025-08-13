@@ -1,8 +1,6 @@
 package eagleseye.eldenflasks.item.custom;
 
-import eagleseye.eldenflasks.EldenFlasks;
 import eagleseye.eldenflasks.item.ItemRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
@@ -15,8 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -157,6 +153,6 @@ public class HealingFlaskItem extends Item {
     }
 
     private static boolean isRechargeBlock(BlockState state){
-        return state.isOf(Blocks.CAMPFIRE);
+        return state.isOf(Blocks.CAMPFIRE) || state.isOf(Blocks.SOUL_CAMPFIRE);
     }
 }
