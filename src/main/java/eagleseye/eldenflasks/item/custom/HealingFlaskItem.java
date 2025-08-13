@@ -114,7 +114,7 @@ public class HealingFlaskItem extends Item {
             }
         }
 
-        return ActionResult.CONSUME;
+        return ActionResult.PASS;
     }
 
     @Override
