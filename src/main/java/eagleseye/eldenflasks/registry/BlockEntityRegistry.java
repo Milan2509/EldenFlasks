@@ -1,7 +1,7 @@
-package eagleseye.eldenflasks.block.entity;
+package eagleseye.eldenflasks.registry;
 
 import eagleseye.eldenflasks.EldenFlasks;
-import eagleseye.eldenflasks.block.BlockRegistry;
+import eagleseye.eldenflasks.block.entity.FlaskMixerBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;

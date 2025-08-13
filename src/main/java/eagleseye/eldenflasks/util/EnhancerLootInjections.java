@@ -1,7 +1,7 @@
-package eagleseye.eldenflasks.loot;
+package eagleseye.eldenflasks.util;
 
 import eagleseye.eldenflasks.EldenFlasks;
-import eagleseye.eldenflasks.item.ItemRegistry;
+import eagleseye.eldenflasks.registry.ItemRegistry;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.item.Item;
 import net.minecraft.loot.LootPool;

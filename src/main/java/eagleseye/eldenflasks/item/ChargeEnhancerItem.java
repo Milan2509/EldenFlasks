@@ -1,6 +1,5 @@
-package eagleseye.eldenflasks.item.custom;
+package eagleseye.eldenflasks.item;
 
-import eagleseye.eldenflasks.EldenFlasks;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

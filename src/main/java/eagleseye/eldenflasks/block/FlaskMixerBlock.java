@@ -1,6 +1,6 @@
-package eagleseye.eldenflasks.block.custom;
+package eagleseye.eldenflasks.block;
 
-import eagleseye.eldenflasks.block.entity.BlockEntityRegistry;
+import eagleseye.eldenflasks.registry.BlockEntityRegistry;
 import eagleseye.eldenflasks.block.entity.FlaskMixerBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;

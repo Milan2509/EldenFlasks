@@ -1,10 +1,10 @@
-package eagleseye.eldenflasks.item;
+package eagleseye.eldenflasks.registry;
 
 import eagleseye.eldenflasks.EldenFlasks;
-import eagleseye.eldenflasks.item.custom.ChargeEnhancerItem;
-import eagleseye.eldenflasks.item.custom.DrinkEnhancerItem;
-import eagleseye.eldenflasks.item.custom.HealingFlaskItem;
-import eagleseye.eldenflasks.item.custom.HealingEnhancerItem;
+import eagleseye.eldenflasks.item.ChargeEnhancerItem;
+import eagleseye.eldenflasks.item.DrinkEnhancerItem;
+import eagleseye.eldenflasks.item.HealingFlaskItem;
+import eagleseye.eldenflasks.item.HealingEnhancerItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;

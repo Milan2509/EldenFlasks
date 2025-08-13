@@ -1,12 +1,12 @@
 package eagleseye.eldenflasks;
 
-import eagleseye.eldenflasks.block.BlockRegistry;
-import eagleseye.eldenflasks.block.entity.BlockEntityRegistry;
+import eagleseye.eldenflasks.registry.BlockRegistry;
+import eagleseye.eldenflasks.registry.BlockEntityRegistry;
 import eagleseye.eldenflasks.config.EldenFlasksFlaskConfig;
 import eagleseye.eldenflasks.config.EldenFlasksLootConfig;
-import eagleseye.eldenflasks.item.FlaskGroup;
-import eagleseye.eldenflasks.item.ItemRegistry;
-import eagleseye.eldenflasks.loot.EnhancerLootInjections;
+import eagleseye.eldenflasks.registry.FlaskGroup;
+import eagleseye.eldenflasks.registry.ItemRegistry;
+import eagleseye.eldenflasks.util.EnhancerLootInjections;
 import eagleseye.eldenflasks.screen.ScreenHandlerRegistry;
 import net.fabricmc.api.ModInitializer;
 

@@ -1,7 +1,7 @@
-package eagleseye.eldenflasks.item;
+package eagleseye.eldenflasks.registry;
 
 import eagleseye.eldenflasks.EldenFlasks;
-import eagleseye.eldenflasks.block.BlockRegistry;
+import eagleseye.eldenflasks.registry.ItemRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;

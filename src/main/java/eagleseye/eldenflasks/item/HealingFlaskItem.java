@@ -1,6 +1,6 @@
-package eagleseye.eldenflasks.item.custom;
+package eagleseye.eldenflasks.item;
 
-import eagleseye.eldenflasks.item.ItemRegistry;
+import eagleseye.eldenflasks.registry.ItemRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;

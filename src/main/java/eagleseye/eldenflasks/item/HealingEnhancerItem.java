@@ -1,4 +1,4 @@
-package eagleseye.eldenflasks.item.custom;
+package eagleseye.eldenflasks.item;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
@@ -11,20 +11,20 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DrinkEnhancerItem extends Item {
+public class HealingEnhancerItem extends Item {
     public Text lore;
     public Text desc;
 
     private static String loreString;
 
-    public DrinkEnhancerItem(Settings settings, int modifier, int maxModifier, String str) {
+    public HealingEnhancerItem(Settings settings, float modifier, float maxModifier, String str) {
         super(settings.rarity(Rarity.RARE).maxCount(8));
         loreString = str;
 
         lore = Text.literal(loreString)
                 .formatted(Formatting.GOLD, Formatting.ITALIC);
-        desc = Text.literal("-" + (float) modifier / 20 + " Drink Time to Flask of Healing" +
-                " (Max: " + (float) maxModifier / 20 + " Sec)").formatted(Formatting.GRAY);
+        desc = Text.literal("+" + (int) modifier + " Healing to Flask of Healing"
+                + " (Max: " + (int) maxModifier + ")").formatted(Formatting.GRAY);
     }
 
     @Override
