@@ -28,8 +28,8 @@ public class BlockRegistry {
         return Registry.register(Registries.BLOCK, new Identifier(EldenFlasks.MOD_ID, id), block);
     }
 
-    private static BlockItem registerItem(String id, Block block){
-        return Registry.register(Registries.ITEM, new Identifier(EldenFlasks.MOD_ID, id),
+    private static void registerItem(String id, Block block){
+        Registry.register(Registries.ITEM, new Identifier(EldenFlasks.MOD_ID, id),
                 new BlockItem(block, new FabricItemSettings()) {
                     @Override
                     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {

@@ -7,7 +7,7 @@ import eagleseye.eldenflasks.config.EldenFlasksLootConfig;
 import eagleseye.eldenflasks.registry.FlaskGroup;
 import eagleseye.eldenflasks.registry.ItemRegistry;
 import eagleseye.eldenflasks.util.EnhancerLootInjections;
-import eagleseye.eldenflasks.screen.ScreenHandlerRegistry;
+import eagleseye.eldenflasks.registry.ScreenHandlerRegistry;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;

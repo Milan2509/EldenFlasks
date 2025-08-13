@@ -81,12 +81,12 @@ public class HealingFlaskItem extends Item {
             return TypedActionResult.fail(user.getStackInHand(hand));
         }
 
-
         if(user.getStackInHand(hand).getNbt().getInt("charges") > 0){
+            float testMath = (float) user.getStackInHand(hand).getNbt().getInt("charges") / user.getStackInHand(hand).getNbt().getInt("maxCharges");
+            user.sendMessage(Text.literal(Float.toString(testMath)).formatted(Formatting.DARK_RED), false);
             return ItemUsage.consumeHeldItem(world, user, hand);
-        } else {
-            user.sendMessage(Text.literal("Flask Empty").formatted(Formatting.RED), true);
         }
+
         return TypedActionResult.pass(user.getStackInHand(hand));
     }
 

@@ -1,6 +1,7 @@
-package eagleseye.eldenflasks.screen;
+package eagleseye.eldenflasks.registry;
 
 import eagleseye.eldenflasks.EldenFlasks;
+import eagleseye.eldenflasks.screen.FlaskMixerScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;

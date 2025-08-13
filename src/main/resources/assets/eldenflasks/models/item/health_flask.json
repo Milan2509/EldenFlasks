@@ -2,5 +2,18 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "eldenflasks:item/health_flask"
-  }
+  },
+  "overrides": [
+    { "predicate": { "charges": 0.0 }, "model": "eldenflasks:item/health_flask_empty" },
+    { "predicate": { "charges": 0.1 }, "model": "eldenflasks:item/health_flask_nearly_empty" },
+    { "predicate": { "charges": 0.2 }, "model": "eldenflasks:item/health_flask_nearly_empty" },
+    { "predicate": { "charges": 0.3 }, "model": "eldenflasks:item/health_flask_nearly_empty" },
+    { "predicate": { "charges": 0.4 }, "model": "eldenflasks:item/health_flask_half" },
+    { "predicate": { "charges": 0.5 }, "model": "eldenflasks:item/health_flask_half" },
+    { "predicate": { "charges": 0.6 }, "model": "eldenflasks:item/health_flask_half" },
+    { "predicate": { "charges": 0.7 }, "model": "eldenflasks:item/health_flask_bit" },
+    { "predicate": { "charges": 0.8 }, "model": "eldenflasks:item/health_flask_bit" },
+    { "predicate": { "charges": 0.9 }, "model": "eldenflasks:item/health_flask_full" },
+    { "predicate": { "charges": 1.0 }, "model": "eldenflasks:item/health_flask_full" }
+  ]
 }
