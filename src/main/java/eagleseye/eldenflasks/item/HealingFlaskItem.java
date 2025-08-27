@@ -76,14 +76,11 @@ public class HealingFlaskItem extends Item {
         PlayerInventory playerInventory = user.getInventory();
 
         if(playerInventory.count(ItemRegistry.HEALTH_FLASK) > FLASKS_CONFIG.maxHeldHealingFlasks()){
-            user.applyDamageEffects(user, user);
             user.sendMessage(Text.literal("The Power of Too Many Flasks is Too Strong For You").formatted(Formatting.DARK_RED), true);
             return TypedActionResult.fail(user.getStackInHand(hand));
         }
 
         if(user.getStackInHand(hand).getNbt().getInt("charges") > 0){
-            float testMath = (float) user.getStackInHand(hand).getNbt().getInt("charges") / user.getStackInHand(hand).getNbt().getInt("maxCharges");
-            user.sendMessage(Text.literal(Float.toString(testMath)).formatted(Formatting.DARK_RED), false);
             return ItemUsage.consumeHeldItem(world, user, hand);
         }
 
@@ -136,6 +133,7 @@ public class HealingFlaskItem extends Item {
             int drinkSpeed = stack.getNbt().getInt("drinkTime");
             float healing = stack.getNbt().getFloat("healing");
 
+            //Charges
             if (charges == maxCharges) {
                 tooltip.add(Text.literal("Charges: " + charges + "/" + maxCharges).formatted(Formatting.GOLD));
             } else if (charges < maxCharges && charges > 0) {
@@ -143,9 +141,12 @@ public class HealingFlaskItem extends Item {
             } else {
                 tooltip.add(Text.literal("Flask Empty").formatted(Formatting.RED));
             }
+            //Other Stats
             tooltip.add(Text.literal("Healing: " + (int) healing + " HP").formatted(Formatting.GRAY));
             tooltip.add(Text.literal("Drink Speed: " + (float) drinkSpeed / 20 + " Sec").formatted(Formatting.GRAY));
-        } else {
+        }
+        //Fallback
+        else {
             tooltip.add(Text.literal("Charges: " + FLASKS_CONFIG.maxCharges() + "/" + FLASKS_CONFIG.maxCharges()).formatted(Formatting.GOLD));
             tooltip.add(Text.literal("Healing: " + (int) FLASKS_CONFIG.healing() + " HP").formatted(Formatting.GRAY));
             tooltip.add(Text.literal("Drink Speed: " + (float) FLASKS_CONFIG.drinkTime() / 20 + " Sec").formatted(Formatting.GRAY));

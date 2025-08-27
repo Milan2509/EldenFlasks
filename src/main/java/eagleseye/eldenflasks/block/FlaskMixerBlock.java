@@ -31,6 +31,7 @@ public class FlaskMixerBlock extends BlockWithEntity implements BlockEntityProvi
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
@@ -46,7 +47,7 @@ public class FlaskMixerBlock extends BlockWithEntity implements BlockEntityProvi
         return new FlaskMixerBlockEntity(pos, state);
     }
 
-
+    @SuppressWarnings("deprecation")
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
@@ -59,6 +60,7 @@ public class FlaskMixerBlock extends BlockWithEntity implements BlockEntityProvi
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {

@@ -17,6 +17,7 @@ public class FlaskGroup {
                     .icon(() -> new ItemStack(ItemRegistry.HEALTH_FLASK)).entries((displayContext, entries) -> {
                         entries.add(BlockRegistry.MIXER);
                         entries.add(ItemRegistry.HEALTH_FLASK);
+                        entries.add(ItemRegistry.MIXING_FLASK);
                         entries.add(ItemRegistry.PEARL);
                         entries.add(ItemRegistry.SACRED_TEARS);
                         entries.add(ItemRegistry.RUNE);
