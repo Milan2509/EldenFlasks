@@ -1,29 +1,22 @@
 package eagleseye.eldenflasks.item;
 
-import eagleseye.eldenflasks.registry.ItemRegistry;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import eagleseye.eldenflasks.EldenFlasks;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
-import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-
-import static eagleseye.eldenflasks.EldenFlasks.FLASKS_CONFIG;
 
 public class MixingFlaskItem extends Item {
     public MixingFlaskItem(Settings settings) {
@@ -37,6 +30,7 @@ public class MixingFlaskItem extends Item {
 
             nbt.putInt("charges", 1);
             nbt.putInt("maxCharges", 1);
+            nbt.putInt("duration", 30);
             nbt.putString("slot1", "empty");
             nbt.putString("slot2", "empty");
         }
@@ -47,7 +41,8 @@ public class MixingFlaskItem extends Item {
         NbtCompound nbt = stack.getNbt();
         nbt.putInt("charges", nbt.getInt("charges") - 1);
 
-        user.sendMessage(Text.literal("CONSUMED"));
+        user.addStatusEffect(new StatusEffectInstance(EldenFlasks.BUFFED_EFFECT,
+                nbt.getInt("duration") * 20, 0, true, true));
         return stack;
     }
 
@@ -105,6 +100,7 @@ public class MixingFlaskItem extends Item {
         if (stack.hasNbt()) {
             int maxCharges = stack.getNbt().getInt("maxCharges");
             int charges = stack.getNbt().getInt("charges");
+            int duration = stack.getNbt().getInt("duration");
             String slot1 = stack.getNbt().getString("slot1");
             String slot2 = stack.getNbt().getString("slot2");
 
@@ -116,8 +112,25 @@ public class MixingFlaskItem extends Item {
             } else {
                 tooltip.add(Text.literal("Flask Empty").formatted(Formatting.RED));
             }
-
-            tooltip.add(Text.literal(slot1 + slot2));
+            //Duration
+            tooltip.add(Text.literal("Duration: " + duration).formatted(Formatting.GRAY));
+            //Slots
+            tooltip.add(Text.literal("Slot 1: " + tooltipTranslationHelper(slot1)).formatted(Formatting.AQUA));
+            tooltip.add(Text.literal("Slot 2: " + tooltipTranslationHelper(slot2)).formatted(Formatting.AQUA));
         }
+        //Fallback
+        else {
+            tooltip.add(Text.literal("Charges: 1/1").formatted(Formatting.GOLD));
+            tooltip.add(Text.literal("Duration: 30 Sec").formatted(Formatting.GRAY));
+            //Slots
+            tooltip.add(Text.literal("Slot 1: Empty").formatted(Formatting.AQUA));
+            tooltip.add(Text.literal("Slot 2: Empty").formatted(Formatting.AQUA));
+        }
+    }
+
+    private String tooltipTranslationHelper(String key){
+        if(key == "empty") return "Empty";
+
+        return "ERROR";
     }
 }

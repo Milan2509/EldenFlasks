@@ -28,5 +28,6 @@
   "text.config.eldenflasks/flasks_v1.option.drinkTimeModifier": "Pearl Enhancing Modifier (Drink Time)",
 
   "item.eldenflasks.mixing_flask": "Mixed Flask",
-  "item.eldenflasks.mixing_flask.desc": "Applied buffs when consumed"
+  "item.eldenflasks.mixing_flask.desc": "Applies buffs when consumed",
+  "effect.eldenflasks.buffed": "Buffed"
 }
