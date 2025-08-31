@@ -29,5 +29,5 @@
 
   "item.eldenflasks.mixing_flask": "Mixed Flask",
   "item.eldenflasks.mixing_flask.desc": "Applies buffs when consumed",
-  "effect.eldenflasks.buffed": "Buffed"
+  "effect.eldenflasks.buffed": "Buffed [WIP]"
 }
