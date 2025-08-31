@@ -11,8 +11,8 @@ import net.minecraft.util.Identifier;
 public class ItemRegistry {
     public static final Item HEALTH_FLASK = register("health_flask",
             new HealingFlaskItem(new FabricItemSettings()));
-    public static final Item MIXING_FLASK = register("mixing_flask",
-            new MixingFlaskItem(new FabricItemSettings()));
+//    public static final Item MIXING_FLASK = register("mixing_flask",
+//            new MixingFlaskItem(new FabricItemSettings()));
 
     //Enhancer Items
     //Charge Enhancers
@@ -37,7 +37,6 @@ public class ItemRegistry {
             drinkTimeModifier, drinkTimeLimit, "This pearl is rumoured to hold the souls of fallen pirates."));
 
     //Buff Items
-
     private static Item register(String id, Item item){
         return Registry.register(Registries.ITEM, Identifier.of(EldenFlasks.MOD_ID, id), item);
     }

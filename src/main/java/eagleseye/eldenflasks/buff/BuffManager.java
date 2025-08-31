@@ -1,22 +1,17 @@
 package eagleseye.eldenflasks.buff;
 
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-
-import java.util.HashMap;
-import java.util.Map;
+import eagleseye.eldenflasks.EldenFlasks;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryLoader;
+import net.minecraft.util.Identifier;
 
 public class BuffManager {
-    public static final Map<String, BuffObj> BUFF_LIST = registerBuffsToMap();
+    public static final RegistryKey<Registry<FlaskBuff>> FLASK_BUFF_KEY =
+            RegistryKey.ofRegistry(new Identifier(EldenFlasks.MOD_ID, "flask_buffs"));
 
-    public static final BuffObj ATTACK_DAMAGE = new BuffObj("Attack Damage", "Increases the player's attack damage with 12%",
-            EntityAttributes.GENERIC_ATTACK_DAMAGE, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
-
-    public static Map<String, BuffObj> registerBuffsToMap(){
-        Map<String, BuffObj> tmpMap = new HashMap<>();
-
-        tmpMap.put("attack_damage", ATTACK_DAMAGE);
-
-        return tmpMap;
+    public static void init(){
+//        DynamicRegistries.register(FLASK_BUFF_KEY, FlaskBuff.CODEC);
     }
 }

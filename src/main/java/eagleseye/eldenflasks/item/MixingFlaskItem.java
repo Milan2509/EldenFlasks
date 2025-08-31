@@ -19,6 +19,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class MixingFlaskItem extends Item {
+    private final NbtCompound BUFF_DATA_SLOT_1 = new NbtCompound();
+
     public MixingFlaskItem(Settings settings) {
         super(settings.maxCount(1).rarity(Rarity.UNCOMMON));
     }
@@ -34,6 +36,10 @@ public class MixingFlaskItem extends Item {
             nbt.putString("slot1", "empty");
             nbt.putString("slot2", "empty");
         }
+        // How do I do this correctly???
+//        else if (entity.isPlayer()){
+//            entity.writeNbt(BUFF_DATA_SLOT_1);
+//        }
     }
 
     @Override

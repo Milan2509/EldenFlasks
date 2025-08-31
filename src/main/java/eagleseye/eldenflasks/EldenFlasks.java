@@ -31,9 +31,12 @@ public class EldenFlasks implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Initializing: Elden Flasks");
+		LOGGER.info("Initializing: " + MOD_ID);
+		//Register Buff Effect
 		Registry.register(Registries.STATUS_EFFECT, new Identifier(MOD_ID, "buffed"), BUFFED_EFFECT);
-		BuffManager.registerBuffsToMap();
+
+		//Other class initializations
+		BuffManager.init();
 		ItemRegistry.init();
 		BlockRegistry.init();
 		BlockEntityRegistry.init();
@@ -42,5 +45,6 @@ public class EldenFlasks implements ModInitializer {
 
 		EnhancerLootInjections.parseLootTableConfig();
 
+		LOGGER.info("Successfully Initialized: " + MOD_ID);
 	}
 }
