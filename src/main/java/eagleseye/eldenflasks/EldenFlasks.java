@@ -2,14 +2,10 @@ package eagleseye.eldenflasks;
 
 import eagleseye.eldenflasks.buff.BuffEffect;
 import eagleseye.eldenflasks.buff.BuffManager;
-import eagleseye.eldenflasks.registry.BlockRegistry;
-import eagleseye.eldenflasks.registry.BlockEntityRegistry;
+import eagleseye.eldenflasks.registry.*;
 import eagleseye.eldenflasks.config.EldenFlasksFlaskConfig;
 import eagleseye.eldenflasks.config.EldenFlasksLootConfig;
-import eagleseye.eldenflasks.registry.FlaskGroup;
-import eagleseye.eldenflasks.registry.ItemRegistry;
 import eagleseye.eldenflasks.util.EnhancerLootInjections;
-import eagleseye.eldenflasks.registry.ScreenHandlerRegistry;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.entity.effect.StatusEffect;
@@ -37,13 +33,19 @@ public class EldenFlasks implements ModInitializer {
 
 		//Other class initializations
 		BuffManager.init();
+
+		//Registry initializations
+		BuffRegistry.init();
 		ItemRegistry.init();
 		BlockRegistry.init();
 		BlockEntityRegistry.init();
 		ScreenHandlerRegistry.init();
 		FlaskGroup.init();
 
+		//Config
 		EnhancerLootInjections.parseLootTableConfig();
+
+		System.out.println(BuffManager.buffMap);
 
 		LOGGER.info("Successfully Initialized: " + MOD_ID);
 	}

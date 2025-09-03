@@ -11,8 +11,8 @@ import net.minecraft.util.Identifier;
 public class ItemRegistry {
     public static final Item HEALTH_FLASK = register("health_flask",
             new HealingFlaskItem(new FabricItemSettings()));
-//    public static final Item MIXING_FLASK = register("mixing_flask",
-//            new MixingFlaskItem(new FabricItemSettings()));
+    public static final Item MIXING_FLASK = register("mixing_flask",
+            new MixingFlaskItem(new FabricItemSettings()));
 
     //Enhancer Items
     //Charge Enhancers

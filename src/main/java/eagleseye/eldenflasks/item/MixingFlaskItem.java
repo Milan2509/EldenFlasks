@@ -33,13 +33,15 @@ public class MixingFlaskItem extends Item {
             nbt.putInt("charges", 1);
             nbt.putInt("maxCharges", 1);
             nbt.putInt("duration", 30);
+            nbt.putDouble("cooldown", 0);
+            nbt.putDouble("maxCooldown", 240 * 20);
             nbt.putString("slot1", "empty");
             nbt.putString("slot2", "empty");
+
+            if(nbt.getDouble("cooldown") != 0){
+                nbt.putDouble("cooldown", nbt.getDouble("cooldown") - 0.05);
+            }
         }
-        // How do I do this correctly???
-//        else if (entity.isPlayer()){
-//            entity.writeNbt(BUFF_DATA_SLOT_1);
-//        }
     }
 
     @Override
@@ -49,6 +51,9 @@ public class MixingFlaskItem extends Item {
 
         user.addStatusEffect(new StatusEffectInstance(EldenFlasks.BUFFED_EFFECT,
                 nbt.getInt("duration") * 20, 0, true, true));
+
+        nbt.putInt("cooldown", nbt.getInt("maxCooldown"));
+
         return stack;
     }
 
@@ -62,33 +67,6 @@ public class MixingFlaskItem extends Item {
 
         return TypedActionResult.pass(user.getStackInHand(hand));
     }
-
-//    @Override
-//    public ActionResult useOnBlock(ItemUsageContext context) {
-//        if(!context.getWorld().isClient){
-//            BlockPos clickedPos = context.getBlockPos();
-//            BlockState state = context.getWorld().getBlockState(clickedPos);
-//            PlayerEntity player = context.getPlayer();
-//            Hand hand = player.getActiveHand();
-//            ItemStack stack = player.getStackInHand(hand);
-//
-//            if(stack.getNbt().getInt("charges") < stack.getNbt().getInt("maxCharges")
-//                    && isRechargeBlock(state)){
-//
-//                int maxCharges = stack.getNbt().getInt("maxCharges");
-//                NbtCompound nbt = stack.getOrCreateNbt();
-//                nbt.putInt("charges", maxCharges);
-//
-//                context.getWorld().playSound(null, clickedPos, SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME,
-//                        SoundCategory.BLOCKS, 1f, 1f);
-//                player.sendMessage(Text.literal("Flask Recharged").formatted(Formatting.GOLD), true);
-//
-//                return ActionResult.SUCCESS;
-//            }
-//        }
-//
-//        return ActionResult.PASS;
-//    }
 
     @Override
     public UseAction getUseAction(ItemStack stack) {
@@ -107,6 +85,7 @@ public class MixingFlaskItem extends Item {
             int maxCharges = stack.getNbt().getInt("maxCharges");
             int charges = stack.getNbt().getInt("charges");
             int duration = stack.getNbt().getInt("duration");
+            double cooldown = stack.getNbt().getDouble("cooldown");
             String slot1 = stack.getNbt().getString("slot1");
             String slot2 = stack.getNbt().getString("slot2");
 
@@ -123,6 +102,10 @@ public class MixingFlaskItem extends Item {
             //Slots
             tooltip.add(Text.literal("Slot 1: " + tooltipTranslationHelper(slot1)).formatted(Formatting.AQUA));
             tooltip.add(Text.literal("Slot 2: " + tooltipTranslationHelper(slot2)).formatted(Formatting.AQUA));
+            //Cooldown
+            if(cooldown != 0){
+                tooltip.add(Text.literal("Cooldown: " + (int) cooldown/20 + " Sec").formatted(Formatting.DARK_GRAY));
+            }
         }
         //Fallback
         else {
@@ -131,12 +114,13 @@ public class MixingFlaskItem extends Item {
             //Slots
             tooltip.add(Text.literal("Slot 1: Empty").formatted(Formatting.AQUA));
             tooltip.add(Text.literal("Slot 2: Empty").formatted(Formatting.AQUA));
+            //Cooldown
+            tooltip.add(Text.literal("Cooldown: 240 Sec").formatted(Formatting.DARK_GRAY));
         }
     }
 
     private String tooltipTranslationHelper(String key){
         if(key == "empty") return "Empty";
-
         return "ERROR";
     }
 }

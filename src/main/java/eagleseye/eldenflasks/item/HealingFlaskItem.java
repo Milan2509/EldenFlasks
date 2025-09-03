@@ -26,9 +26,6 @@ import java.util.List;
 import static eagleseye.eldenflasks.EldenFlasks.FLASKS_CONFIG;
 
 public class HealingFlaskItem extends Item {
-//    public static final TagKey<Block> RECHARGE_BLOCKS = TagKey.of(RegistryKeys.BLOCK,
-//            new Identifier(EldenFlasks.MOD_ID, "recharge_blocks"));
-
     public HealingFlaskItem(Settings settings) {
         super(settings.maxCount(1).rarity(Rarity.UNCOMMON));
     }

@@ -1,7 +1,6 @@
 package eagleseye.eldenflasks.registry;
 
 import eagleseye.eldenflasks.EldenFlasks;
-import eagleseye.eldenflasks.registry.ItemRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -17,7 +16,7 @@ public class FlaskGroup {
                     .icon(() -> new ItemStack(ItemRegistry.HEALTH_FLASK)).entries((displayContext, entries) -> {
                         entries.add(BlockRegistry.MIXER);
                         entries.add(ItemRegistry.HEALTH_FLASK);
-//                        entries.add(ItemRegistry.MIXING_FLASK);
+                        entries.add(ItemRegistry.MIXING_FLASK);
                         entries.add(ItemRegistry.PEARL);
                         entries.add(ItemRegistry.SACRED_TEARS);
                         entries.add(ItemRegistry.RUNE);

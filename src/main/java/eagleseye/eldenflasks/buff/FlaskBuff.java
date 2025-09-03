@@ -1,12 +1,7 @@
 package eagleseye.eldenflasks.buff;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.registry.Registries;
-import net.minecraft.text.Text;
-import net.minecraft.util.Uuids;
 
 import java.util.UUID;
 
@@ -16,27 +11,31 @@ public class FlaskBuff {
     private final double value;
     private final UUID uuid;
 
-    EntityAttributeModifier modifier;
+    private final EntityAttributeModifier modifier;
 
     private final String name;
     private final String desc;
 
-    //Create codec for EntityAttributeModifier
-    public static final Codec<EntityAttributeModifier.Operation> OPERATION_CODEC =
-            Codec.STRING.xmap(
-                    EntityAttributeModifier.Operation::valueOf,
-                    EntityAttributeModifier.Operation::name
-            );
+    /*
+        Might create registry and stuff in the future, too complicated for me right now.
+     */
 
-    //Codec
-    public static final Codec<FlaskBuff> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.STRING.fieldOf("name").forGetter(FlaskBuff::getName),
-            Codec.STRING.fieldOf("desc").forGetter(FlaskBuff::getDesc),
-            Registries.ATTRIBUTE.getCodec().fieldOf("attribute").forGetter(FlaskBuff::getAttribute),
-            Codec.DOUBLE.fieldOf("value").forGetter(FlaskBuff::getValue),
-            OPERATION_CODEC.fieldOf("operation").forGetter(FlaskBuff::getOperation),
-            Uuids.CODEC.fieldOf("uuid").forGetter(FlaskBuff::getUuid)
-    ).apply(instance, FlaskBuff::new));
+    //Create codec for EntityAttributeModifier
+//    public static final Codec<EntityAttributeModifier.Operation> OPERATION_CODEC =
+//            Codec.STRING.xmap(
+//                    EntityAttributeModifier.Operation::valueOf,
+//                    EntityAttributeModifier.Operation::name
+//            );
+//
+//    //Codec
+//    public static final Codec<FlaskBuff> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+//            Codec.STRING.fieldOf("name").forGetter(FlaskBuff::getName),
+//            Codec.STRING.fieldOf("desc").forGetter(FlaskBuff::getDesc),
+//            Registries.ATTRIBUTE.getCodec().fieldOf("attribute").forGetter(FlaskBuff::getAttribute),
+//            Codec.DOUBLE.fieldOf("value").forGetter(FlaskBuff::getValue),
+//            OPERATION_CODEC.fieldOf("operation").forGetter(FlaskBuff::getOperation),
+//            Uuids.CODEC.fieldOf("uuid").forGetter(FlaskBuff::getUuid)
+//    ).apply(instance, FlaskBuff::new));
 
     public FlaskBuff(String name, String desc,
                      EntityAttribute attribute, double value, EntityAttributeModifier.Operation operation, UUID uuid){
