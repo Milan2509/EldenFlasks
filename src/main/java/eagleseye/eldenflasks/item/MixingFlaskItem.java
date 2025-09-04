@@ -52,7 +52,7 @@ public class MixingFlaskItem extends Item {
         user.addStatusEffect(new StatusEffectInstance(EldenFlasks.BUFFED_EFFECT,
                 nbt.getInt("duration") * 20, 0, true, true));
 
-        nbt.putInt("cooldown", nbt.getInt("maxCooldown"));
+        nbt.putDouble("cooldown", nbt.getDouble("maxCooldown"));
 
         return stack;
     }

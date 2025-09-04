@@ -17,7 +17,7 @@ public class FlaskBuff {
     private final String desc;
 
     /*
-        Might create registry and stuff in the future, too complicated for me right now.
+        Might create registry and stuff in the future, too complicated right now.
      */
 
     //Create codec for EntityAttributeModifier

@@ -16,7 +16,7 @@ public class BuffRegistry {
             EntityAttributes.GENERIC_MOVEMENT_SPEED,
             0.2,
             EntityAttributeModifier.Operation.ADDITION,
-            UUID.fromString("eldenflasks.buff.speed.uuid")
+            UUID.fromString("cfe365bb-a88d-4bb9-9d54-8a4fca93876c")
         )
     );
 
