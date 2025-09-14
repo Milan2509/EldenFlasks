@@ -32,19 +32,42 @@ public class HealingFlaskItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if(!stack.hasNbt()) {
+        if (!stack.hasNbt()) {
             NbtCompound nbt = stack.getOrCreateNbt();
 
             nbt.putInt("charges", FLASKS_CONFIG.maxCharges());
             nbt.putInt("maxCharges", FLASKS_CONFIG.maxCharges());
             nbt.putInt("drinkTime", FLASKS_CONFIG.drinkTime());
             nbt.putFloat("healing", FLASKS_CONFIG.healing());
+            nbt.putInt("killRequirement", FLASKS_CONFIG.rechargeKillRequirement());
+            nbt.putInt("kills", 0);
+            /*
+            * The type of kills, each one fills the healing flask with a different amount
+            *
+            *   basic : just +1
+            *   full : full recharge
+            */
+            nbt.putString("killType", "basic");
         } else {
             resetFlaskWhenOverEnhanced(stack);
+
+            NbtCompound nbt = stack.getOrCreateNbt();
+            //FIXING: STILL RESET KILLS WHEN FLASK IS FULL
+            //ADD: SOUND WHEN FLASK GETS RECHARGED
+            if(nbt.getInt("kills") >= nbt.getInt("killRequirement") && nbt.getInt("charges") < nbt.getInt("maxCharges")){
+                if(nbt.getString("killType") == "basic") nbt.putInt("charges", nbt.getInt("charges") + 1);
+                if(nbt.getString("killType") == "full") nbt.putInt("charges", nbt.getInt("maxCharges"));
+
+                if(!(nbt.getInt("kills") - nbt.getInt("killRequirement") < 0)){
+                    nbt.putInt("kills", nbt.getInt("kills") - nbt.getInt("killRequirement"));
+                } else{
+                    nbt.putInt("kills", 0);
+                }
+            }
         }
     }
 
-    private void resetFlaskWhenOverEnhanced(ItemStack stack){
+    private void resetFlaskWhenOverEnhanced(ItemStack stack) {
         NbtCompound nbt = stack.getNbt();
 
         boolean charges = nbt.getInt("maxCharges") > FLASKS_CONFIG.maxChargeLimit();
@@ -72,12 +95,12 @@ public class HealingFlaskItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         PlayerInventory playerInventory = user.getInventory();
 
-        if(playerInventory.count(ItemRegistry.HEALTH_FLASK) > FLASKS_CONFIG.maxHeldHealingFlasks()){
+        if (playerInventory.count(ItemRegistry.HEALTH_FLASK) > FLASKS_CONFIG.maxHeldHealingFlasks()) {
             user.sendMessage(Text.literal("The Power of Too Many Flasks is Too Strong For You").formatted(Formatting.DARK_RED), true);
             return TypedActionResult.fail(user.getStackInHand(hand));
         }
 
-        if(user.getStackInHand(hand).getNbt().getInt("charges") > 0){
+        if (user.getStackInHand(hand).getNbt().getInt("charges") > 0) {
             return ItemUsage.consumeHeldItem(world, user, hand);
         }
 
@@ -86,15 +109,15 @@ public class HealingFlaskItem extends Item {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if(!context.getWorld().isClient){
+        if (!context.getWorld().isClient) {
             BlockPos clickedPos = context.getBlockPos();
             BlockState state = context.getWorld().getBlockState(clickedPos);
             PlayerEntity player = context.getPlayer();
             Hand hand = player.getActiveHand();
             ItemStack stack = player.getStackInHand(hand);
 
-            if(stack.getNbt().getInt("charges") < stack.getNbt().getInt("maxCharges")
-                    && isRechargeBlock(state)){
+            if (stack.getNbt().getInt("charges") < stack.getNbt().getInt("maxCharges")
+                    && isRechargeBlock(state)) {
 
                 int maxCharges = stack.getNbt().getInt("maxCharges");
                 NbtCompound nbt = stack.getOrCreateNbt();
@@ -124,10 +147,12 @@ public class HealingFlaskItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.literal("Heals you when consumed, can be recharged at a Campfire.").formatted(Formatting.DARK_GRAY));
-        if(stack.hasNbt()) {
+        if (stack.hasNbt()) {
             int maxCharges = stack.getNbt().getInt("maxCharges");
             int charges = stack.getNbt().getInt("charges");
             int drinkSpeed = stack.getNbt().getInt("drinkTime");
+            int kills = stack.getNbt().getInt("kills");
+            int killRequirement = stack.getNbt().getInt("killRequirement");
             float healing = stack.getNbt().getFloat("healing");
 
             //Charges
@@ -141,16 +166,19 @@ public class HealingFlaskItem extends Item {
             //Other Stats
             tooltip.add(Text.literal("Healing: " + (int) healing + " HP").formatted(Formatting.GRAY));
             tooltip.add(Text.literal("Drink Speed: " + (float) drinkSpeed / 20 + " Sec").formatted(Formatting.GRAY));
+            // Kills to Recharge
+            tooltip.add(Text.literal(kills + "/" + killRequirement + " kills for Flask Recharge").formatted(Formatting.DARK_GRAY));
         }
         //Fallback
         else {
             tooltip.add(Text.literal("Charges: " + FLASKS_CONFIG.maxCharges() + "/" + FLASKS_CONFIG.maxCharges()).formatted(Formatting.GOLD));
             tooltip.add(Text.literal("Healing: " + (int) FLASKS_CONFIG.healing() + " HP").formatted(Formatting.GRAY));
             tooltip.add(Text.literal("Drink Speed: " + (float) FLASKS_CONFIG.drinkTime() / 20 + " Sec").formatted(Formatting.GRAY));
+            tooltip.add(Text.literal("0/" + FLASKS_CONFIG.rechargeKillRequirement() + " for Flask Recharge").formatted(Formatting.DARK_GRAY));
         }
     }
 
-    private static boolean isRechargeBlock(BlockState state){
+    private static boolean isRechargeBlock(BlockState state) {
         return state.isOf(Blocks.CAMPFIRE) || state.isOf(Blocks.SOUL_CAMPFIRE);
     }
 }

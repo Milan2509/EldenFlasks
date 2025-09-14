@@ -15,6 +15,8 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 public class EldenFlasks implements ModInitializer {
 	public static final String MOD_ID = "eldenflasks";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -45,7 +47,12 @@ public class EldenFlasks implements ModInitializer {
 		//Config
 		EnhancerLootInjections.parseLootTableConfig();
 
-		System.out.println(BuffManager.buffMap);
+		//Defaults
+		List<String> rechargeList = FLASKS_CONFIG.fullyRechargeEntities();
+		rechargeList.add("minecraft:wither");
+		rechargeList.add("minecraft:ender_dragon");
+		rechargeList.add("minecells:concierge");
+		rechargeList.add("minecraft:conjunctivius");
 
 		LOGGER.info("Successfully Initialized: " + MOD_ID);
 	}

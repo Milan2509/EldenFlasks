@@ -6,12 +6,21 @@ import io.wispforest.owo.config.annotation.Config;
 import io.wispforest.owo.config.annotation.Modmenu;
 import io.wispforest.owo.config.annotation.SectionHeader;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Modmenu(modId = EldenFlasks.MOD_ID)
 @Config(name = "eldenflasks/flasks_v1", wrapperName = "EldenFlasksFlaskConfig")
 public class FlasksConfigModel {
     @SectionHeader("general")
     @Comment("When more flasks are held then the flasks aren't usable.")
     public int maxHeldHealingFlasks = 1;
+    @Comment("How many kills are required for the healing flask to get 1 additional charge")
+    public int rechargeKillRequirement = 8;
+    @Comment("Which entities won't count towards the kill flask recharging")
+    public List<String> entityKillBlacklist = new ArrayList<>();
+    @Comment("Which entities should fully recharge the healing flasks charges on death")
+    public List<String> fullyRechargeEntities = new ArrayList<>();
 
     @SectionHeader("baseStats")
     public int maxCharges = 3;
