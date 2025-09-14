@@ -29,8 +29,8 @@ public class DrinkEnhancerItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if (loreString != null) tooltip.add(lore);
         tooltip.add(desc);
+        if (loreString != null) tooltip.add(lore);
         tooltip.add(Text.literal("Applied in the Flask Mixer").formatted(Formatting.DARK_GRAY));
     }
 }

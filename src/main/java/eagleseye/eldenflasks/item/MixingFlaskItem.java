@@ -49,10 +49,20 @@ public class MixingFlaskItem extends Item {
         NbtCompound nbt = stack.getNbt();
         nbt.putInt("charges", nbt.getInt("charges") - 1);
 
+        nbt.putDouble("cooldown", nbt.getDouble("maxCooldown"));
+
+
+        NbtCompound buff1Nbt = new NbtCompound();
+        NbtCompound buff2Nbt = new NbtCompound();
+
+        buff1Nbt.putString("eldenflasks.buff1", nbt.getString("slot1"));
+        buff2Nbt.putString("eldenflasks.buff2", nbt.getString("slot2"));
+
+        user.writeNbt(buff1Nbt);
+        user.writeNbt(buff2Nbt);
+
         user.addStatusEffect(new StatusEffectInstance(EldenFlasks.BUFFED_EFFECT,
                 nbt.getInt("duration") * 20, 0, true, true));
-
-        nbt.putDouble("cooldown", nbt.getDouble("maxCooldown"));
 
         return stack;
     }

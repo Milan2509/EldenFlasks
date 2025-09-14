@@ -11,13 +11,23 @@ import java.util.UUID;
 
 public class BuffRegistry {
     public static final FlaskBuff SPEED = register("speed", new FlaskBuff(
-            "buff.eldenflasks.speed_boost",
-            "buff.eldenflasks.speed_boost.desc",
+            "buff.eldenflasks.speed",
+            "buff.eldenflasks.speed.desc",
             EntityAttributes.GENERIC_MOVEMENT_SPEED,
-            0.2,
-            EntityAttributeModifier.Operation.ADDITION,
+            0.1,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
             UUID.fromString("cfe365bb-a88d-4bb9-9d54-8a4fca93876c")
         )
+    );
+
+    public static final FlaskBuff STRENGTH = register("strength", new FlaskBuff(
+                    "buff.eldenflasks.strength",
+                    "buff.eldenflasks.strength.desc",
+                    EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                    0.12,
+                    EntityAttributeModifier.Operation.MULTIPLY_BASE,
+                    UUID.fromString("52e6ada6-588d-4457-b539-3628a605a94e")
+            )
     );
 
     private static FlaskBuff register(String name, FlaskBuff buff){

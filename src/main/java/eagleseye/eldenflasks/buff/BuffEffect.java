@@ -5,6 +5,8 @@ import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.text.Text;
 
 import java.util.UUID;
 
@@ -20,20 +22,35 @@ public class BuffEffect extends StatusEffect {
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         super.applyUpdateEffect(entity, amplifier);
 
-        /// SOME GET IDENTIFIER FROM PLAYER DATA OR SOMETHING
-
         //sanitize checks
-        if(!entity.isPlayer() && !BuffManager.buffExists("eldenflasks:test")) return;
+        if(!entity.isPlayer()) return;
+
+//        NbtCompound readNbt = new NbtCompound();
+//        readNbt.getString("eldenflasks.buff1");
+//        entity.readCustomDataFromNbt(readNbt);
 
         //buffs
         buff1 = BuffManager.getBuff("eldenflasks:speed");
-        buff2 = BuffManager.getBuff("eldenflasks:speed");
+        buff2 = BuffManager.getBuff("eldenflasks:strength");
 
-        //return if the player already has the modifier
-        if(entity.getAttributes().getCustomInstance(buff1.getAttribute()).getModifier(buff1.getUuid()) != null) return;
+        //buff 1 modifier
+        if(buff1 != null) {
+            //return if the player already has the modifier
+            if (entity.getAttributes().getCustomInstance(buff1.getAttribute()).getModifier(buff1.getUuid()) != null)
+                return;
 
-        //apply modifier
-        entity.getAttributes().getCustomInstance(buff1.getAttribute()).addPersistentModifier(buff1.getModifier());
+            //apply modifier
+            entity.getAttributes().getCustomInstance(buff1.getAttribute()).addPersistentModifier(buff1.getModifier());
+        }
+        //buff 2 modifier
+        if(buff2 != null) {
+            //return if the player already has the modifier
+            if (entity.getAttributes().getCustomInstance(buff2.getAttribute()).getModifier(buff2.getUuid()) != null)
+                return;
+
+            //apply modifier
+            entity.getAttributes().getCustomInstance(buff2.getAttribute()).addPersistentModifier(buff2.getModifier());
+        }
     }
 
     @Override
