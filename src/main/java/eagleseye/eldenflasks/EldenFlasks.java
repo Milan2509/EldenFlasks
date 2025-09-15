@@ -48,11 +48,17 @@ public class EldenFlasks implements ModInitializer {
 		EnhancerLootInjections.parseLootTableConfig();
 
 		//Defaults
-		List<String> rechargeList = FLASKS_CONFIG.fullyRechargeEntities();
-		rechargeList.add("minecraft:wither");
-		rechargeList.add("minecraft:ender_dragon");
-		rechargeList.add("minecells:concierge");
-		rechargeList.add("minecraft:conjunctivius");
+		if(FLASKS_CONFIG.firstLoad()) {
+			List<String> rechargeList = FLASKS_CONFIG.fullyRechargeEntities();
+			rechargeList.add("minecraft:wither");
+			rechargeList.add("minecraft:ender_dragon");
+			rechargeList.add("minecells:concierge");
+			rechargeList.add("minecraft:conjunctivius");
+			rechargeList.add("bosses_of_mass_destruction:lich");
+			rechargeList.add("bosses_of_mass_destruction:gauntlet");
+			rechargeList.add("bosses_of_mass_destruction:void_blossom");
+			FLASKS_CONFIG.firstLoad(false);
+		}
 
 		LOGGER.info("Successfully Initialized: " + MOD_ID);
 	}

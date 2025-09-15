@@ -32,37 +32,37 @@ public class HealingFlaskItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        NbtCompound nbt = stack.getOrCreateNbt();
         if (!stack.hasNbt()) {
-            NbtCompound nbt = stack.getOrCreateNbt();
-
             nbt.putInt("charges", FLASKS_CONFIG.maxCharges());
             nbt.putInt("maxCharges", FLASKS_CONFIG.maxCharges());
             nbt.putInt("drinkTime", FLASKS_CONFIG.drinkTime());
             nbt.putFloat("healing", FLASKS_CONFIG.healing());
-            nbt.putInt("killRequirement", FLASKS_CONFIG.rechargeKillRequirement());
             nbt.putInt("kills", 0);
-            /*
-            * The type of kills, each one fills the healing flask with a different amount
-            *
-            *   basic : just +1
-            *   full : full recharge
-            */
-            nbt.putString("killType", "basic");
         } else {
             resetFlaskWhenOverEnhanced(stack);
 
-            NbtCompound nbt = stack.getOrCreateNbt();
+            nbt.putInt("killRequirement", FLASKS_CONFIG.rechargeKillRequirement());
             //FIXING: STILL RESET KILLS WHEN FLASK IS FULL
             //ADD: SOUND WHEN FLASK GETS RECHARGED
-            if(nbt.getInt("kills") >= nbt.getInt("killRequirement") && nbt.getInt("charges") < nbt.getInt("maxCharges")){
-                if(nbt.getString("killType") == "basic") nbt.putInt("charges", nbt.getInt("charges") + 1);
-                if(nbt.getString("killType") == "full") nbt.putInt("charges", nbt.getInt("maxCharges"));
+            if(nbt.getInt("kills") >= nbt.getInt("killRequirement")){
+                if(nbt.getInt("charges") < nbt.getInt("maxCharges")){
+                    if(!(nbt.getInt("kills") - nbt.getInt("killRequirement") < 0)){
+                        nbt.putInt("kills", nbt.getInt("kills") - nbt.getInt("killRequirement"));
+                    } else{
+                        nbt.putInt("kills", 0);
+                    }
 
-                if(!(nbt.getInt("kills") - nbt.getInt("killRequirement") < 0)){
-                    nbt.putInt("kills", nbt.getInt("kills") - nbt.getInt("killRequirement"));
-                } else{
-                    nbt.putInt("kills", 0);
+                    nbt.putInt("charges", nbt.getInt("charges") + 1);
+                } else {
+                    if(!(nbt.getInt("kills") - nbt.getInt("killRequirement") < 0)){
+                        nbt.putInt("kills", nbt.getInt("kills") - nbt.getInt("killRequirement"));
+                    } else{
+                        nbt.putInt("kills", 0);
+                    }
                 }
+//                if(nbt.getString("killType") == "basic") nbt.putInt("charges", nbt.getInt("charges") + 1);
+//                if(nbt.getString("killType") == "full") nbt.putInt("charges", nbt.getInt("maxCharges"));
             }
         }
     }

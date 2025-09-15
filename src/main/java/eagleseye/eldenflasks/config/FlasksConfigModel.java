@@ -3,6 +3,7 @@ package eagleseye.eldenflasks.config;
 import blue.endless.jankson.Comment;
 import eagleseye.eldenflasks.EldenFlasks;
 import io.wispforest.owo.config.annotation.Config;
+import io.wispforest.owo.config.annotation.ExcludeFromScreen;
 import io.wispforest.owo.config.annotation.Modmenu;
 import io.wispforest.owo.config.annotation.SectionHeader;
 
@@ -36,4 +37,8 @@ public class FlasksConfigModel {
     public int maxChargeModifier = 1;
     public float healingModifier = 2;
     public int drinkTimeModifier = 5;
+
+    @ExcludeFromScreen
+    @Comment("DO NOT TOUCH PLS")
+    public boolean firstLoad = true;
 }

@@ -38,10 +38,8 @@ public abstract class LivingEntityMixin {
                     int kills = nbt.getInt("kills");
 
                     if(FLASKS_CONFIG.fullyRechargeEntities().contains(entityId.toString())){
-                        nbt.putString("killType", "full");
                         nbt.putInt("kills", kills + nbt.getInt("killRequirement"));
                     } else{
-                        nbt.putString("killType", "basic");
                         nbt.putInt("kills", kills + 1);
                     }
                 }
