@@ -39,6 +39,13 @@ public class HealingFlaskItem extends Item {
             nbt.putInt("drinkTime", FLASKS_CONFIG.drinkTime());
             nbt.putFloat("healing", FLASKS_CONFIG.healing());
             nbt.putInt("kills", 0);
+            /*
+             * The type of kills, each one fills the healing flask with a different amount
+             *
+             *   basic : just +1
+             *   full : full recharge
+             */
+            nbt.putString("killType", "basic");
         } else {
             resetFlaskWhenOverEnhanced(stack);
 
@@ -53,7 +60,8 @@ public class HealingFlaskItem extends Item {
                         nbt.putInt("kills", 0);
                     }
 
-                    nbt.putInt("charges", nbt.getInt("charges") + 1);
+                    if(nbt.getString("killType") == "basic") nbt.putInt("charges", nbt.getInt("charges") + 1);
+                    if(nbt.getString("killType") == "full") nbt.putInt("charges", nbt.getInt("maxCharges"));
                 } else {
                     if(!(nbt.getInt("kills") - nbt.getInt("killRequirement") < 0)){
                         nbt.putInt("kills", nbt.getInt("kills") - nbt.getInt("killRequirement"));

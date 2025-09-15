@@ -29,7 +29,7 @@ public class FlasksConfigModel {
     public int drinkTime = 40;
 
     @SectionHeader("statLimits")
-    public int maxChargeLimit = 6;
+    public int maxChargeLimit = 12;
     public float healingLimit = 20;
     public int drinkTimeLimit = 20;
 
