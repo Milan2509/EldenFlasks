@@ -16,29 +16,7 @@ public class FlaskBuff {
     private final String name;
     private final String desc;
 
-    /*
-        Might create registry and stuff in the future, too complicated right now.
-     */
-
-    //Create codec for EntityAttributeModifier
-//    public static final Codec<EntityAttributeModifier.Operation> OPERATION_CODEC =
-//            Codec.STRING.xmap(
-//                    EntityAttributeModifier.Operation::valueOf,
-//                    EntityAttributeModifier.Operation::name
-//            );
-//
-//    //Codec
-//    public static final Codec<FlaskBuff> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-//            Codec.STRING.fieldOf("name").forGetter(FlaskBuff::getName),
-//            Codec.STRING.fieldOf("desc").forGetter(FlaskBuff::getDesc),
-//            Registries.ATTRIBUTE.getCodec().fieldOf("attribute").forGetter(FlaskBuff::getAttribute),
-//            Codec.DOUBLE.fieldOf("value").forGetter(FlaskBuff::getValue),
-//            OPERATION_CODEC.fieldOf("operation").forGetter(FlaskBuff::getOperation),
-//            Uuids.CODEC.fieldOf("uuid").forGetter(FlaskBuff::getUuid)
-//    ).apply(instance, FlaskBuff::new));
-
-    public FlaskBuff(String name, String desc,
-                     EntityAttribute attribute, double value, EntityAttributeModifier.Operation operation, UUID uuid){
+    public FlaskBuff(String name, EntityAttribute attribute, double value, EntityAttributeModifier.Operation operation, UUID uuid) {
         this.attribute = attribute;
         this.operation = operation;
         this.uuid = uuid;
@@ -48,33 +26,33 @@ public class FlaskBuff {
                 uuid,
                 name,
                 value,
-                EntityAttributeModifier.Operation.ADDITION);
+                operation);
 
         this.name = name;
-        this.desc = desc;
+        this.desc = name + ".desc";
     }
 
-    public EntityAttribute getAttribute(){
+    public EntityAttribute getAttribute() {
         return this.attribute;
     }
 
-    public EntityAttributeModifier.Operation getOperation(){
+    public EntityAttributeModifier.Operation getOperation() {
         return this.operation;
     }
 
-    public double getValue(){
+    public double getValue() {
         return this.value;
     }
 
-    public UUID getUuid(){
+    public UUID getUuid() {
         return this.uuid;
     }
 
-    public EntityAttributeModifier getModifier(){
+    public EntityAttributeModifier getModifier() {
         return this.modifier;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
