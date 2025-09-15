@@ -1,10 +1,12 @@
 package eagleseye.eldenflasks.buff;
 
+import eagleseye.eldenflasks.util.PlayerPersistentData;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 
@@ -23,33 +25,33 @@ public class BuffEffect extends StatusEffect {
         super.applyUpdateEffect(entity, amplifier);
 
         //sanitize checks
-        if(!entity.isPlayer()) return;
+        if (entity instanceof PlayerEntity player) {
 
-//        NbtCompound readNbt = new NbtCompound();
-//        readNbt.getString("eldenflasks.buff1");
-//        entity.readCustomDataFromNbt(readNbt);
+            PlayerPersistentData persistent = (PlayerPersistentData) player;
+            NbtCompound buffData = persistent.getBuffData();
 
-        //buffs
-        buff1 = BuffManager.getBuff("eldenflasks:speed");
-        buff2 = BuffManager.getBuff("eldenflasks:strength");
+            //buffs
+            buff1 = BuffManager.getBuff(buffData.getString("buff1"));
+            buff2 = BuffManager.getBuff(buffData.getString("buff2"));
 
-        //buff 1 modifier
-        if(buff1 != null) {
-            //return if the player already has the modifier
-            if (entity.getAttributes().getCustomInstance(buff1.getAttribute()).getModifier(buff1.getUuid()) != null)
-                return;
+            //buff 1 modifier
+            if (buff1 != null) {
+                //return if the player already has the modifier
+                if (entity.getAttributes().getCustomInstance(buff1.getAttribute()).getModifier(buff1.getUuid()) != null)
+                    return;
 
-            //apply modifier
-            entity.getAttributes().getCustomInstance(buff1.getAttribute()).addPersistentModifier(buff1.getModifier());
-        }
-        //buff 2 modifier
-        if(buff2 != null) {
-            //return if the player already has the modifier
-            if (entity.getAttributes().getCustomInstance(buff2.getAttribute()).getModifier(buff2.getUuid()) != null)
-                return;
+                //apply modifier
+                entity.getAttributes().getCustomInstance(buff1.getAttribute()).addPersistentModifier(buff1.getModifier());
+            }
+            //buff 2 modifier
+            if (buff2 != null) {
+                //return if the player already has the modifier
+                if (entity.getAttributes().getCustomInstance(buff2.getAttribute()).getModifier(buff2.getUuid()) != null)
+                    return;
 
-            //apply modifier
-            entity.getAttributes().getCustomInstance(buff2.getAttribute()).addPersistentModifier(buff2.getModifier());
+                //apply modifier
+                entity.getAttributes().getCustomInstance(buff2.getAttribute()).addPersistentModifier(buff2.getModifier());
+            }
         }
     }
 
@@ -57,7 +59,7 @@ public class BuffEffect extends StatusEffect {
     public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         super.onRemoved(entity, attributes, amplifier);
 
-        if(entity.isPlayer() && buff1 != null) {
+        if (entity.isPlayer() && buff1 != null) {
             entity.getAttributes().getCustomInstance(buff1.getAttribute()).removeModifier(buff1.getUuid());
         }
     }

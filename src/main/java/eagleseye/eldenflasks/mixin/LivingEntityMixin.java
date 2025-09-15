@@ -19,7 +19,6 @@ import static eagleseye.eldenflasks.EldenFlasks.FLASKS_CONFIG;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
     @Shadow public abstract EntityGroup getGroup();
-
     @Inject(method = "onDeath", at = @At("TAIL"))
     private void onDeath(DamageSource damageSource, CallbackInfo ci) {
         Entity killer = damageSource.getAttacker();

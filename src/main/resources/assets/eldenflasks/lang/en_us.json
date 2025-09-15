@@ -11,6 +11,9 @@
 
   "text.config.eldenflasks/flasks_v1.section.general": "General",
   "text.config.eldenflasks/flasks_v1.option.maxHeldHealingFlasks": "Maximum Healing Flasks in Inventory",
+  "text.config.eldenflasks/flasks_v1.option.rechargeKillRequirement": "Amount of kills required for flask recharge",
+  "text.config.eldenflasks/flasks_v1.option.entityKillBlacklist": "Entity recharge kill blacklist",
+  "text.config.eldenflasks/flasks_v1.option.fullyRechargeEntities": "Entities that fully recharge the flask",
 
   "text.config.eldenflasks/flasks_v1.section.baseStats": "Base Stats",
   "text.config.eldenflasks/flasks_v1.option.maxCharges": "Max Charges (Base)",
