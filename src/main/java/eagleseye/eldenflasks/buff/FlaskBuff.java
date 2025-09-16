@@ -8,17 +8,20 @@ import java.util.UUID;
 public class FlaskBuff {
     private final EntityAttribute attribute;
     private final EntityAttributeModifier.Operation operation;
-    private final double value;
+    private final double incrementAmount;
     private final UUID uuid;
-
-    private final EntityAttributeModifier modifier;
 
     private final String name;
     private final String desc;
 
-    public FlaskBuff(String name, EntityAttribute attribute, double value, EntityAttributeModifier.Operation operation, UUID uuid) {
+    private EntityAttributeModifier modifier;
+    private double value;
+    private int tier = 1;
+
+    public FlaskBuff(String name, EntityAttribute attribute, double value, double incrementAmount, EntityAttributeModifier.Operation operation, UUID uuid) {
         this.attribute = attribute;
         this.operation = operation;
+        this.incrementAmount = incrementAmount;
         this.uuid = uuid;
         this.value = value;
 
@@ -58,5 +61,28 @@ public class FlaskBuff {
 
     public String getDesc() {
         return this.desc;
+    }
+
+    public double getIncrementAmount() {
+        return incrementAmount;
+    }
+
+    public int getTier() {
+        return tier;
+    }
+
+    public void setTier(int tier) {
+        this.tier = tier;
+    }
+
+    public void incrementTier(){
+        this.tier++;
+    }
+
+    public void setModifier(EntityAttributeModifier modifier){
+        this.modifier = modifier;
+    }
+    public void setValueByTier(){
+        this.value = tier * incrementAmount;
     }
 }

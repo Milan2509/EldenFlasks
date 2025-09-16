@@ -1,11 +1,9 @@
 package eagleseye.eldenflasks.block.entity;
 
 import eagleseye.eldenflasks.EldenFlasks;
+import eagleseye.eldenflasks.item.*;
 import eagleseye.eldenflasks.registry.BlockEntityRegistry;
 import eagleseye.eldenflasks.registry.ItemRegistry;
-import eagleseye.eldenflasks.item.ChargeEnhancerItem;
-import eagleseye.eldenflasks.item.DrinkEnhancerItem;
-import eagleseye.eldenflasks.item.HealingEnhancerItem;
 import eagleseye.eldenflasks.screen.FlaskMixerScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
@@ -127,8 +125,10 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
     private void createFlask(World world) {
         ItemStack input = getStack(INPUT_SLOT);
         ItemStack addition = getStack(ADDITION_SLOT);
+        ItemStack result = null;
 
-        ItemStack result = flaskResult(input, addition.getItem());
+        if(input.getItem() instanceof HealingFlaskItem) result = healingFlaskResult(input, addition.getItem());
+        if(input.getItem() instanceof MixingFlaskItem) result = healingFlaskResult(input, addition.getItem());
 
         this.removeStack(INPUT_SLOT, 1);
         this.removeStack(ADDITION_SLOT, 1);
@@ -138,7 +138,34 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
                 SoundCategory.BLOCKS, 1f, 1f);
     }
 
-    private ItemStack flaskResult(ItemStack flask, Item addition){
+    private ItemStack healingFlaskResult(ItemStack flask, Item addition){
+        ItemStack result = new ItemStack(ItemRegistry.HEALTH_FLASK);
+        NbtCompound originalNbt = flask.getNbt();
+        NbtCompound newNbt = result.getOrCreateNbt();
+
+        int maxCharges = originalNbt.getInt("maxCharges");
+        float healing = originalNbt.getFloat("healing");
+        int drinkTime = originalNbt.getInt("drinkTime");
+
+        if(addition instanceof ChargeEnhancerItem){
+            maxCharges += EldenFlasks.FLASKS_CONFIG.maxChargeModifier();
+        }
+        else if (addition instanceof HealingEnhancerItem) {
+            healing += EldenFlasks.FLASKS_CONFIG.healingModifier();
+        }
+        else if (addition instanceof DrinkEnhancerItem) {
+            drinkTime -= EldenFlasks.FLASKS_CONFIG.drinkTimeModifier();
+        }
+
+        newNbt.putInt("charges", maxCharges);
+        newNbt.putInt("maxCharges", maxCharges);
+        newNbt.putFloat("healing", healing);
+        newNbt.putInt("drinkTime", drinkTime);
+
+        return result;
+    }
+
+    private ItemStack mixingFlaskResult(ItemStack flask, Item addition){
         ItemStack result = new ItemStack(ItemRegistry.HEALTH_FLASK);
         NbtCompound originalNbt = flask.getNbt();
         NbtCompound newNbt = result.getOrCreateNbt();

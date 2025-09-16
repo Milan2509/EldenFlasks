@@ -1,5 +1,7 @@
 package eagleseye.eldenflasks.buff;
 
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,7 +16,9 @@ public class BuffManager {
     }
 
     public static FlaskBuff getBuff(String name){
-        Identifier id = new Identifier(name);
+        String modId = StringUtils.substringBefore(name, ":");
+        String buffName = StringUtils.substringAfter(name, ":");
+        Identifier id = new Identifier(buffName);
         if (!buffMap.containsKey(id)) return null;
         return buffMap.get(id);
     }
@@ -25,6 +29,10 @@ public class BuffManager {
 
         Identifier id = new Identifier(modId, buffName);
         return buffMap.containsKey(id);
+    }
+
+    public static void sendBuffMapToPlayer(ServerPlayerEntity serverPlayer){
+        serverPlayer.sendMessage(Text.literal(buffMap.toString()));
     }
 
     public static void init(){}

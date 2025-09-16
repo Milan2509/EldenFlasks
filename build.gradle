@@ -17,6 +17,7 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
 	maven { url 'https://maven.wispforest.io/releases/' }
+	maven { url 'https://jitpack.io' }
 	maven {
 		name = 'Modrinth'
 		url = 'https://api.modrinth.com/maven'
@@ -42,7 +43,9 @@ dependencies {
 	annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
 	// Attributes
 	modImplementation "maven.modrinth:spell-power:${project.spell_power_version}"
+	include(implementation("com.github.ZsoltMolnarrr:TinyConfig:${project.tiny_config_version}"))
 	modImplementation "maven.modrinth:eternal-attributes:${project.eternal_attributes_version}"
+	modImplementation "maven.modrinth:ranged-weapon-api:${project.ranged_weapon_version}"
 }
 
 processResources {

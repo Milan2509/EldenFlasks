@@ -1,6 +1,7 @@
 package eagleseye.eldenflasks.item;
 
 import eagleseye.eldenflasks.EldenFlasks;
+import eagleseye.eldenflasks.buff.BuffManager;
 import eagleseye.eldenflasks.util.PlayerPersistentData;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -12,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
@@ -34,8 +36,8 @@ public class MixingFlaskItem extends Item {
             nbt.putInt("charges", 1);
             nbt.putInt("maxCharges", 1);
             nbt.putInt("duration", 30);
-            nbt.putString("slot1", "eldenflasks:speed");
-            nbt.putString("slot2", "empty");
+            nbt.putString("slot1", "eldenflasks:movement_speed");
+            nbt.putString("slot2", "eldenflasks:movement_speed");
         }
     }
 
@@ -53,6 +55,10 @@ public class MixingFlaskItem extends Item {
 
             user.addStatusEffect(new StatusEffectInstance(EldenFlasks.BUFFED_EFFECT,
                     nbt.getInt("duration") * 20, 0, true, true));
+
+//            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+//            serverPlayer.sendMessage(Text.literal(BuffManager.getBuff("slot1").getName()));
+//            BuffManager.sendBuffMapToPlayer((ServerPlayerEntity) player);
 
         }
         return stack;
@@ -100,8 +106,14 @@ public class MixingFlaskItem extends Item {
             //Duration
             tooltip.add(Text.literal("Duration: " + duration).formatted(Formatting.GRAY));
             //Slots
-            tooltip.add(Text.literal("Slot 1: " + tooltipTranslationHelper(slot1)).formatted(Formatting.AQUA));
-            tooltip.add(Text.literal("Slot 2: " + tooltipTranslationHelper(slot2)).formatted(Formatting.AQUA));
+            if (BuffManager.getBuff(slot2) != null) {
+                tooltip.add(Text.literal("Slot 1: ").formatted(Formatting.AQUA).append(
+                        Text.translatable(BuffManager.getBuff(slot1).getName())));
+                tooltip.add(Text.literal("Slot 2: ").formatted(Formatting.AQUA).append(
+                        Text.translatable(BuffManager.getBuff(slot2).getName())));
+            } else {
+                tooltip.add(Text.literal("BUFF NOT FOUND").formatted(Formatting.DARK_RED));
+            }
         }
         //Fallback
         else {
