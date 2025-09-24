@@ -32,5 +32,6 @@
 
   "item.eldenflasks.mixing_flask": "Flask of Mixed Wonders",
   "item.eldenflasks.mixing_flask.desc": "Applies buffs when consumed",
-  "effect.eldenflasks.buffed": "Buffed"
+  "effect.eldenflasks.buffed": "Buffed",
+  "buff.invalid.desc": "Invalid BuffId: %"
 }

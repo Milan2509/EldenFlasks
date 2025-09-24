@@ -18,7 +18,7 @@ public class BuffManager {
     public static FlaskBuff getBuff(String name){
         String modId = StringUtils.substringBefore(name, ":");
         String buffName = StringUtils.substringAfter(name, ":");
-        Identifier id = new Identifier(buffName);
+        Identifier id = new Identifier(modId, buffName);
         if (!buffMap.containsKey(id)) return null;
         return buffMap.get(id);
     }

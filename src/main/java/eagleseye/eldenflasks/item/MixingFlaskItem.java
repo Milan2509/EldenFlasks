@@ -106,13 +106,20 @@ public class MixingFlaskItem extends Item {
             //Duration
             tooltip.add(Text.literal("Duration: " + duration).formatted(Formatting.GRAY));
             //Slots
-            if (BuffManager.getBuff(slot2) != null) {
+            if (BuffManager.getBuff(slot1) != null) {
                 tooltip.add(Text.literal("Slot 1: ").formatted(Formatting.AQUA).append(
                         Text.translatable(BuffManager.getBuff(slot1).getName())));
+                tooltip.add(Text.translatable(BuffManager.getBuff(slot1).getDesc()).formatted(Formatting.DARK_GRAY));
+            } else {
+                tooltip.add(Text.literal("BUFF 1 NOT FOUND").formatted(Formatting.DARK_RED));
+            }
+
+            if (BuffManager.getBuff(slot2) != null) {
                 tooltip.add(Text.literal("Slot 2: ").formatted(Formatting.AQUA).append(
                         Text.translatable(BuffManager.getBuff(slot2).getName())));
+                tooltip.add(Text.translatable(BuffManager.getBuff(slot2).getDesc()).formatted(Formatting.DARK_GRAY));
             } else {
-                tooltip.add(Text.literal("BUFF NOT FOUND").formatted(Formatting.DARK_RED));
+                tooltip.add(Text.literal("BUFF 2 NOT FOUND").formatted(Formatting.DARK_RED));
             }
         }
         //Fallback
