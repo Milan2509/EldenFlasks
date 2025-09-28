@@ -6,9 +6,12 @@ import eagleseye.eldenflasks.registry.*;
 import eagleseye.eldenflasks.config.EldenFlasksFlaskConfig;
 import eagleseye.eldenflasks.config.EldenFlasksLootConfig;
 import eagleseye.eldenflasks.util.EnhancerLootInjections;
+import eagleseye.incombat.api.CombatCheck;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -26,6 +29,14 @@ public class EldenFlasks implements ModInitializer {
 
 	//Buff effect
 	public static final StatusEffect BUFFED_EFFECT = new BuffEffect();
+
+	// Flask Helper Function
+	public static boolean canRechargeFlask(PlayerEntity player){
+		if (!FabricLoader.getInstance().isModLoaded("incombat")) return true;
+
+		else return !CombatCheck.isPlayerInCombat(player);
+
+	}
 
 	@Override
 	public void onInitialize() {

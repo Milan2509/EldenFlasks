@@ -1,5 +1,6 @@
 package eagleseye.eldenflasks.item;
 
+import eagleseye.eldenflasks.EldenFlasks;
 import eagleseye.eldenflasks.registry.ItemRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -124,6 +125,11 @@ public class HealingFlaskItem extends Item {
             Hand hand = player.getActiveHand();
             ItemStack stack = player.getStackInHand(hand);
 
+            if(!EldenFlasks.canRechargeFlask(player)){
+                player.sendMessage(Text.translatable("message.incombat.recharge_unavailable").formatted(Formatting.RED), true);
+                return ActionResult.PASS;
+            }
+
             if (stack.getNbt().getInt("charges") < stack.getNbt().getInt("maxCharges")
                     && isRechargeBlock(state)) {
 
@@ -133,7 +139,7 @@ public class HealingFlaskItem extends Item {
 
                 context.getWorld().playSound(null, clickedPos, SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME,
                         SoundCategory.BLOCKS, 1f, 1f);
-                player.sendMessage(Text.literal("Flask Recharged").formatted(Formatting.GOLD), true);
+                player.sendMessage(Text.translatable("message.incombat.recharge_flask").formatted(Formatting.GOLD), true);
 
                 return ActionResult.SUCCESS;
             }

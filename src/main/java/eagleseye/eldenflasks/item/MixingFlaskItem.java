@@ -33,8 +33,8 @@ public class MixingFlaskItem extends Item {
             nbt.putInt("charges", 1);
             nbt.putInt("maxCharges", 1);
             nbt.putInt("duration", 30);
-            nbt.putString("slot1", "eldenflasks:movement_speed");
-            nbt.putString("slot2", "eldenflasks:movement_speed");
+            nbt.putString("slot1", "eldenflasks:movement_speed_1");
+            nbt.putString("slot2", "eldenflasks:fire_power_3");
         }
     }
 
