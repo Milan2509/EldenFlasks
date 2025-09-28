@@ -4,13 +4,10 @@ import eagleseye.eldenflasks.EldenFlasks;
 import eagleseye.eldenflasks.buff.BuffManager;
 import eagleseye.eldenflasks.buff.FlaskBuff;
 import eagleseye.eldenflasks.item.FlaskBuffItem;
-import elocindev.eternal_attributes.registry.AttributeRegistry;
-import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -24,164 +21,139 @@ public class BuffRegistry {
             "minecraft:generic.movement_speed",
             0.05,
             EntityAttributeModifier.Operation.MULTIPLY_BASE,
-            "cfe365bb-a88d-4bb9-9d54-8a4fca93876c",
+            UUID.fromString("cfe365bb-a88d-4bb9-9d54-8a4fca93876c"),
             0.05
     );
 
-//    public static final FlaskBuff ATTACK_DAMAGE = register("attack_damage", new FlaskBuff(
-//                    "buff.eldenflasks.attack_damage",
-//                    EntityAttributes.GENERIC_ATTACK_DAMAGE,
-//                    0.05,
-//                    0.05,
-//                    EntityAttributeModifier.Operation.MULTIPLY_BASE,
-//                    UUID.fromString("52e6ada6-588d-4457-b539-3628a605a94e")
-//            )
-//    );
-//
-//    public static final FlaskBuff ARMOR = register("armor", new FlaskBuff(
-//                    "buff.eldenflasks.armor",
-//                    EntityAttributes.GENERIC_ARMOR,
-//                    2,
-//                    2,
-//                    EntityAttributeModifier.Operation.ADDITION,
-//                    UUID.fromString("138932d2-9959-4c9f-b5da-f581e499324f")
-//            )
-//    );
-//
-//    public static final FlaskBuff TOUGHNESS = register("toughness", new FlaskBuff(
-//                    "buff.eldenflasks.toughness",
-//                    EntityAttributes.GENERIC_ARMOR_TOUGHNESS,
-//                    1,
-//                    1,
-//                    EntityAttributeModifier.Operation.ADDITION,
-//                    UUID.fromString("1391114c-ec2a-46d1-b626-467323cac761")
-//            )
-//    );
-//
-//    public static final FlaskBuff MAX_HEALTH = register("max_health", new FlaskBuff(
-//                    "buff.eldenflasks.max_health",
-//                    EntityAttributes.GENERIC_MAX_HEALTH,
-//                    2,
-//                    2,
-//                    EntityAttributeModifier.Operation.ADDITION,
-//                    UUID.fromString("a40afabb-35a2-40b6-8322-adce9901f1c3")
-//            )
-//    );
-//
-//    public static final FlaskBuff ATTACK_SPEED = register("attack_speed", new FlaskBuff(
-//                    "buff.eldenflasks.attack_speed",
-//                    EntityAttributes.GENERIC_ATTACK_SPEED,
-//                    0.02,
-//                    0.02,
-//                    EntityAttributeModifier.Operation.MULTIPLY_BASE,
-//                    UUID.fromString("6270e2e6-45e5-4b23-be87-21b788572d47")
-//            )
-//    );
-//
-//    public static final FlaskBuff LUCK = register("luck", new FlaskBuff(
-//                    "buff.eldenflasks.luck",
-//                    EntityAttributes.GENERIC_LUCK,
-//                    2,
-//                    1,
-//                    EntityAttributeModifier.Operation.ADDITION,
-//                    UUID.fromString("a57a00b6-09d2-4099-98e9-4f684f0c3457")
-//            )
-//    );
-//
-//    public static final FlaskBuff KNOCKBACK_RES = register("knockback_res", new FlaskBuff(
-//                    "buff.eldenflasks.knockback_res",
-//                    EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
-//                    0.1,
-//                    0.05,
-//                    EntityAttributeModifier.Operation.MULTIPLY_BASE,
-//                    UUID.fromString("9663d9d8-49a0-41f2-8688-8721e30accc3")
-//            )
-//    );
-//
-//    // MODDED
-//    private static final String SPELL_POWER = "spell_power";
-//    private static final String ETERNAL_ATTRIBUTES = "eternal_attributes";
-//    private static final String RANGED_WEAPON = "ranged_weapon_api";
-//
-//    // Spell Power
-//    public static final FlaskBuff FIRE = registerModded(SPELL_POWER, "fire_power", new FlaskBuff(
-//                    "buff.eldenflasks.fire_power",
-//                    Registries.ATTRIBUTE.get(new Identifier("spell_power:fire")),
-//                    0.05,
-//                    0.05,
-//                    EntityAttributeModifier.Operation.MULTIPLY_BASE,
-//                    UUID.fromString("ec3edbe8-7fe2-48ef-b9e5-b54ca30f2500")
-//            )
-//    );
-//    public static final FlaskBuff FROST = registerModded(SPELL_POWER, "frost_power", new FlaskBuff(
-//                    "buff.eldenflasks.frost_power",
-//                    Registries.ATTRIBUTE.get(new Identifier("spell_power:frost")),
-//                    0.05,
-//                    0.05,
-//                    EntityAttributeModifier.Operation.MULTIPLY_BASE,
-//                    UUID.fromString("f6ff3755-e55a-4fe5-9c0c-02245c663725")
-//            )
-//    );
-//    public static final FlaskBuff ARCANE = registerModded(SPELL_POWER, "arcane_power", new FlaskBuff(
-//                    "buff.eldenflasks.arcane_power_power",
-//                    Registries.ATTRIBUTE.get(new Identifier("spell_power:arcane")),
-//                    0.05,
-//                    0.05,
-//                    EntityAttributeModifier.Operation.MULTIPLY_BASE,
-//                    UUID.fromString("0aefec74-21e7-4448-8358-037e8b9c5cdd")
-//            )
-//    );
-//    public static final FlaskBuff HEALING = registerModded(SPELL_POWER, "healing_power", new FlaskBuff(
-//                    "buff.eldenflasks.healing_power",
-//                    Registries.ATTRIBUTE.get(new Identifier("spell_power:healing")),
-//                    0.05,
-//                    0.05,
-//                    EntityAttributeModifier.Operation.MULTIPLY_BASE,
-//                    UUID.fromString("fc37458d-e073-4104-8d63-cb909773beba")
-//            )
-//    );
-//    // Eternal Attributes
-//    public static final FlaskBuff UNHOLY = registerModded(ETERNAL_ATTRIBUTES, "unholy_power", new FlaskBuff(
-//                    "buff.eldenflasks.unholy_power",
-//                    AttributeRegistry.UNHOLY_POWER,
-//                    0.05,
-//                    0.05,
-//                    EntityAttributeModifier.Operation.MULTIPLY_BASE,
-//                    UUID.fromString("abcd7c12-1c0c-4f84-a01a-7ecebaada56c")
-//            )
-//    );
-//    public static final FlaskBuff BLOOD = registerModded(ETERNAL_ATTRIBUTES, "blood_power", new FlaskBuff(
-//                    "buff.eldenflasks.blood_power",
-//                    AttributeRegistry.BLOOD_POWER,
-//                    0.05,
-//                    0.05,
-//                    EntityAttributeModifier.Operation.MULTIPLY_BASE,
-//                    UUID.fromString("f502d5e0-5071-44ba-8e9c-fa006ff5fe30")
-//            )
-//    );
-//    // Ranged Weapon
-//    public static final FlaskBuff RANGED_DAMAGE = registerModded(RANGED_WEAPON, "ranged_damage", new FlaskBuff(
-//                    "buff.eldenflasks.ranged_damage",
-//                    EntityAttributes_RangedWeapon.DAMAGE.attribute,
-//                    0.05,
-//                    0.05,
-//                    EntityAttributeModifier.Operation.MULTIPLY_BASE,
-//                    UUID.fromString("88bde36d-2520-451f-a55d-0207e54847a1")
-//            )
-//    );
-//    public static final FlaskBuff DRAW_SPEED = registerModded(RANGED_WEAPON, "draw_speed", new FlaskBuff(
-//                    "buff.eldenflasks.draw_speed",
-//                    EntityAttributes_RangedWeapon.HASTE.attribute,
-//                    0.02,
-//                    0.02,
-//                    EntityAttributeModifier.Operation.MULTIPLY_BASE,
-//                    UUID.fromString("97200f22-94b8-4bd2-aaf9-01d44b10cde9")
-//            )
-//    );
+    public static final FlaskBuff ATTACK_DAMAGE = register("attack_damage",
+            "minecraft:generic.attack_damage",
+            0.05,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
+            UUID.fromString("52e6ada6-588d-4457-b539-3628a605a94e"),
+            0.05
+    );
+
+    public static final FlaskBuff ARMOR = register("armor",
+            "minecraft:generic.armor",
+            2,
+            EntityAttributeModifier.Operation.ADDITION,
+            UUID.fromString("138932d2-9959-4c9f-b5da-f581e499324f"),
+            2
+    );
+
+    public static final FlaskBuff TOUGHNESS = register("toughness",
+            "minecraft:generic.armor_toughness",
+            1,
+            EntityAttributeModifier.Operation.ADDITION,
+            UUID.fromString("1391114c-ec2a-46d1-b626-467323cac761"),
+            1
+    );
+
+    public static final FlaskBuff MAX_HEALTH = register("max_health",
+            "minecraft:generic.max_health",
+            2,
+            EntityAttributeModifier.Operation.ADDITION,
+            UUID.fromString("a40afabb-35a2-40b6-8322-adce9901f1c3"),
+            2
+    );
+
+    public static final FlaskBuff ATTACK_SPEED = register("attack_speed",
+            "minecraft:generic.attack_speed",
+            0.02,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
+            UUID.fromString("6270e2e6-45e5-4b23-be87-21b788572d47"),
+            0.02
+
+    );
+
+    public static final FlaskBuff LUCK = register("luck",
+            "minecraft:generic.luck",
+            2,
+            EntityAttributeModifier.Operation.ADDITION,
+            UUID.fromString("a57a00b6-09d2-4099-98e9-4f684f0c3457"),
+            1
+
+    );
+
+    public static final FlaskBuff KNOCKBACK_RES = register("knockback_res",
+            "minecraft:generic.knockback_resistance",
+            0.1,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
+            UUID.fromString("9663d9d8-49a0-41f2-8688-8721e30accc3"),
+            0.05
+    );
+
+    // MODDED
+    private static final String SPELL_POWER = "spell_power";
+    private static final String ETERNAL_ATTRIBUTES = "eternal_attributes";
+    private static final String RANGED_WEAPON = "ranged_weapon_api";
+
+    // Spell Power
+    public static final FlaskBuff FIRE = registerModded(SPELL_POWER, "fire_power",
+            "spell_power:fire",
+            0.05,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
+            UUID.fromString("ec3edbe8-7fe2-48ef-b9e5-b54ca30f2500"),
+            0.05
+    );
+    public static final FlaskBuff FROST = registerModded(SPELL_POWER, "frost_power",
+            "spell_power:frost",
+            0.05,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
+            UUID.fromString("f6ff3755-e55a-4fe5-9c0c-02245c663725"),
+            0.05
+
+    );
+    public static final FlaskBuff ARCANE = registerModded(SPELL_POWER, "arcane_power",
+            "spell_power:arcane",
+            0.05,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
+            UUID.fromString("0aefec74-21e7-4448-8358-037e8b9c5cdd"),
+            0.05
+
+    );
+    public static final FlaskBuff HEALING = registerModded(SPELL_POWER, "healing_power",
+            "spell_power:healing",
+            0.05,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
+            UUID.fromString("fc37458d-e073-4104-8d63-cb909773beba"),
+            0.05
+    );
+    // Eternal Attributes
+    public static final FlaskBuff UNHOLY = registerModded(ETERNAL_ATTRIBUTES, "unholy_power",
+            "eternal_attributes:unholy",
+            0.05,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
+            UUID.fromString("abcd7c12-1c0c-4f84-a01a-7ecebaada56c"),
+            0.05
+
+    );
+    public static final FlaskBuff BLOOD = registerModded(ETERNAL_ATTRIBUTES, "blood_power",
+            "eternal_attributes:blood",
+            0.05,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
+            UUID.fromString("f502d5e0-5071-44ba-8e9c-fa006ff5fe30"),
+            0.05
+    );
+    // Ranged Weapon
+    public static final FlaskBuff RANGED_DAMAGE = registerModded(RANGED_WEAPON, "ranged_damage",
+            "ranged_weapon:damage",
+            0.05,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
+            UUID.fromString("88bde36d-2520-451f-a55d-0207e54847a1"),
+            0.05
+    );
+    public static final FlaskBuff DRAW_SPEED = registerModded(RANGED_WEAPON, "draw_speed",
+            "ranged_weapon:haste",
+            0.02,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
+            UUID.fromString("97200f22-94b8-4bd2-aaf9-01d44b10cde9"),
+            0.02
+
+    );
 
     private static FlaskBuff register(String name, String attribute, double value,
-                                      EntityAttributeModifier.Operation operation, String uuid, double tierIncrement) {
-        //TODO: Create system where 3 tiers of the buff are made based on incrementAmount (remove from FlaskBuff)
+                                      EntityAttributeModifier.Operation operation, UUID uuid, double tierIncrement) {
 
         FlaskBuff flaskBuff_t1 = createFlaskBuff(name + "_1", attribute, value, operation, uuid);
         FlaskBuff flaskBuff_t2 = createFlaskBuff(name + "_2", attribute, value + tierIncrement, operation, uuid);
@@ -191,14 +163,15 @@ public class BuffRegistry {
         addBuffItem(name + "_2");
         addBuffItem(name + "_3");
 
-        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name), flaskBuff_t1);
-        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name), flaskBuff_t2);
-        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name), flaskBuff_t3);
+        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name + "_1"), flaskBuff_t1);
+        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name + "_2"), flaskBuff_t2);
+        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name + "_3"), flaskBuff_t3);
+
         return flaskBuff_t1;
     }
 
     private static FlaskBuff registerModded(String requiredMod, String name, String attribute, double value,
-                                            EntityAttributeModifier.Operation operation, String uuid, double tierIncrement) {
+                                            EntityAttributeModifier.Operation operation, UUID uuid, double tierIncrement) {
         if (!FabricLoader.getInstance().isModLoaded(requiredMod)) return null;
 
         return register(name, attribute, value, operation, uuid, tierIncrement);
@@ -215,14 +188,14 @@ public class BuffRegistry {
     }
 
     private static FlaskBuff createFlaskBuff(String name, String attribute, double value,
-                                             EntityAttributeModifier.Operation operation, String uuid) {
+                                             EntityAttributeModifier.Operation operation, UUID uuid) {
         return new FlaskBuff(
                 "buff.eldenflasks." + name,
                 getAttributeFromString(attribute),
                 value,
                 0.05,
                 operation,
-                UUID.fromString(uuid)
+                uuid
         );
     }
 

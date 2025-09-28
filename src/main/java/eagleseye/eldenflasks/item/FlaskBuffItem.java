@@ -25,11 +25,12 @@ public class FlaskBuffItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        //TODO: Fix BuffItem tooltips
-//        if (BuffManager.getBuff(buffId) == null) {
-//            tooltip.add(Text.translatable("buff.invalid.desc", BuffManager.getBuff(buffId)));
-//        }
-//        tooltip.add(Text.translatable(BuffManager.getBuff(buffId).getName()).formatted(Formatting.GOLD));
-//        tooltip.add(Text.translatable(BuffManager.getBuff(buffId).getDesc()).formatted(Formatting.DARK_GRAY));
+        // Checks if the buff exists, prevents crashes
+        if (BuffManager.getBuff(buffId) == null) {
+            tooltip.add(Text.translatable("buff.invalid.desc", BuffManager.getBuff(buffId)));
+            return;
+        }
+        tooltip.add(Text.translatable(BuffManager.getBuff(buffId).getName()).formatted(Formatting.GOLD));
+        tooltip.add(Text.translatable(BuffManager.getBuff(buffId).getDesc()).formatted(Formatting.DARK_GRAY));
     }
 }

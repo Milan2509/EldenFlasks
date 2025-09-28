@@ -13,7 +13,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
@@ -22,8 +21,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class MixingFlaskItem extends Item {
-    private final NbtCompound BUFF_DATA_SLOT_1 = new NbtCompound();
-
     public MixingFlaskItem(Settings settings) {
         super(settings.maxCount(1).rarity(Rarity.UNCOMMON));
     }
@@ -55,10 +52,6 @@ public class MixingFlaskItem extends Item {
 
             user.addStatusEffect(new StatusEffectInstance(EldenFlasks.BUFFED_EFFECT,
                     nbt.getInt("duration") * 20, 0, true, true));
-
-//            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-//            serverPlayer.sendMessage(Text.literal(BuffManager.getBuff("slot1").getName()));
-//            BuffManager.sendBuffMapToPlayer((ServerPlayerEntity) player);
 
         }
         return stack;
