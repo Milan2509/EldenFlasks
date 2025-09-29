@@ -2,6 +2,7 @@ package eagleseye.eldenflasks.item;
 
 import eagleseye.eldenflasks.buff.BuffManager;
 import eagleseye.eldenflasks.buff.FlaskBuff;
+import eagleseye.eldenflasks.util.FlaskBuffUtils;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Item;
@@ -37,11 +38,15 @@ public class FlaskBuffItem extends Item {
         tooltip.add(Text.translatable(buff.getName()).formatted(Formatting.GOLD));
 
         // Description changes based on operation
-        if(buff.getOperation() == EntityAttributeModifier.Operation.ADDITION) {
-            tooltip.add(Text.translatable(buff.getDesc(), buff.getValue()).formatted(Formatting.DARK_GRAY));
-        }
-        if(buff.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_BASE || buff.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_TOTAL) {
-            tooltip.add(Text.translatable(buff.getDesc(), (double) buff.getValue() * 100 + "%").formatted(Formatting.DARK_GRAY));
-        }
+        tooltip.add(FlaskBuffUtils.createBuffDescription(buff));
+//        if(buff.getOperation() == EntityAttributeModifier.Operation.ADDITION) {
+//            tooltip.add(Text.translatable(buff.getDesc(), buff.getValue()).formatted(Formatting.DARK_GRAY));
+//        }
+//        if(buff.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_BASE || buff.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_TOTAL) {
+//
+//        }
     }
+    //Text.translatable(buff.getDesc(), round(buff.getValue() * 100, 2) + "%").formatted(Formatting.DARK_GRAY)
+
+
 }

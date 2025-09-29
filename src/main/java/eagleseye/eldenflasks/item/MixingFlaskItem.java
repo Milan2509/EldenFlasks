@@ -2,6 +2,7 @@ package eagleseye.eldenflasks.item;
 
 import eagleseye.eldenflasks.EldenFlasks;
 import eagleseye.eldenflasks.buff.BuffManager;
+import eagleseye.eldenflasks.util.FlaskBuffUtils;
 import eagleseye.eldenflasks.util.PlayerPersistentData;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -89,35 +90,35 @@ public class MixingFlaskItem extends Item {
             String slot2 = stack.getNbt().getString("slot2");
 
             //Charges
-            if (charges == maxCharges) {
-                tooltip.add(Text.literal("Charges: " + charges + "/" + maxCharges).formatted(Formatting.GOLD));
-            } else if (charges < maxCharges && charges > 0) {
-                tooltip.add(Text.literal("Charges: " + charges + "/" + maxCharges).formatted(Formatting.GRAY));
-            } else {
-                tooltip.add(Text.literal("Flask Empty").formatted(Formatting.RED));
-            }
-            //Duration
-            tooltip.add(Text.literal("Duration: " + duration).formatted(Formatting.GRAY));
+//            if (charges == maxCharges) {
+//                tooltip.add(Text.literal("Charges: " + charges + "/" + maxCharges).formatted(Formatting.GOLD));
+//            } else if (charges < maxCharges && charges > 0) {
+//                tooltip.add(Text.literal("Charges: " + charges + "/" + maxCharges).formatted(Formatting.GRAY));
+//            } else {
+//                tooltip.add(Text.literal("Flask Empty").formatted(Formatting.RED));
+//            }
             //Slots
             if (BuffManager.getBuff(slot1) != null) {
-                tooltip.add(Text.literal("Slot 1: ").formatted(Formatting.AQUA).append(
+                tooltip.add(Text.literal("Slot 1: ").formatted(Formatting.GOLD).append(
                         Text.translatable(BuffManager.getBuff(slot1).getName())));
-                tooltip.add(Text.translatable(BuffManager.getBuff(slot1).getDesc()).formatted(Formatting.DARK_GRAY));
+                tooltip.add(FlaskBuffUtils.createBuffDescription(BuffManager.getBuff(slot1)));
             } else {
                 tooltip.add(Text.literal("BUFF 1 NOT FOUND").formatted(Formatting.DARK_RED));
             }
 
             if (BuffManager.getBuff(slot2) != null) {
-                tooltip.add(Text.literal("Slot 2: ").formatted(Formatting.AQUA).append(
+                tooltip.add(Text.literal("Slot 2: ").formatted(Formatting.GOLD).append(
                         Text.translatable(BuffManager.getBuff(slot2).getName())));
-                tooltip.add(Text.translatable(BuffManager.getBuff(slot2).getDesc()).formatted(Formatting.DARK_GRAY));
+                tooltip.add(FlaskBuffUtils.createBuffDescription(BuffManager.getBuff(slot2)));
             } else {
                 tooltip.add(Text.literal("BUFF 2 NOT FOUND").formatted(Formatting.DARK_RED));
             }
+            //Duration
+            tooltip.add(Text.literal("Duration: " + duration).formatted(Formatting.GRAY));
         }
         //Fallback
         else {
-            tooltip.add(Text.literal("Charges: 1/1").formatted(Formatting.GOLD));
+//            tooltip.add(Text.literal("Charges: 1/1").formatted(Formatting.GOLD));
             tooltip.add(Text.literal("Duration: 30 Sec").formatted(Formatting.GRAY));
             //Slots
             tooltip.add(Text.literal("Slot 1: Empty").formatted(Formatting.AQUA));

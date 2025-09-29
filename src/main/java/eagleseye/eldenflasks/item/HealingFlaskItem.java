@@ -160,7 +160,7 @@ public class HealingFlaskItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.literal("Heals you when consumed, can be recharged at a Campfire.").formatted(Formatting.DARK_GRAY));
+        tooltip.add(Text.translatable("item.eldenflasks.health_flask.desc").formatted(Formatting.DARK_GRAY));
         if (stack.hasNbt()) {
             int maxCharges = stack.getNbt().getInt("maxCharges");
             int charges = stack.getNbt().getInt("charges");
@@ -188,7 +188,7 @@ public class HealingFlaskItem extends Item {
             tooltip.add(Text.literal("Charges: " + FLASKS_CONFIG.maxCharges() + "/" + FLASKS_CONFIG.maxCharges()).formatted(Formatting.GOLD));
             tooltip.add(Text.literal("Healing: " + (int) FLASKS_CONFIG.healing() + " HP").formatted(Formatting.GRAY));
             tooltip.add(Text.literal("Drink Speed: " + (float) FLASKS_CONFIG.drinkTime() / 20 + " Sec").formatted(Formatting.GRAY));
-            tooltip.add(Text.literal("0/" + FLASKS_CONFIG.rechargeKillRequirement() + " for Flask Recharge").formatted(Formatting.DARK_GRAY));
+            tooltip.add(Text.literal("0/" + FLASKS_CONFIG.rechargeKillRequirement() + " kills for Flask Recharge").formatted(Formatting.DARK_GRAY));
         }
     }
 

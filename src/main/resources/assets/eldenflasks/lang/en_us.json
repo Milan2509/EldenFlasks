@@ -37,10 +37,103 @@
   "message.incombat.recharge_unavailable": "Can't Recharge While In Combat",
   "message.incombat.recharge_flask": "Flask Recharged",
 
-  "buff.eldenflasks.movement_speed_1": "Movement Speed",
-  "buff.eldenflasks.movement_speed_2": "Enhanced Movement Speed",
-  "buff.eldenflasks.movement_speed_3": "Empowered Movement Speed",
-  "buff.eldenflasks.movement_speed.desc": "Increases movement speed with %1$s",
   "buff.prefix.tier2": "Enhanced",
-  "buff.prefix.tier3": "Empowered"
+  "buff.prefix.tier3": "Empowered",
+  "item.eldenflasks.health_flask.desc": "Heals you when consumed, can be recharged at a Campfire.",
+
+  "item.eldenflasks.orb_movement_speed_1": "Orb of Swiftness",
+  "item.eldenflasks.orb_movement_speed_2": "Orb of Enhanced Swiftness",
+  "item.eldenflasks.orb_movement_speed_3": "Orb of Empowered Swiftness",
+  "buff.eldenflasks.movement_speed": "Swiftness",
+  "buff.eldenflasks.movement_speed.desc": "Increases movement speed with %1$s",
+
+  "item.eldenflasks.orb_attack_damage_1": "Orb of Physical Damage",
+  "item.eldenflasks.orb_attack_damage_2": "Orb of Enhanced Physical Damage",
+  "item.eldenflasks.orb_attack_damage_3": "Orb of Empowered Physical Damage",
+  "buff.eldenflasks.attack_damage": "Physical Damage",
+  "buff.eldenflasks.attack_damage.desc": "Increases attack damage with %1$s",
+
+  "item.eldenflasks.orb_armor_1": "Orb of Defense",
+  "item.eldenflasks.orb_armor_2": "Orb of Enhanced Defense",
+  "item.eldenflasks.orb_armor_3": "Orb of Empowered Defense",
+  "buff.eldenflasks.armor": "Defense",
+  "buff.eldenflasks.armor.desc": "Increases armor with %1$s",
+
+  "item.eldenflasks.orb_toughness_1": "Orb of Toughness",
+  "item.eldenflasks.orb_toughness_2": "Orb of Enhanced Toughness",
+  "item.eldenflasks.orb_toughness_3": "Orb of Empowered Toughness",
+  "buff.eldenflasks.toughness": "Toughness",
+  "buff.eldenflasks.toughness.desc": "Increases armor toughness with %1$s",
+
+  "item.eldenflasks.orb_max_health_1": "Orb of Vitality",
+  "item.eldenflasks.orb_max_health_2": "Orb of Enhanced Vitality",
+  "item.eldenflasks.orb_max_health_3": "Orb of Empowered Vitality",
+  "buff.eldenflasks.max_health": "Vitality",
+  "buff.eldenflasks.max_health.desc": "Increases max health with %1$s",
+
+  "item.eldenflasks.orb_attack_speed_1": "Orb of Haste",
+  "item.eldenflasks.orb_attack_speed_2": "Orb of Enhanced Haste",
+  "item.eldenflasks.orb_attack_speed_3": "Orb of Empowered Haste",
+  "buff.eldenflasks.attack_speed": "Haste",
+  "buff.eldenflasks.attack_speed.desc": "Increases attack speed with %1$s",
+
+  "item.eldenflasks.orb_luck_1": "Orb of Luck",
+  "item.eldenflasks.orb_luck_2": "Orb of Enhanced Luck",
+  "item.eldenflasks.orb_luck_3": "Orb of Empowered Luck",
+  "buff.eldenflasks.luck": "Luck",
+  "buff.eldenflasks.luck.desc": "Increases luck with %1$s",
+
+  "item.eldenflasks.orb_knockback_res_1": "Orb of Knockback Resist",
+  "item.eldenflasks.orb_knockback_res_2": "Orb of Enhanced Knockback Resist",
+  "item.eldenflasks.orb_knockback_res_3": "Orb of Empowered Knockback Resist",
+  "buff.eldenflasks.knockback_res": "Knockback Resist",
+  "buff.eldenflasks.knockback_res.desc": "Increases knockback resistance with %1$s",
+
+  "item.eldenflasks.orb_fire_power_1": "Orb of Fire Power",
+  "item.eldenflasks.orb_fire_power_2": "Orb of Enhanced Fire Power",
+  "item.eldenflasks.orb_fire_power_3": "Orb of Empowered Fire Power",
+  "buff.eldenflasks.fire_power": "Fire Power",
+  "buff.eldenflasks.fire_power.desc": "Increases fire spell power with %1$s",
+
+  "item.eldenflasks.orb_frost_power_1": "Orb of Frost Power",
+  "item.eldenflasks.orb_frost_power_2": "Orb of Enhanced Frost Power",
+  "item.eldenflasks.orb_frost_power_3": "Orb of Empowered Frost Power",
+  "buff.eldenflasks.frost_power": "Frost Power",
+  "buff.eldenflasks.frost_power.desc": "Increases frost spell power with %1$s",
+
+  "item.eldenflasks.orb_arcane_power_1": "Orb of Arcane Power",
+  "item.eldenflasks.orb_arcane_power_2": "Orb of Enhanced Arcane Power",
+  "item.eldenflasks.orb_arcane_power_3": "Orb of Empowered Arcane Power",
+  "buff.eldenflasks.arcane_power": "Arcane Power",
+  "buff.eldenflasks.arcane_power.desc": "Increases arcane spell power with %1$s",
+
+  "item.eldenflasks.orb_healing_power_1": "Orb of Healing Power",
+  "item.eldenflasks.orb_healing_power_2": "Orb of Enhanced Healing Power",
+  "item.eldenflasks.orb_healing_power_3": "Orb of Empowered Healing Power",
+  "buff.eldenflasks.healing_power": "Healing Power",
+  "buff.eldenflasks.healing_power.desc": "Increases healing spell power with %1$s",
+
+  "item.eldenflasks.orb_unholy_power_1": "Orb of Unholy Power",
+  "item.eldenflasks.orb_unholy_power_2": "Orb of Enhanced Unholy Power",
+  "item.eldenflasks.orb_unholy_power_3": "Orb of Empowered Unholy Power",
+  "buff.eldenflasks.unholy_power": "Unholy Power",
+  "buff.eldenflasks.unholy_power.desc": "Increases unholy spell power with %1$s",
+
+  "item.eldenflasks.orb_blood_power_1": "Orb of Blood Power",
+  "item.eldenflasks.orb_blood_power_2": "Orb of Enhanced Blood Power",
+  "item.eldenflasks.orb_blood_power_3": "Orb of Empowered Blood Power",
+  "buff.eldenflasks.blood_power": "Blood Power",
+  "buff.eldenflasks.blood_power.desc": "Increases blood power with %1$s",
+
+  "item.eldenflasks.orb_ranged_damage_1": "Orb of Heavy Shots",
+  "item.eldenflasks.orb_ranged_damage_2": "Orb of Enhanced Heavy Shots",
+  "item.eldenflasks.orb_ranged_damage_3": "Orb of Empowered Heavy Shots",
+  "buff.eldenflasks.ranged_damage": "Heavy Shots",
+  "buff.eldenflasks.ranged_damage.desc": "Increases ranged damage with %1$s",
+
+  "item.eldenflasks.orb_draw_speed_1": "Orb of Hasty Shots",
+  "item.eldenflasks.orb_draw_speed_2": "Orb of Enhanced Hasty Shots",
+  "item.eldenflasks.orb_draw_speed_3": "Orb of Empowered Hasty Shots",
+  "buff.eldenflasks.draw_speed": "Hasty Shots",
+  "buff.eldenflasks.draw_speed.desc": "Increases draw speed with %1$s"
 }

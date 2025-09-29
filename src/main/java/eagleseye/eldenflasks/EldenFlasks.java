@@ -35,7 +35,6 @@ public class EldenFlasks implements ModInitializer {
 		if (!FabricLoader.getInstance().isModLoaded("incombat")) return true;
 
 		else return !CombatCheck.isPlayerInCombat(player);
-
 	}
 
 	@Override
