@@ -13,9 +13,26 @@ public class EldenFlasksClient implements ClientModInitializer {
     public void onInitializeClient() {
         HandledScreens.register(ScreenHandlerRegistry.FLASK_MIXER_SCREEN_SCREEN_HANDLER, FlaskMixerScreen::new);
 
-        //new model predicate
+        // new model predicates
+        // Health Flask
         ModelPredicateProviderRegistry.register(
                 ItemRegistry.HEALTH_FLASK,
+                new Identifier("charges"),
+                (stack, world, entity, seed) -> {
+                    if (stack.hasNbt() && stack.getNbt().contains("charges")) {
+                        int charges = stack.getNbt().getInt("charges");
+                        int max = stack.getOrCreateNbt().getInt("maxCharges");
+
+                        return (float) charges / max; // returns a float between 0.0 and 1.0
+
+                    }
+                    return 1f; // default
+                }
+        );
+
+        // Mixing Flask
+        ModelPredicateProviderRegistry.register(
+                ItemRegistry.MIXING_FLASK,
                 new Identifier("charges"),
                 (stack, world, entity, seed) -> {
                     if (stack.hasNbt() && stack.getNbt().contains("charges")) {

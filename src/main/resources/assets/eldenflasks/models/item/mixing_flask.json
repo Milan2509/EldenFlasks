@@ -1,0 +1,10 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "eldenflasks:item/mixing_flask"
+  },
+  "overrides": [
+    { "predicate": { "charges": 0.0 }, "model": "eldenflasks:item/health_flask_empty" },
+    { "predicate": { "charges": 1.0 }, "model": "eldenflasks:item/mixing_flask_full" }
+  ]
+}
