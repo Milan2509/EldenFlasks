@@ -26,6 +26,7 @@ public class EldenFlasks implements ModInitializer {
 
 	public static final EldenFlasksFlaskConfig FLASKS_CONFIG = EldenFlasksFlaskConfig.createAndLoad();
 	public static final EldenFlasksLootConfig LOOT_CONFIG = EldenFlasksLootConfig.createAndLoad();
+//	public static final EldenFlasksBuffConfig BUFF_CONFIG = EldenFlasksBuffConfig.createAndLoad();
 
 	//Buff effect
 	public static final StatusEffect BUFFED_EFFECT = new BuffEffect();

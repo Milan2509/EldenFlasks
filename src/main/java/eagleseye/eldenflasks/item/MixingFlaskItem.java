@@ -34,8 +34,8 @@ public class MixingFlaskItem extends Item {
             nbt.putInt("charges", 1);
             nbt.putInt("maxCharges", 1);
             nbt.putInt("duration", 30);
-            nbt.putString("slot1", "eldenflasks:movement_speed_1");
-            nbt.putString("slot2", "eldenflasks:fire_power_3");
+            nbt.putString("slot1", "empty");
+            nbt.putString("slot2", "empty");
         }
     }
 
@@ -101,24 +101,28 @@ public class MixingFlaskItem extends Item {
             tooltip.add(Text.literal("Duration: " + duration).formatted(Formatting.GRAY));
             //Slots
             if (BuffManager.getBuff(slot1) != null) {
-                tooltip.add(Text.literal("Slot 1: ").formatted(Formatting.AQUA).append(
-                        Text.translatable(BuffManager.getBuff(slot1).getName())));
+                tooltip.add(Text.literal("Slot 1: ").formatted(Formatting.AQUA).append(Text.translatable(BuffManager.getBuff(slot1).getName())));
                 tooltip.add(FlaskBuffUtils.createBuffDescription(BuffManager.getBuff(slot1)));
-            } else {
-                tooltip.add(Text.literal("BUFF 1 NOT FOUND").formatted(Formatting.DARK_RED));
+            } else if (slot1 == "empty"){
+                tooltip.add(Text.literal("Slot 1: Empty").formatted(Formatting.AQUA));
+            }
+            else {
+                tooltip.add(Text.translatable("buff.invalid.desc", "buff not found"));
             }
 
             if (BuffManager.getBuff(slot2) != null) {
-                tooltip.add(Text.literal("Slot 2: ").formatted(Formatting.AQUA).append(
-                        Text.translatable(BuffManager.getBuff(slot2).getName())));
+                tooltip.add(Text.literal("Slot 2: ").formatted(Formatting.AQUA).append(Text.translatable(BuffManager.getBuff(slot2).getName())));
                 tooltip.add(FlaskBuffUtils.createBuffDescription(BuffManager.getBuff(slot2)));
-            } else {
-                tooltip.add(Text.literal("BUFF 2 NOT FOUND").formatted(Formatting.DARK_RED));
+            } else if (slot1 == "empty"){
+                tooltip.add(Text.literal("Slot 2: Empty").formatted(Formatting.AQUA));
+            }
+            else {
+                tooltip.add(Text.translatable("buff.invalid.desc", "buff not found"));
             }
         }
         //Fallback
         else {
-            tooltip.add(Text.literal("Charges: 1/1").formatted(Formatting.GOLD));
+//            tooltip.add(Text.literal("Charges: 1/1").formatted(Formatting.GOLD));
             tooltip.add(Text.literal("Duration: 30 Sec").formatted(Formatting.GRAY));
             //Slots
             tooltip.add(Text.literal("Slot 1: Empty").formatted(Formatting.AQUA));

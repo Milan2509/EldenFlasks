@@ -35,18 +35,12 @@ public class FlaskBuffItem extends Item {
             tooltip.add(Text.translatable("buff.invalid.desc", BuffManager.getBuff(buffId)));
             return;
         }
+
         tooltip.add(Text.translatable(buff.getName()).formatted(Formatting.GOLD));
 
         // Description changes based on operation
         tooltip.add(FlaskBuffUtils.createBuffDescription(buff));
-//        if(buff.getOperation() == EntityAttributeModifier.Operation.ADDITION) {
-//            tooltip.add(Text.translatable(buff.getDesc(), buff.getValue()).formatted(Formatting.DARK_GRAY));
-//        }
-//        if(buff.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_BASE || buff.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_TOTAL) {
-//
-//        }
     }
-    //Text.translatable(buff.getDesc(), round(buff.getValue() * 100, 2) + "%").formatted(Formatting.DARK_GRAY)
 
 
 }

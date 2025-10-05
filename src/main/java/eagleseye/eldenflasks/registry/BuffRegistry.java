@@ -51,7 +51,7 @@ public class BuffRegistry {
 
     public static final FlaskBuff MAX_HEALTH = register("max_health",
             "minecraft:generic.max_health",
-            2,
+            4,
             EntityAttributeModifier.Operation.ADDITION,
             UUID.fromString("a40afabb-35a2-40b6-8322-adce9901f1c3"),
             2
@@ -87,6 +87,7 @@ public class BuffRegistry {
     private static final String SPELL_POWER = "spell_power";
     private static final String ETERNAL_ATTRIBUTES = "eternal_attributes";
     private static final String RANGED_WEAPON = "ranged_weapon_api";
+    private static final String COMBAT_ROLL = "combatroll";
 
     // Spell Power
     public static final FlaskBuff FIRE = registerModded(SPELL_POWER, "fire_power",
@@ -149,25 +150,40 @@ public class BuffRegistry {
             EntityAttributeModifier.Operation.MULTIPLY_BASE,
             UUID.fromString("97200f22-94b8-4bd2-aaf9-01d44b10cde9"),
             0.02
+    );
+    // Combat Roll
+    public static final FlaskBuff ROLL_RECHARGE = registerModded(COMBAT_ROLL, "roll_recharge",
+            "combatroll:recharge",
+            0.1,
+            EntityAttributeModifier.Operation.MULTIPLY_BASE,
+            UUID.fromString("6711b554-3a45-4ace-b541-9df8045d201f"),
+            0.02
 
+    );
+    public static final FlaskBuff ROLL_COUNT = registerModded(COMBAT_ROLL, "roll_count",
+            "combatroll:count",
+            1,
+            EntityAttributeModifier.Operation.ADDITION,
+            UUID.fromString("6711b554-3a45-4ace-b541-9df8045d201f"),
+            0.02
     );
 
     private static FlaskBuff register(String name, String attribute, double value,
                                       EntityAttributeModifier.Operation operation, UUID uuid, double tierIncrement) {
 
-        FlaskBuff flaskBuff_t1 = createFlaskBuff(name + "_1", attribute, value, operation, uuid);
-        FlaskBuff flaskBuff_t2 = createFlaskBuff(name + "_2", attribute, value + tierIncrement, operation, uuid);
-        FlaskBuff flaskBuff_t3 = createFlaskBuff(name + "_3", attribute, value + tierIncrement * 2, operation, uuid);
+        FlaskBuff flaskBuff = createFlaskBuff(name, attribute, value, operation, uuid);
+//        FlaskBuff flaskBuff_t2 = createFlaskBuff(name + "_2", attribute, value + tierIncrement, operation, uuid);
+//        FlaskBuff flaskBuff_t3 = createFlaskBuff(name + "_3", attribute, value + tierIncrement * 2, operation, uuid);
 
-        addBuffItem(name + "_1");
-        addBuffItem(name + "_2");
-        addBuffItem(name + "_3");
+        addBuffItem(name);
+//        addBuffItem(name + "_2");
+//        addBuffItem(name + "_3");
 
-        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name + "_1"), flaskBuff_t1);
-        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name + "_2"), flaskBuff_t2);
-        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name + "_3"), flaskBuff_t3);
+        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name), flaskBuff);
+//        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name + "_2"), flaskBuff_t2);
+//        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name + "_3"), flaskBuff_t3);
 
-        return flaskBuff_t1;
+        return flaskBuff;
     }
 
     private static FlaskBuff registerModded(String requiredMod, String name, String attribute, double value,
@@ -193,7 +209,6 @@ public class BuffRegistry {
                 "buff.eldenflasks." + name,
                 getAttributeFromString(attribute),
                 value,
-                0.05,
                 operation,
                 uuid
         );
