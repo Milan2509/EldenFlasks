@@ -90,6 +90,7 @@ public class BuffRegistry {
     private static final String COMBAT_ROLL = "combatroll";
 
     // Spell Power
+    //TODO: Add following buffs: Spell Haste, Spell Critical Chance, Spell Critical Damage
     public static final FlaskBuff FIRE = registerModded(SPELL_POWER, "fire_power",
             "spell_power:fire",
             0.05,
@@ -172,16 +173,10 @@ public class BuffRegistry {
                                       EntityAttributeModifier.Operation operation, UUID uuid, double tierIncrement) {
 
         FlaskBuff flaskBuff = createFlaskBuff(name, attribute, value, operation, uuid);
-//        FlaskBuff flaskBuff_t2 = createFlaskBuff(name + "_2", attribute, value + tierIncrement, operation, uuid);
-//        FlaskBuff flaskBuff_t3 = createFlaskBuff(name + "_3", attribute, value + tierIncrement * 2, operation, uuid);
 
         addBuffItem(name);
-//        addBuffItem(name + "_2");
-//        addBuffItem(name + "_3");
 
         BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name), flaskBuff);
-//        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name + "_2"), flaskBuff_t2);
-//        BuffManager.registerBuff(new Identifier(EldenFlasks.MOD_ID, name + "_3"), flaskBuff_t3);
 
         return flaskBuff;
     }

@@ -27,4 +27,18 @@ public class FlaskBuffUtils {
         long tmp = Math.round(value);
         return (double) tmp / factor;
     }
+    /**
+     * operationFromString
+     * @param opString string of the operation; defaults to ADDITION
+     * @return Entity Attribute Modifier Operation
+     */
+    public static EntityAttributeModifier.Operation operationFromString(String opString){
+        if(opString == null) return EntityAttributeModifier.Operation.ADDITION;
+
+        return switch (opString) {
+            case "MULTIPLY_BASE" -> EntityAttributeModifier.Operation.MULTIPLY_BASE;
+            case "MULTIPLY_TOTAL" -> EntityAttributeModifier.Operation.MULTIPLY_TOTAL;
+            default -> EntityAttributeModifier.Operation.ADDITION;
+        };
+    }
 }
