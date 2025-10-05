@@ -129,9 +129,4 @@ public class MixingFlaskItem extends Item {
             tooltip.add(Text.literal("Slot 2: Empty").formatted(Formatting.AQUA));
         }
     }
-
-    private String tooltipTranslationHelper(String key) {
-        if (key == "empty") return "Empty";
-        return "ERROR";
-    }
 }

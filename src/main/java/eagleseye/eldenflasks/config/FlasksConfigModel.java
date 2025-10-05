@@ -38,6 +38,9 @@ public class FlasksConfigModel {
     public float healingModifier = 2;
     public int drinkTimeModifier = 5;
 
+    @SectionHeader("modIntegrations")
+    public boolean inCombatIntegration = true;
+
     @ExcludeFromScreen
     @Comment("DO NOT TOUCH PLS")
     public boolean firstLoad = true;

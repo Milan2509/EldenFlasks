@@ -36,7 +36,10 @@ public class EldenFlasks implements ModInitializer {
 	public static boolean canRechargeFlask(PlayerEntity player){
 		if (!FabricLoader.getInstance().isModLoaded("incombat")) return true;
 
-		else return !CombatCheck.isPlayerInCombat(player);
+		if (CombatCheck.isPlayerInCombat(player) && FLASKS_CONFIG.inCombatIntegration()) {
+			return false;
+
+		} else return true;
 	}
 
 	@Override
