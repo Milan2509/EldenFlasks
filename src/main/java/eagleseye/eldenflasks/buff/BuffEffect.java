@@ -62,6 +62,10 @@ public class BuffEffect extends StatusEffect {
         if (entity.isPlayer() && buff1 != null) {
             entity.getAttributes().getCustomInstance(buff1.getAttribute()).removeModifier(buff1.getUuid());
         }
+
+        if (entity.isPlayer() && buff2 != null) {
+            entity.getAttributes().getCustomInstance(buff2.getAttribute()).removeModifier(buff2.getUuid());
+        }
     }
 
     @Override

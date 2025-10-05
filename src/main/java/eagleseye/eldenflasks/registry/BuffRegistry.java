@@ -165,7 +165,7 @@ public class BuffRegistry {
             "combatroll:count",
             1,
             EntityAttributeModifier.Operation.ADDITION,
-            UUID.fromString("6711b554-3a45-4ace-b541-9df8045d201f"),
+            UUID.fromString("3205cc1f-d53b-46ff-863b-247f55bce180"),
             0.02
     );
 

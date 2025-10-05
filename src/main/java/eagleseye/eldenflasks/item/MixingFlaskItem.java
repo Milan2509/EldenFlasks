@@ -33,9 +33,9 @@ public class MixingFlaskItem extends Item {
 
             nbt.putInt("charges", 1);
             nbt.putInt("maxCharges", 1);
-            nbt.putInt("duration", 30);
+            nbt.putInt("duration", 60);
             nbt.putString("slot1", "empty");
-            nbt.putString("slot2", "empty");
+            nbt.putString("slot2", "eldenflasks:roll_count");
         }
     }
 
