@@ -1,14 +1,14 @@
 # Elden Flasks (RPG Additions)
 ![banner image](https://raw.githubusercontent.com/Milan2509/EldenFlasks/1.20.1/.projectPage/images/banner.png)
+[![discord_link_badge](https://img.shields.io/badge/Join_the_Discord-%235865F2?style=for-the-badge&logo=discord&logoColor=white&link=https%3A%2F%2Fdiscord.gg%2FX6TAsTz8NQ)](https://discord.gg/X6TAsTz8NQ)
+[![Static Badge](https://img.shields.io/badge/Forge_Via_Sinytra_Connector-orange?style=for-the-badge&logo=modrinth&logoColor=white)](https://modrinth.com/mod/connector)
+
+[![Static Badge](https://img.shields.io/badge/Report_Issues-red?style=for-the-badge&logo=github&logoColor=%23181717)](https://github.com/Milan2509/EldenFlasks/issues)
+[![Static Badge](https://img.shields.io/badge/Source_Code-%23181717?style=for-the-badge&logo=github&logoColor=white&link=https%3A%2F%2Fgithub.com%2FMilan2509%2FEldenFlasks)](https://github.com/Milan2509/EldenFlasks)
 # Installation
 **Requires**
 - [oωo (owo-lib)](https://modrinth.com/mod/owo-lib)
 - [Fabric API](https://modrinth.com/mod/fabric-api)
-
-**Recommended**
-- [In Combat](https://modrinth.com/mod/in-combat)
-
-**Forge via [Sinytra Connector](https://modrinth.com/mod/connector)**
 # Features ✨
 ### Healing Flask
 The healing flask is used to quickly heal yourself in the midst of battle. It has various enhanceable stats.
