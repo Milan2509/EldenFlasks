@@ -2,7 +2,7 @@ package eagleseye.eldenflasks.config;
 import blue.endless.jankson.Comment;
 import io.wispforest.owo.config.annotation.Config;
 
-@Config(name = "eldenflasks/loot_v1", wrapperName = "EldenFlasksLootConfig")
+@Config(name = "eldenflasks/loot_v2", wrapperName = "EldenFlasksLootConfig")
 public class LootConfigModel {
     @Comment("""
             The loot tables to inject the enhancer items

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Modmenu(modId = EldenFlasks.MOD_ID)
-@Config(name = "eldenflasks/flasks_v1", wrapperName = "EldenFlasksFlaskConfig")
+@Config(name = "eldenflasks/flasks_v2", wrapperName = "EldenFlasksFlaskConfig")
 public class FlasksConfigModel {
     @SectionHeader("general")
     @Comment("When more flasks are held then the flasks aren't usable.")

@@ -67,9 +67,9 @@
   "buff.eldenflasks.luck": "Luck",
   "buff.eldenflasks.luck.desc": "Increases luck with %1$s",
 
-  "item.eldenflasks.orb_knockback_res": "Orb of Knockback Resist",
-  "buff.eldenflasks.knockback_res": "Knockback Resist",
-  "buff.eldenflasks.knockback_res.desc": "Increases knockback resistance with %1$s",
+  "item.eldenflasks.orb_knockback_res": "Orb of the Immovable",
+  "buff.eldenflasks.knockback_res": "Immovable",
+  "buff.eldenflasks.knockback_res.desc": "Become completely immune to knockback",
 
   "item.eldenflasks.orb_fire_power": "Orb of Fire Power",
   "buff.eldenflasks.fire_power": "Fire Power",

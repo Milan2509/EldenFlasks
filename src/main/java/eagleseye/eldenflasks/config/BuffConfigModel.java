@@ -18,7 +18,7 @@ public class BuffConfigModel {
     public double movementSpeedValue = 0.05;
     public String movementSpeedOperation = "MULTIPLY_BASE";
 
-    public double attackDamageValue = 0.05;
+    public double attackDamageValue = 0.06;
     public String attackDamageOperation = "MULTIPLY_BASE";
 
     public double armorValue = 2;
@@ -30,50 +30,54 @@ public class BuffConfigModel {
     public double maxHealthValue = 4;
     public String maxHealthOperation = "ADDITION";
 
-    public double attackSpeedValue = 0.02;
+    public double attackSpeedValue = 0.04;
     public String attackSpeedOperation = "MULTIPLY_BASE";
 
     public double luckValue = 2;
     public String luckOperation = "ADDITION";
 
+    @Comment("This value makes the player completely immune to knockback, the translation tooltip is changed to reflect this!")
     public double knockbackResistanceValue = 1;
     public String knockbackResistanceOperation = "ADDITION";
     @Comment("""
             Modded Buffs
             The following buffs require a mod to be loaded for them to register.
             
-            Spell Power Attributes
+            If the modded buffs should be disabled. NOTE: the required mod still needs to be loaded! 
             """)
-    public double firePowerValue = 0.05;
-    public String firePowerOperation = "MULTIPLY_BASE";
-
-    public double frostPowerValue = 0.05;
-    public String frostPowerOperation = "MULTIPLY_BASE";
-
-    public double arcanePowerValue = 0.05;
-    public String arcanePowerOperation = "MULTIPLY_BASE";
-
-    public double healingPowerValue = 0.05;
-    public String healingPowerOperation = "MULTIPLY_BASE";
-
-    @Comment("Eternal Attributes (Death Knights)")
-    public double bloodPowerValue = 0.05;
-    public String bloodPowerOperation = "MULTIPLY_BASE";
-
-    public double unholyPowerValue = 0.05;
-    public String unholyPowerOperation = "MULTIPLY_BASE";
+    public boolean disableModdedBuffs = false;
 
     @Comment("Ranged Weapon API")
-    public double rangedDamageValue = 0.05;
+    public double rangedDamageValue = 0.06;
     public String rangedDamageOperation = "MULTIPLY_BASE";
 
     public double drawSpeedValue = 0.02;
     public String drawSpeedOperation = "MULTIPLY_BASE";
 
     @Comment("Combat Roll")
-    public double rollRechargeValue = 1;
+    public double rollRechargeValue = 0.1;
     public String rollRechargeOperation = "MULTIPLY_BASE";
 
     public double rollCountValue = 1;
     public String rollCountOperation = "ADDITION";
+
+    @Comment("Spell Power")
+    public double firePowerValue = 0.06;
+    public String firePowerOperation = "MULTIPLY_BASE";
+
+    public double frostPowerValue = 0.06;
+    public String frostPowerOperation = "MULTIPLY_BASE";
+
+    public double arcanePowerValue = 0.06;
+    public String arcanePowerOperation = "MULTIPLY_BASE";
+
+    public double healingPowerValue = 0.06;
+    public String healingPowerOperation = "MULTIPLY_BASE";
+
+    @Comment("Eternal Attributes (Death Knights)")
+    public double bloodPowerValue = 0.06;
+    public String bloodPowerOperation = "MULTIPLY_BASE";
+
+    public double unholyPowerValue = 0.06;
+    public String unholyPowerOperation = "MULTIPLY_BASE";
 }
