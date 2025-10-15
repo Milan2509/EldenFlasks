@@ -23,11 +23,15 @@ public class FlasksConfigModel {
     @Comment("Which entities should fully recharge the healing flasks charges on death")
     public List<String> fullyRechargeEntities = new ArrayList<>();
 
+    @Comment("enable/disable the how to recharge tooltip")
+    public boolean rechargeTooltip = true;
+
     @SectionHeader("baseStats")
     public int maxCharges = 3;
     public float healing = 8;
-    public int drinkTime = 40;
+    public int drinkTime = 25;
 
+    //TODO: Remove the configs for drink time modifier amount, OR add a config for disabling/enabling drink time modifiers
     @SectionHeader("statLimits")
     public int maxChargeLimit = 12;
     public float healingLimit = 20;

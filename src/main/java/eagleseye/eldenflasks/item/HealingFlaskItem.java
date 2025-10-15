@@ -22,6 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.Normalizer;
 import java.util.List;
 
 import static eagleseye.eldenflasks.EldenFlasks.FLASKS_CONFIG;
@@ -179,16 +180,18 @@ public class HealingFlaskItem extends Item {
             }
             //Other Stats
             tooltip.add(Text.literal("Healing: " + (int) healing + " HP").formatted(Formatting.GRAY));
-            tooltip.add(Text.literal("Drink Speed: " + (float) drinkSpeed / 20 + " Sec").formatted(Formatting.GRAY));
+//            tooltip.add(Text.literal("Drink Speed: " + (float) drinkSpeed / 20 + " Sec").formatted(Formatting.GRAY));
             // Kills to Recharge
-            tooltip.add(Text.literal(kills + "/" + killRequirement + " kills for Flask Recharge").formatted(Formatting.DARK_GRAY));
+            tooltip.add(Text.literal(kills + "/" + killRequirement + " kills for Flask Recharge").formatted(Formatting.GRAY));
+            if(FLASKS_CONFIG.rechargeTooltip()) tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));
         }
         //Fallback
         else {
             tooltip.add(Text.literal("Charges: " + FLASKS_CONFIG.maxCharges() + "/" + FLASKS_CONFIG.maxCharges()).formatted(Formatting.GOLD));
             tooltip.add(Text.literal("Healing: " + (int) FLASKS_CONFIG.healing() + " HP").formatted(Formatting.GRAY));
-            tooltip.add(Text.literal("Drink Speed: " + (float) FLASKS_CONFIG.drinkTime() / 20 + " Sec").formatted(Formatting.GRAY));
-            tooltip.add(Text.literal("0/" + FLASKS_CONFIG.rechargeKillRequirement() + " kills for Flask Recharge").formatted(Formatting.DARK_GRAY));
+//            tooltip.add(Text.literal("Drink Speed: " + (float) FLASKS_CONFIG.drinkTime() / 20 + " Sec").formatted(Formatting.GRAY));
+            tooltip.add(Text.literal("0/" + FLASKS_CONFIG.rechargeKillRequirement() + " kills for Flask Recharge").formatted(Formatting.GRAY));
+            if(FLASKS_CONFIG.rechargeTooltip()) tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));
         }
     }
 

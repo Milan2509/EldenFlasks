@@ -21,6 +21,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static eagleseye.eldenflasks.EldenFlasks.FLASKS_CONFIG;
+
 public class MixingFlaskItem extends Item {
     public MixingFlaskItem(Settings settings) {
         super(settings.maxCount(1).rarity(Rarity.UNCOMMON));
@@ -119,6 +121,8 @@ public class MixingFlaskItem extends Item {
             else {
                 tooltip.add(Text.translatable("buff.invalid.desc", "buff not found"));
             }
+            // Recharge tooltip
+            if(FLASKS_CONFIG.rechargeTooltip()) tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));
         }
         //Fallback
         else {
@@ -127,6 +131,8 @@ public class MixingFlaskItem extends Item {
             //Slots
             tooltip.add(Text.literal("Slot 1: Empty").formatted(Formatting.AQUA));
             tooltip.add(Text.literal("Slot 2: Empty").formatted(Formatting.AQUA));
+            // Recharge tooltip
+            if(FLASKS_CONFIG.rechargeTooltip()) tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));
         }
     }
 }

@@ -24,7 +24,7 @@ public class EnhancerLootInjections {
                 float dropRate = Float.parseFloat(StringUtils.substringAfter(table, "|"));
                 Identifier id = createLootTableId(table);
 
-                modifyLootTables(id, ItemRegistry.PEARL, dropRate);
+//                modifyLootTables(id, ItemRegistry.PEARL, dropRate);
             }
         }
         for (String table : tearsLootTables) {

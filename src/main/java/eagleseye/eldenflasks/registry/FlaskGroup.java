@@ -23,7 +23,7 @@ public class FlaskGroup {
                         entries.add(BlockRegistry.MIXER);
                         entries.add(ItemRegistry.HEALTH_FLASK);
                         entries.add(ItemRegistry.MIXING_FLASK);
-                        entries.add(ItemRegistry.PEARL);
+//                        entries.add(ItemRegistry.PEARL);
                         entries.add(ItemRegistry.SACRED_TEARS);
                         entries.add(ItemRegistry.RUNE);
                         // Add buff items to group

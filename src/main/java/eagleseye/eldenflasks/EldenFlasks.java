@@ -2,6 +2,7 @@ package eagleseye.eldenflasks;
 
 import eagleseye.eldenflasks.buff.BuffEffect;
 import eagleseye.eldenflasks.buff.BuffManager;
+import eagleseye.eldenflasks.config.DefaultConfigs;
 import eagleseye.eldenflasks.config.EldenFlasksBuffConfig;
 import eagleseye.eldenflasks.registry.*;
 import eagleseye.eldenflasks.config.EldenFlasksFlaskConfig;
@@ -63,17 +64,7 @@ public class EldenFlasks implements ModInitializer {
 		EnhancerLootInjections.parseLootTableConfig();
 
 		//Defaults
-		if(FLASKS_CONFIG.firstLoad()) {
-			List<String> rechargeList = FLASKS_CONFIG.fullyRechargeEntities();
-			rechargeList.add("minecraft:wither");
-			rechargeList.add("minecraft:ender_dragon");
-			rechargeList.add("minecells:concierge");
-			rechargeList.add("minecraft:conjunctivius");
-			rechargeList.add("bosses_of_mass_destruction:lich");
-			rechargeList.add("bosses_of_mass_destruction:gauntlet");
-			rechargeList.add("bosses_of_mass_destruction:void_blossom");
-			FLASKS_CONFIG.firstLoad(false);
-		}
+		DefaultConfigs.init();
 
 		LOGGER.info("Successfully Initialized: " + MOD_ID);
 	}

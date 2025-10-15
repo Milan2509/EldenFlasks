@@ -33,8 +33,8 @@ public class ItemRegistry {
     private static int drinkTimeModifier = EldenFlasks.FLASKS_CONFIG.drinkTimeModifier();
     private static int drinkTimeLimit = EldenFlasks.FLASKS_CONFIG.drinkTimeLimit();
 
-    public static final Item PEARL = register("pearl", new DrinkEnhancerItem(new FabricItemSettings(),
-            drinkTimeModifier, drinkTimeLimit, "This pearl is rumoured to hold the souls of fallen pirates."));
+//    public static final Item PEARL = register("pearl", new DrinkEnhancerItem(new FabricItemSettings(),
+//            drinkTimeModifier, drinkTimeLimit, "This pearl is rumoured to hold the souls of fallen pirates."));
 
     //Buff Items
     private static Item register(String id, Item item){

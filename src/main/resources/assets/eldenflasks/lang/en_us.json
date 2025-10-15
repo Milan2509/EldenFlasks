@@ -37,7 +37,8 @@
   "message.incombat.recharge_unavailable": "Can't Recharge While In Combat",
   "message.incombat.recharge_flask": "Flask Recharged",
 
-  "item.eldenflasks.health_flask.desc": "Heals you when consumed, can be recharged at a Campfire.",
+  "item.eldenflasks.health_flask.desc": "Heals you when consumed",
+  "tooltip.eldenflasks.recharging.desc": "Recharge at a campfire",
 
   "item.eldenflasks.orb_movement_speed": "Orb of Swiftness",
   "buff.eldenflasks.movement_speed": "Swiftness",
