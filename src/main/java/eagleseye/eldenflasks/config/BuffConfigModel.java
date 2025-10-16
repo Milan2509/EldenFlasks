@@ -16,23 +16,23 @@ public class BuffConfigModel {
                 - MULTIPLY_BASE
                 - MULTIPLY_TOTAL
             """)
-    public double movementSpeedValue = 0.05;
-    public String movementSpeedOperation = "MULTIPLY_BASE";
-
     public double attackDamageValue = 0.06;
     public String attackDamageOperation = "MULTIPLY_BASE";
+
+    public double attackSpeedValue = 0.04;
+    public String attackSpeedOperation = "MULTIPLY_BASE";
+
+    public double maxHealthValue = 4;
+    public String maxHealthOperation = "ADDITION";
+
+    public double movementSpeedValue = 0.05;
+    public String movementSpeedOperation = "MULTIPLY_BASE";
 
     public double armorValue = 2;
     public String armorOperation = "ADDITION";
 
     public double toughnessValue = 1;
     public String toughnessOperation = "ADDITION";
-
-    public double maxHealthValue = 4;
-    public String maxHealthOperation = "ADDITION";
-
-    public double attackSpeedValue = 0.04;
-    public String attackSpeedOperation = "MULTIPLY_BASE";
 
     public double luckValue = 2;
     public String luckOperation = "ADDITION";
@@ -75,10 +75,26 @@ public class BuffConfigModel {
     public double healingPowerValue = 0.06;
     public String healingPowerOperation = "MULTIPLY_BASE";
 
+    public double spellHasteValue = 0.04;
+    public String spellHasteOperation = "MULTIPLY_BASE";
+
+    public double spellCritChanceValue = 0.06;
+    public String spellCritChanceOperation = "MULTIPLY_BASE";
+
+    public double spellCritDamageValue = 0.06;
+    public String spellCritDamageOperation = "MULTIPLY_BASE";
+
     @Comment("Eternal Attributes (Death Knights)")
     public double bloodPowerValue = 0.06;
     public String bloodPowerOperation = "MULTIPLY_BASE";
 
     public double unholyPowerValue = 0.06;
     public String unholyPowerOperation = "MULTIPLY_BASE";
+
+    @Comment("Eldritch End")
+    public double corruptionValue = 15;
+    public String corruptionOperation = "ADDITION";
+
+    public double corruptionResistanceValue = 15;
+    public String corruptionResistanceOperation = "ADDITION";
 }

@@ -68,9 +68,9 @@
   "buff.eldenflasks.luck": "Luck",
   "buff.eldenflasks.luck.desc": "Increases luck with %1$s",
 
-  "item.eldenflasks.orb_knockback_res": "Orb of the Immovable",
-  "buff.eldenflasks.knockback_res": "Immovable",
-  "buff.eldenflasks.knockback_res.desc": "Become completely immune to knockback",
+  "item.eldenflasks.orb_knockback_resist": "Orb of the Immovable",
+  "buff.eldenflasks.knockback_resist": "Immovable",
+  "buff.eldenflasks.knockback_resist.desc": "Become completely immune to knockback",
 
   "item.eldenflasks.orb_fire_power": "Orb of Fire Power",
   "buff.eldenflasks.fire_power": "Fire Power",
@@ -111,6 +111,27 @@
   "item.eldenflasks.orb_roll_count": "Orb of Multi-Roll",
   "buff.eldenflasks.roll_count": "Multi-Roll",
   "buff.eldenflasks.roll_count.desc": "Increases roll count with %1$s",
+
+  "item.eldenflasks.orb_corruption": "Orb of the Corrupted",
+  "buff.eldenflasks.corruption": "Corrupted",
+  "buff.eldenflasks.corruption.desc": "Increases your corruption with %1$s",
+
+  "item.eldenflasks.orb_corruption_resist": "Orb of Anti-Corruption",
+  "buff.eldenflasks.corruption_resist": "Corruption Resistant",
+  "buff.eldenflasks.corruption_resist.desc": "Increases your corruption resistance with %1$s",
+
+  "item.eldenflasks.orb_spell_haste": "Orb of Quick Casting",
+  "buff.eldenflasks.spell_haste": "Spell Haste",
+  "buff.eldenflasks.spell_haste.desc": "Increases your spell haste with %1$s",
+
+  "item.eldenflasks.orb_spell_crit_chance": "Orb of Magical Chance",
+  "buff.eldenflasks.spell_crit_chance": "Spell Critical Chance",
+  "buff.eldenflasks.spell_crit_chance.desc": "Increases your spell critical chance with %1$s",
+
+  "item.eldenflasks.orb_spell_crit_damage": "Orb of Lucky Damage",
+  "buff.eldenflasks.spell_crit_damage": "Spell Critical Damage",
+  "buff.eldenflasks.spell_crit_damage.desc": "Increases your spell critical damage with %1$s",
+
   "text.eldenflasks.button_mix": "Mix",
   "text.eldenflasks.cannot_drink_message": "The Power of Too Many Flasks is Too Strong For You"
 }

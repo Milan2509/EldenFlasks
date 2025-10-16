@@ -69,7 +69,7 @@ public class BuffRegistry {
             UUID.fromString("a57a00b6-09d2-4099-98e9-4f684f0c3457")
     );
 
-    public static final FlaskBuff KNOCKBACK_RES = register("knockback_res",
+    public static final FlaskBuff KNOCKBACK_RESIST = register("knockback_resist",
             "minecraft:generic.knockback_resistance",
             BUFF_CONFIG.knockbackResistanceValue(),
             FlaskBuffUtils.operationFromString(BUFF_CONFIG.knockbackResistanceOperation()),
@@ -81,9 +81,29 @@ public class BuffRegistry {
     private static final String ETERNAL_ATTRIBUTES = "eternal_attributes";
     private static final String RANGED_WEAPON = "ranged_weapon_api";
     private static final String COMBAT_ROLL = "combatroll";
+    private static final String ELDRITCH_END = "eldritch_end";
 
     // Spell Power
-    //TODO: Add following buffs: Spell Haste, Spell Critical Chance, Spell Critical Damage
+    public static final FlaskBuff SPELL_HASTE = registerModded(SPELL_POWER, "spell_haste",
+            "spell_power:haste",
+            BUFF_CONFIG.spellHasteValue(),
+            FlaskBuffUtils.operationFromString(BUFF_CONFIG.spellHasteOperation()),
+            UUID.fromString("6ba2c593-2fba-46f3-8e30-3acc14f33091")
+    );
+
+    public static final FlaskBuff SPELL_CRIT_CHANCE = registerModded(SPELL_POWER, "spell_crit_chance",
+            "spell_power:critical_chance",
+            BUFF_CONFIG.spellCritChanceValue(),
+            FlaskBuffUtils.operationFromString(BUFF_CONFIG.spellCritChanceOperation()),
+            UUID.fromString("510b099b-ca1a-4026-992e-a72842fbfb44")
+    );
+    public static final FlaskBuff SPELL_CRIT_DAMAGE = registerModded(SPELL_POWER, "spell_crit_damage",
+            "spell_power:critical_damage",
+            BUFF_CONFIG.spellCritDamageValue(),
+            FlaskBuffUtils.operationFromString(BUFF_CONFIG.spellCritDamageOperation()),
+            UUID.fromString("9849d850-790f-4886-9d96-7c53146a4a96")
+    );
+
     public static final FlaskBuff FIRE = registerModded(SPELL_POWER, "fire_power",
             "spell_power:fire",
             BUFF_CONFIG.firePowerValue(),
@@ -146,6 +166,20 @@ public class BuffRegistry {
             BUFF_CONFIG.rollCountValue(),
             FlaskBuffUtils.operationFromString(BUFF_CONFIG.rollCountOperation()),
             UUID.fromString("3205cc1f-d53b-46ff-863b-247f55bce180")
+    );
+
+    public static final FlaskBuff CORRUPTION = registerModded(ELDRITCH_END, "corruption",
+            "eldritch_end:corruption",
+            BUFF_CONFIG.corruptionValue(),
+            FlaskBuffUtils.operationFromString(BUFF_CONFIG.corruptionOperation()),
+            UUID.fromString("93b75ba3-f5cc-41d7-b52d-31e7220e9466")
+    );
+
+    public static final FlaskBuff CORRUPTION_RESIST = registerModded(ELDRITCH_END, "corruption_resist",
+            "eldritch_end:corruption_resistance",
+            BUFF_CONFIG.corruptionResistanceValue(),
+            FlaskBuffUtils.operationFromString(BUFF_CONFIG.corruptionResistanceOperation()),
+            UUID.fromString("366a9ff9-b9c8-416d-b906-787fa54bee9c")
     );
 
     private static FlaskBuff register(String name, String attribute, double value,
