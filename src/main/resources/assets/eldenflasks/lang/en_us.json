@@ -7,28 +7,33 @@
   "item.eldenflasks.sacred_tears": "Goblet of Sacred Tears",
   "item.eldenflasks.rune": "Ancient Rune",
 
-  "text.config.eldenflasks/flasks_v1.title": "Elden Flasks Config",
+  "text.config.eldenflasks/flasks_v2.title": "Elden Flasks Config",
 
-  "text.config.eldenflasks/flasks_v1.section.general": "General",
-  "text.config.eldenflasks/flasks_v1.option.maxHeldHealingFlasks": "Maximum Healing Flasks in Inventory",
-  "text.config.eldenflasks/flasks_v1.option.rechargeKillRequirement": "Amount of kills required for flask recharge",
-  "text.config.eldenflasks/flasks_v1.option.entityKillBlacklist": "Entity recharge kill blacklist",
-  "text.config.eldenflasks/flasks_v1.option.fullyRechargeEntities": "Entities that fully recharge the flask",
+  "text.config.eldenflasks/flasks_v2.section.healingFlask": "Healing Flask",
+  "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.maxHeldHealingFlasks": "Maximum Healing Flasks in Inventory",
+  "text.config.eldenflasks/flasks_v2.option.rechargeKillRequirement": "Amount of kills required for flask recharge",
+  "text.config.eldenflasks/flasks_v2.option.entityKillBlacklist": "Entity recharge kill blacklist",
+  "text.config.eldenflasks/flasks_v2.option.fullyRechargeEntities": "Entities that fully recharge the flask",
 
-  "text.config.eldenflasks/flasks_v1.section.baseStats": "Base Stats",
-  "text.config.eldenflasks/flasks_v1.option.maxCharges": "Max Charges (Base)",
-  "text.config.eldenflasks/flasks_v1.option.healing": "Healing (Base)",
-  "text.config.eldenflasks/flasks_v1.option.drinkTime": "Drink Time (Base)",
+  "text.config.eldenflasks/flasks_v2.category.healingFlaskStats": "Healing Flask Stats",
 
-  "text.config.eldenflasks/flasks_v1.section.statLimits": "Stat Limits",
-  "text.config.eldenflasks/flasks_v1.option.maxChargeLimit": "Max Charges Limit",
-  "text.config.eldenflasks/flasks_v1.option.healingLimit": "Healing Limit",
-  "text.config.eldenflasks/flasks_v1.option.drinkTimeLimit": "Drink Time Limit",
+  "text.config.eldenflasks/flasks_v2.section.healingFlaskStats.baseStats": "Base Stats",
+  "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.maxCharges": "Max Charges (Base)",
+  "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.healing": "Healing (Base)",
+  "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.drinkTime": "Drink Time (Base)",
 
-  "text.config.eldenflasks/flasks_v1.section.enhancerModifiers": "Enhancer Modifiers",
-  "text.config.eldenflasks/flasks_v1.option.maxChargeModifier": "Sacred Tears Enhancing Modifier (Charges)",
-  "text.config.eldenflasks/flasks_v1.option.healingModifier": "Ancient Rune Enhancing Modifier (Healing)",
-  "text.config.eldenflasks/flasks_v1.option.drinkTimeModifier": "Pearl Enhancing Modifier (Drink Time)",
+  "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.maxChargeLimit": "Max Charges (Limit)",
+  "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.healingLimit": "Healing (Limit)",
+
+  "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.maxChargeModifier": "Charges Modifier Amount (Enhancer Item)",
+  "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.healingModifier": "Healing Modifier Amount (Enhancer Item)",
+
+  "text.config.eldenflasks/flasks_v2.section.mixedFlask": "Mixed Flask",
+  "text.config.eldenflasks/flasks_v2.option.maxHeldMixedFlasks": "Max Held Mixed Flasks",
+  "text.config.eldenflasks/flasks_v2.option.buffDuration": "Buffed Effect Duration (in Ticks)",
+
+  "text.config.eldenflasks/flasks_v2.section.modIntegrations": "Mod Integrations",
+  "text.config.eldenflasks/flasks_v2.option.inCombatIntegration": "In Combat",
 
   "item.eldenflasks.mixing_flask": "Flask of Mixed Wonders",
   "item.eldenflasks.mixing_flask.desc": "Applies buffs when consumed",

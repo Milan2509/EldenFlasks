@@ -2,6 +2,7 @@ package eagleseye.eldenflasks.item;
 
 import eagleseye.eldenflasks.EldenFlasks;
 import eagleseye.eldenflasks.buff.BuffManager;
+import eagleseye.eldenflasks.registry.ItemRegistry;
 import eagleseye.eldenflasks.util.FlaskBuffUtils;
 import eagleseye.eldenflasks.util.PlayerPersistentData;
 import net.minecraft.client.item.TooltipContext;
@@ -35,9 +36,9 @@ public class MixingFlaskItem extends Item {
 
             nbt.putInt("charges", 1);
             nbt.putInt("maxCharges", 1);
-            nbt.putInt("duration", 60);
+            nbt.putInt("duration", FLASKS_CONFIG.buffDuration());
             nbt.putString("slot1", "empty");
-            nbt.putString("slot2", "eldenflasks:roll_count");
+            nbt.putString("slot2", "empty");
         }
     }
 
@@ -54,7 +55,7 @@ public class MixingFlaskItem extends Item {
             buffData.putString("buff2", nbt.getString("slot2"));
 
             user.addStatusEffect(new StatusEffectInstance(EldenFlasks.BUFFED_EFFECT,
-                    nbt.getInt("duration") * 20, 0, true, true));
+                    nbt.getInt("duration"), 0, true, true));
 
         }
         return stack;
@@ -63,6 +64,11 @@ public class MixingFlaskItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         PlayerInventory playerInventory = user.getInventory();
+
+        if (playerInventory.count(ItemRegistry.MIXING_FLASK) > FLASKS_CONFIG.maxHeldMixedFlasks()) {
+            user.sendMessage(Text.translatable("text.eldenflasks.cannot_drink_message").formatted(Formatting.RED), true);
+            return TypedActionResult.fail(user.getStackInHand(hand));
+        }
 
         if (user.getStackInHand(hand).getNbt().getInt("charges") > 0) {
             return ItemUsage.consumeHeldItem(world, user, hand);
@@ -90,7 +96,7 @@ public class MixingFlaskItem extends Item {
             String slot2 = stack.getNbt().getString("slot2");
 
             //Duration
-            tooltip.add(Text.literal("Duration: " + duration).formatted(Formatting.GRAY));
+            tooltip.add(Text.literal("Duration: " + duration/20 + "Seconds").formatted(Formatting.GRAY));
             //Slots
             if (BuffManager.getBuff(slot1) != null) {
                 tooltip.add(Text.literal("Slot 1: ").formatted(Formatting.AQUA).append(Text.translatable(BuffManager.getBuff(slot1).getName())));

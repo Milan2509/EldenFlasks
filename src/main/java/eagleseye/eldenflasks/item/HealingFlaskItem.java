@@ -35,9 +35,9 @@ public class HealingFlaskItem extends Item {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         NbtCompound nbt = stack.getOrCreateNbt();
         if (!stack.hasNbt()) {
-            nbt.putInt("charges", FLASKS_CONFIG.maxCharges());
-            nbt.putInt("maxCharges", FLASKS_CONFIG.maxCharges());
-            nbt.putFloat("healing", FLASKS_CONFIG.healing());
+            nbt.putInt("charges", FLASKS_CONFIG.healingFlaskStats.maxCharges());
+            nbt.putInt("maxCharges", FLASKS_CONFIG.healingFlaskStats.maxCharges());
+            nbt.putFloat("healing", FLASKS_CONFIG.healingFlaskStats.healing());
             nbt.putInt("kills", 0);
             /*
              * The type of kills, each one fills the healing flask with a different amount
@@ -76,14 +76,14 @@ public class HealingFlaskItem extends Item {
     private void resetFlaskWhenOverEnhanced(ItemStack stack) {
         NbtCompound nbt = stack.getNbt();
 
-        boolean charges = nbt.getInt("maxCharges") > FLASKS_CONFIG.maxChargeLimit();
-        boolean healing = nbt.getFloat("healing") > FLASKS_CONFIG.healingLimit();
+        boolean charges = nbt.getInt("maxCharges") > FLASKS_CONFIG.healingFlaskStats.maxChargeLimit();
+        boolean healing = nbt.getFloat("healing") > FLASKS_CONFIG.healingFlaskStats.healingLimit();
 
         if (charges) {
-            nbt.putInt("maxCharges", FLASKS_CONFIG.maxChargeLimit());
-            nbt.putInt("charges", FLASKS_CONFIG.maxChargeLimit());
+            nbt.putInt("maxCharges", FLASKS_CONFIG.healingFlaskStats.maxChargeLimit());
+            nbt.putInt("charges", FLASKS_CONFIG.healingFlaskStats.maxChargeLimit());
         }
-        if (healing) nbt.putFloat("healing", FLASKS_CONFIG.healingLimit());
+        if (healing) nbt.putFloat("healing", FLASKS_CONFIG.healingFlaskStats.healingLimit());
     }
 
     @Override
@@ -100,7 +100,7 @@ public class HealingFlaskItem extends Item {
         PlayerInventory playerInventory = user.getInventory();
 
         if (playerInventory.count(ItemRegistry.HEALTH_FLASK) > FLASKS_CONFIG.maxHeldHealingFlasks()) {
-            user.sendMessage(Text.translatable("text.eldenflasks.cannot_drink_message").formatted(Formatting.DARK_RED), true);
+            user.sendMessage(Text.translatable("text.eldenflasks.cannot_drink_message").formatted(Formatting.RED), true);
             return TypedActionResult.fail(user.getStackInHand(hand));
         }
 
@@ -150,7 +150,7 @@ public class HealingFlaskItem extends Item {
 
     @Override
     public int getMaxUseTime(ItemStack stack) {
-        return FLASKS_CONFIG.drinkTime();
+        return FLASKS_CONFIG.healingFlaskStats.drinkTime();
     }
 
     @Override
@@ -180,8 +180,8 @@ public class HealingFlaskItem extends Item {
         }
         //Fallback
         else {
-            tooltip.add(Text.literal("Charges: " + FLASKS_CONFIG.maxCharges() + "/" + FLASKS_CONFIG.maxCharges()).formatted(Formatting.GOLD));
-            tooltip.add(Text.literal("Healing: " + (int) FLASKS_CONFIG.healing() + " HP").formatted(Formatting.GRAY));
+            tooltip.add(Text.literal("Charges: " + FLASKS_CONFIG.healingFlaskStats.maxCharges() + "/" + FLASKS_CONFIG.healingFlaskStats.maxCharges()).formatted(Formatting.GOLD));
+            tooltip.add(Text.literal("Healing: " + (int) FLASKS_CONFIG.healingFlaskStats.healing() + " HP").formatted(Formatting.GRAY));
             tooltip.add(Text.literal("0/" + FLASKS_CONFIG.rechargeKillRequirement() + " kills for Flask Recharge").formatted(Formatting.GRAY));
             if (FLASKS_CONFIG.rechargeTooltip())
                 tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));

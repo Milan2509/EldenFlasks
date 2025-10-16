@@ -108,9 +108,9 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
 
 
         if (addition instanceof ChargeEnhancerItem) {
-            maxCharges += EldenFlasks.FLASKS_CONFIG.maxChargeModifier();
+            maxCharges += EldenFlasks.FLASKS_CONFIG.healingFlaskStats.maxChargeModifier();
         } else if (addition instanceof HealingEnhancerItem) {
-            healing += EldenFlasks.FLASKS_CONFIG.healingModifier();
+            healing += EldenFlasks.FLASKS_CONFIG.healingFlaskStats.healingModifier();
         }
 
         newNbt.putInt("charges", maxCharges);
@@ -133,9 +133,9 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
 
 
         if (addition instanceof ChargeEnhancerItem) {
-            maxCharges += EldenFlasks.FLASKS_CONFIG.maxChargeModifier();
+            maxCharges += EldenFlasks.FLASKS_CONFIG.healingFlaskStats.maxChargeModifier();
         } else if (addition instanceof HealingEnhancerItem) {
-            healing += EldenFlasks.FLASKS_CONFIG.healingModifier();
+            healing += EldenFlasks.FLASKS_CONFIG.healingFlaskStats.healingModifier();
         }
 
         newNbt.putInt("charges", maxCharges);
@@ -152,8 +152,8 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
         boolean hasFlask = input.getItem() == ItemRegistry.HEALTH_FLASK;
         boolean hasValidEnhancer = false;
 
-        int chargeLimit = EldenFlasks.FLASKS_CONFIG.maxChargeLimit();
-        float healingLimit = EldenFlasks.FLASKS_CONFIG.healingLimit();
+        int chargeLimit = EldenFlasks.FLASKS_CONFIG.healingFlaskStats.maxChargeLimit();
+        float healingLimit = EldenFlasks.FLASKS_CONFIG.healingFlaskStats.healingLimit();
 
         if (input.hasNbt()) {
             NbtCompound nbt = input.getNbt();

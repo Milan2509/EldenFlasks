@@ -16,15 +16,15 @@ public class ItemRegistry {
 
     //Enhancer Items
     //Charge Enhancers
-    private static final int chargeModifier = EldenFlasks.FLASKS_CONFIG.maxChargeModifier();
-    private static final int chargeLimit = EldenFlasks.FLASKS_CONFIG.maxChargeLimit();
+    private static final int chargeModifier = EldenFlasks.FLASKS_CONFIG.healingFlaskStats.maxChargeModifier();
+    private static final int chargeLimit = EldenFlasks.FLASKS_CONFIG.healingFlaskStats.maxChargeLimit();
 
     public static final Item SACRED_TEARS = register("sacred_tears", new ChargeEnhancerItem(new FabricItemSettings(),
             chargeModifier, chargeLimit, "A goblet containing the sacred tears of the mourning divine."));
 
     //Healing Enhancers
-    private static final float healingModifier = EldenFlasks.FLASKS_CONFIG.healingModifier();
-    private static final float healingLimit = EldenFlasks.FLASKS_CONFIG.healingLimit();
+    private static final float healingModifier = EldenFlasks.FLASKS_CONFIG.healingFlaskStats.healingModifier();
+    private static final float healingLimit = EldenFlasks.FLASKS_CONFIG.healingFlaskStats.healingLimit();
 
     public static final Item RUNE = register("rune", new HealingEnhancerItem(new FabricItemSettings(),
             healingModifier, healingLimit, "A rune forged by the dwarves and inscribed by powerful mages."));
