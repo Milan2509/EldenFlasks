@@ -18,6 +18,8 @@ public class FlasksConfigModel {
     public int maxHeldHealingFlasks = 1;
     @Comment("How many kills are required for the healing flask to get 1 additional charge")
     public int rechargeKillRequirement = 8;
+    @Comment("Keep the flask the player's inventory on death")
+    public boolean keepHealingFlaskOnDeath = true;
     @Comment("Which entities won't count towards the kill flask recharging")
     public List<String> entityKillBlacklist = new ArrayList<>();
     @Comment("Which entities should fully recharge the healing flasks charges on death")
