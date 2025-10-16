@@ -20,52 +20,50 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-
 public class EldenFlasks implements ModInitializer {
-	public static final String MOD_ID = "eldenflasks";
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static final String MOD_ID = "eldenflasks";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static final EldenFlasksFlaskConfig FLASKS_CONFIG = EldenFlasksFlaskConfig.createAndLoad();
-	public static final EldenFlasksLootConfig LOOT_CONFIG = EldenFlasksLootConfig.createAndLoad();
-	public static final EldenFlasksBuffConfig BUFF_CONFIG = EldenFlasksBuffConfig.createAndLoad();
+    public static final EldenFlasksFlaskConfig FLASKS_CONFIG = EldenFlasksFlaskConfig.createAndLoad();
+    public static final EldenFlasksLootConfig LOOT_CONFIG = EldenFlasksLootConfig.createAndLoad();
+    public static final EldenFlasksBuffConfig BUFF_CONFIG = EldenFlasksBuffConfig.createAndLoad();
 
-	//Buff effect
-	public static final StatusEffect BUFFED_EFFECT = new BuffEffect();
+    //Buff effect
+    public static final StatusEffect BUFFED_EFFECT = new BuffEffect();
 
-	// Flask Helper Function
-	public static boolean canRechargeFlask(PlayerEntity player){
-		if (!FabricLoader.getInstance().isModLoaded("incombat")) return true;
+    // Flask Helper Function
+    public static boolean canRechargeFlask(PlayerEntity player) {
+        if (!FabricLoader.getInstance().isModLoaded("incombat")) return true;
 
-		if (CombatCheck.isPlayerInCombat(player) && FLASKS_CONFIG.inCombatIntegration()) {
-			return false;
+        if (CombatCheck.isPlayerInCombat(player) && FLASKS_CONFIG.inCombatIntegration()) {
+            return false;
 
-		} else return true;
-	}
+        } else return true;
+    }
 
-	@Override
-	public void onInitialize() {
-		LOGGER.info("Initializing: " + MOD_ID);
-		//Register Buff Effect
-		Registry.register(Registries.STATUS_EFFECT, new Identifier(MOD_ID, "buffed"), BUFFED_EFFECT);
+    @Override
+    public void onInitialize() {
+        LOGGER.info("Initializing: " + MOD_ID);
+        //Register Buff Effect
+        Registry.register(Registries.STATUS_EFFECT, new Identifier(MOD_ID, "buffed"), BUFFED_EFFECT);
 
-		//Other class initializations
-		BuffManager.init();
+        //Other class initializations
+        BuffManager.init();
 
-		//Registry initializations
-		BuffRegistry.init();
-		ItemRegistry.init();
-		BlockRegistry.init();
-		BlockEntityRegistry.init();
-		ScreenHandlerRegistry.init();
-		FlaskGroup.init();
+        //Registry initializations
+        BuffRegistry.init();
+        ItemRegistry.init();
+        BlockRegistry.init();
+        BlockEntityRegistry.init();
+        ScreenHandlerRegistry.init();
+        FlaskGroup.init();
 
-		//Config
-		EnhancerLootInjections.parseLootTableConfig();
+        //Config
+        EnhancerLootInjections.parseLootTableConfig();
 
-		//Defaults
-		DefaultConfigs.init();
+        //Defaults
+        DefaultConfigs.init();
 
-		LOGGER.info("Successfully Initialized: " + MOD_ID);
-	}
+        LOGGER.info("Successfully Initialized: " + MOD_ID);
+    }
 }

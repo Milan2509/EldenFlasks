@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class FlaskMixerBlock extends BlockWithEntity implements BlockEntityProvider {
-    private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 16,16);
+    private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 16, 16);
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
     public FlaskMixerBlock(Settings settings) {
@@ -53,8 +53,8 @@ public class FlaskMixerBlock extends BlockWithEntity implements BlockEntityProvi
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof FlaskMixerBlockEntity) {
-                ItemScatterer.spawn(world, pos, (FlaskMixerBlockEntity)blockEntity);
-                world.updateComparators(pos,this);
+                ItemScatterer.spawn(world, pos, (FlaskMixerBlockEntity) blockEntity);
+                world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
         }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlaskGroup {
-    private static List<Item> buffItems = new ArrayList<>();
+    private static final List<Item> buffItems = new ArrayList<>();
 
     public static final ItemGroup FLASKS_GROUP = Registry.register(Registries.ITEM_GROUP,
             new Identifier(EldenFlasks.MOD_ID, "generic"),
@@ -23,19 +23,15 @@ public class FlaskGroup {
                         entries.add(BlockRegistry.MIXER);
                         entries.add(ItemRegistry.HEALTH_FLASK);
                         entries.add(ItemRegistry.MIXING_FLASK);
-//                        entries.add(ItemRegistry.PEARL);
                         entries.add(ItemRegistry.SACRED_TEARS);
                         entries.add(ItemRegistry.RUNE);
                         // Add buff items to group
-                        for (Item item : buffItems){
+                        for (Item item : buffItems) {
                             entries.add(item);
                         }
                     }).build());
 
-    public static void init(){}
-
-    public static List<Item> getBuffItems() {
-        return buffItems;
+    public static void init() {
     }
 
     public static void addBuffItem(Item buffItem) {

@@ -6,13 +6,13 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 public class FlaskBuffUtils {
-    public static Text createBuffDescription(FlaskBuff buff){
-        if(buff == null) return Text.literal("BUFF NOT FOUNd");
+    public static Text createBuffDescription(FlaskBuff buff) {
+        if (buff == null) return Text.literal("BUFF NOT FOUND");
 
-        if(buff.getOperation() == EntityAttributeModifier.Operation.ADDITION) {
+        if (buff.getOperation() == EntityAttributeModifier.Operation.ADDITION) {
             return Text.translatable(buff.getDesc(), buff.getValue()).formatted(Formatting.DARK_GRAY);
         }
-        if(buff.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_BASE || buff.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_TOTAL) {
+        if (buff.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_BASE || buff.getOperation() == EntityAttributeModifier.Operation.MULTIPLY_TOTAL) {
             return Text.translatable(buff.getDesc(), round(buff.getValue() * 100, 2) + "%").formatted(Formatting.DARK_GRAY);
         }
 
@@ -27,13 +27,15 @@ public class FlaskBuffUtils {
         long tmp = Math.round(value);
         return (double) tmp / factor;
     }
+
     /**
      * operationFromString
+     *
      * @param opString string of the operation; defaults to ADDITION
      * @return Entity Attribute Modifier Operation
      */
-    public static EntityAttributeModifier.Operation operationFromString(String opString){
-        if(opString == null) return EntityAttributeModifier.Operation.ADDITION;
+    public static EntityAttributeModifier.Operation operationFromString(String opString) {
+        if (opString == null) return EntityAttributeModifier.Operation.ADDITION;
 
         return switch (opString) {
             case "MULTIPLY_BASE" -> EntityAttributeModifier.Operation.MULTIPLY_BASE;

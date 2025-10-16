@@ -13,5 +13,5 @@ public class ScreenHandlerRegistry {
             Registry.register(Registries.SCREEN_HANDLER, new Identifier(EldenFlasks.MOD_ID, "flask_mixing"),
                     new ExtendedScreenHandlerType<>(FlaskMixerScreenHandler::new));
 
-    public static void init(){}
+    public static void init() {}
 }

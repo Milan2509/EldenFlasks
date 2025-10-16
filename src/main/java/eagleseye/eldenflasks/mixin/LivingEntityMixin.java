@@ -18,7 +18,9 @@ import static eagleseye.eldenflasks.EldenFlasks.FLASKS_CONFIG;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-    @Shadow public abstract EntityGroup getGroup();
+    @Shadow
+    public abstract EntityGroup getGroup();
+
     @Inject(method = "onDeath", at = @At("TAIL"))
     private void onDeath(DamageSource damageSource, CallbackInfo ci) {
         Entity killer = damageSource.getAttacker();
@@ -28,7 +30,7 @@ public abstract class LivingEntityMixin {
         EntityType<?> entityType = entity.getType();
         Identifier entityId = Registries.ENTITY_TYPE.getId(entityType);
 
-        if(FLASKS_CONFIG.entityKillBlacklist().contains(entityId.toString())) return;
+        if (FLASKS_CONFIG.entityKillBlacklist().contains(entityId.toString())) return;
 
         if (killer instanceof PlayerEntity player) {
             for (ItemStack stack : player.getInventory().main) {
@@ -36,10 +38,10 @@ public abstract class LivingEntityMixin {
                     NbtCompound nbt = stack.getOrCreateNbt();
                     int kills = nbt.getInt("kills");
 
-                    if(FLASKS_CONFIG.fullyRechargeEntities().contains(entityId.toString())){
+                    if (FLASKS_CONFIG.fullyRechargeEntities().contains(entityId.toString())) {
                         nbt.putString("killType", "full");
                         nbt.putInt("kills", kills + nbt.getInt("killRequirement"));
-                    } else{
+                    } else {
                         nbt.putString("killType", "basic");
                         nbt.putInt("kills", kills + 1);
                     }

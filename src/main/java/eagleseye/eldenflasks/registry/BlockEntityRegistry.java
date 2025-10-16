@@ -11,8 +11,9 @@ import net.minecraft.util.Identifier;
 public class BlockEntityRegistry {
     public static final BlockEntityType<FlaskMixerBlockEntity> FLASK_MIXER_BLOCK_ENTITY =
             Registry.register(Registries.BLOCK_ENTITY_TYPE,
-            new Identifier(EldenFlasks.MOD_ID, "flask_mixer_be"),
+                    new Identifier(EldenFlasks.MOD_ID, "flask_mixer_be"),
                     FabricBlockEntityTypeBuilder.create(FlaskMixerBlockEntity::new, BlockRegistry.MIXER).build());
 
-    public static void init(){}
+    public static void init() {
+    }
 }

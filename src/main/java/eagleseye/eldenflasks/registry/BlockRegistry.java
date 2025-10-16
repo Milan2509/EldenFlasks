@@ -23,12 +23,12 @@ public class BlockRegistry {
     public static final Block MIXER = register("mixer",
             new FlaskMixerBlock(FabricBlockSettings.copyOf(Blocks.ACACIA_WOOD).nonOpaque()));
 
-    private static Block register(String id, Block block){
+    private static Block register(String id, Block block) {
         registerItem(id, block);
         return Registry.register(Registries.BLOCK, new Identifier(EldenFlasks.MOD_ID, id), block);
     }
 
-    private static void registerItem(String id, Block block){
+    private static void registerItem(String id, Block block) {
         Registry.register(Registries.ITEM, new Identifier(EldenFlasks.MOD_ID, id),
                 new BlockItem(block, new FabricItemSettings()) {
                     @Override
@@ -38,5 +38,6 @@ public class BlockRegistry {
                 });
     }
 
-    public static void init(){}
+    public static void init() {
+    }
 }

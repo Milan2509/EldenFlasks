@@ -24,9 +24,8 @@ public class FlaskMixerScreen extends HandledScreen<FlaskMixerScreenHandler> {
     protected void init() {
         super.init();
 
-        mixButton = ButtonWidget.builder(Text.translatable("text.eldenflasks.button_mix"), button -> {
-                    FlaskMixerBlockEntity.setCanMix(true);
-                }).dimensions(width / 2 - 205, 20, 200, 20)
+        mixButton = ButtonWidget.builder(Text.translatable("text.eldenflasks.button_mix"), button -> FlaskMixerBlockEntity.setCanMix(true))
+                .dimensions(width / 2 - 205, 20, 200, 20)
                 .build();
 
         addDrawableChild(mixButton);
@@ -41,15 +40,8 @@ public class FlaskMixerScreen extends HandledScreen<FlaskMixerScreenHandler> {
         int y = (height - backgroundHeight) / 2;
 
         context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
-
-        renderProgressArrow(context, x, y);
     }
 
-    private void renderProgressArrow(DrawContext context, int x, int y) {
-        if (handler.isMixing()) {
-            context.drawTexture(TEXTURE, x + 84, y + 29, 176, 0, 8, handler.getScaledProgress());
-        }
-    }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {

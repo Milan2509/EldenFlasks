@@ -33,16 +33,13 @@ public class FlasksConfigModel {
     public float healing = 8;
     public int drinkTime = 25;
 
-    //TODO: Remove the configs for drink time modifier amount, OR add a config for disabling/enabling drink time modifiers
     @SectionHeader("statLimits")
     public int maxChargeLimit = 12;
     public float healingLimit = 20;
-    public int drinkTimeLimit = 20;
 
     @SectionHeader("enhancerModifiers")
     public int maxChargeModifier = 1;
     public float healingModifier = 2;
-    public int drinkTimeModifier = 5;
 
     @SectionHeader("modIntegrations")
     public boolean inCombatIntegration = true;

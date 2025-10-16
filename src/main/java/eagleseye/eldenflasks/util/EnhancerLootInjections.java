@@ -14,21 +14,12 @@ import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
 
 public class EnhancerLootInjections {
-    private static final String[] pearlLootTables = EldenFlasks.LOOT_CONFIG.pearlLootTables();
     private static final String[] tearsLootTables = EldenFlasks.LOOT_CONFIG.tearsLootTable();
     private static final String[] runeLootTables = EldenFlasks.LOOT_CONFIG.runeLootTable();
 
-    public static void parseLootTableConfig(){
-        for (String table : pearlLootTables) {
-            if(table.contains(":") && table.contains("|")) {
-                float dropRate = Float.parseFloat(StringUtils.substringAfter(table, "|"));
-                Identifier id = createLootTableId(table);
-
-//                modifyLootTables(id, ItemRegistry.PEARL, dropRate);
-            }
-        }
+    public static void parseLootTableConfig() {
         for (String table : tearsLootTables) {
-            if(table.contains(":") && table.contains("|")) {
+            if (table.contains(":") && table.contains("|")) {
                 float dropRate = Float.parseFloat(StringUtils.substringAfter(table, "|"));
                 Identifier id = createLootTableId(table);
 
@@ -36,7 +27,7 @@ public class EnhancerLootInjections {
             }
         }
         for (String table : runeLootTables) {
-            if(table.contains(":") && table.contains("|")) {
+            if (table.contains(":") && table.contains("|")) {
                 float dropRate = Float.parseFloat(StringUtils.substringAfter(table, "|"));
                 Identifier id = createLootTableId(table);
 
@@ -45,21 +36,21 @@ public class EnhancerLootInjections {
         }
     }
 
-    private static void modifyLootTables(Identifier tableToModify, Item item, float dropRate){
+    private static void modifyLootTables(Identifier tableToModify, Item item, float dropRate) {
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, builder, lootTableSource) -> {
-                    if (tableToModify.equals(id)){
-                        LootPool.Builder poolBuilder = LootPool.builder()
-                                .rolls(ConstantLootNumberProvider.create(1))
-                                .conditionally(RandomChanceLootCondition.builder(dropRate))
-                                .with(ItemEntry.builder(item))
-                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
+            if (tableToModify.equals(id)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(1))
+                        .conditionally(RandomChanceLootCondition.builder(dropRate))
+                        .with(ItemEntry.builder(item))
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
 
-                        builder.pool(poolBuilder.build());
-                    }
-                });
+                builder.pool(poolBuilder.build());
+            }
+        });
     }
 
-    private static Identifier createLootTableId(String table){
+    private static Identifier createLootTableId(String table) {
         String modId = StringUtils.substringBefore(table, ":");
         String tableIdWithDropRate = StringUtils.substringAfter(table, ":");
         String tableId = StringUtils.substringBefore(tableIdWithDropRate, "|");

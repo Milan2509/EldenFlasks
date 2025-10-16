@@ -22,7 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.text.Normalizer;
 import java.util.List;
 
 import static eagleseye.eldenflasks.EldenFlasks.FLASKS_CONFIG;
@@ -38,7 +37,6 @@ public class HealingFlaskItem extends Item {
         if (!stack.hasNbt()) {
             nbt.putInt("charges", FLASKS_CONFIG.maxCharges());
             nbt.putInt("maxCharges", FLASKS_CONFIG.maxCharges());
-            nbt.putInt("drinkTime", FLASKS_CONFIG.drinkTime());
             nbt.putFloat("healing", FLASKS_CONFIG.healing());
             nbt.putInt("kills", 0);
             /*
@@ -54,25 +52,23 @@ public class HealingFlaskItem extends Item {
             nbt.putInt("killRequirement", FLASKS_CONFIG.rechargeKillRequirement());
             //FIXING: STILL RESET KILLS WHEN FLASK IS FULL
             //ADD: SOUND WHEN FLASK GETS RECHARGED
-            if(nbt.getInt("kills") >= nbt.getInt("killRequirement")){
-                if(nbt.getInt("charges") < nbt.getInt("maxCharges")){
-                    if(!(nbt.getInt("kills") - nbt.getInt("killRequirement") < 0)){
+            if (nbt.getInt("kills") >= nbt.getInt("killRequirement")) {
+                if (nbt.getInt("charges") < nbt.getInt("maxCharges")) {
+                    if (!(nbt.getInt("kills") - nbt.getInt("killRequirement") < 0)) {
                         nbt.putInt("kills", nbt.getInt("kills") - nbt.getInt("killRequirement"));
-                    } else{
+                    } else {
                         nbt.putInt("kills", 0);
                     }
 
-                    if(nbt.getString("killType") == "basic") nbt.putInt("charges", nbt.getInt("charges") + 1);
-                    if(nbt.getString("killType") == "full") nbt.putInt("charges", nbt.getInt("maxCharges"));
+                    if (nbt.getString("killType") == "basic") nbt.putInt("charges", nbt.getInt("charges") + 1);
+                    if (nbt.getString("killType") == "full") nbt.putInt("charges", nbt.getInt("maxCharges"));
                 } else {
-                    if(!(nbt.getInt("kills") - nbt.getInt("killRequirement") < 0)){
+                    if (!(nbt.getInt("kills") - nbt.getInt("killRequirement") < 0)) {
                         nbt.putInt("kills", nbt.getInt("kills") - nbt.getInt("killRequirement"));
-                    } else{
+                    } else {
                         nbt.putInt("kills", 0);
                     }
                 }
-//                if(nbt.getString("killType") == "basic") nbt.putInt("charges", nbt.getInt("charges") + 1);
-//                if(nbt.getString("killType") == "full") nbt.putInt("charges", nbt.getInt("maxCharges"));
             }
         }
     }
@@ -82,14 +78,12 @@ public class HealingFlaskItem extends Item {
 
         boolean charges = nbt.getInt("maxCharges") > FLASKS_CONFIG.maxChargeLimit();
         boolean healing = nbt.getFloat("healing") > FLASKS_CONFIG.healingLimit();
-        boolean drinkTime = nbt.getInt("drinkTime") < FLASKS_CONFIG.drinkTimeLimit();
 
         if (charges) {
             nbt.putInt("maxCharges", FLASKS_CONFIG.maxChargeLimit());
             nbt.putInt("charges", FLASKS_CONFIG.maxChargeLimit());
         }
         if (healing) nbt.putFloat("healing", FLASKS_CONFIG.healingLimit());
-        if (drinkTime) nbt.putInt("drinkTime", FLASKS_CONFIG.drinkTimeLimit());
     }
 
     @Override
@@ -106,7 +100,7 @@ public class HealingFlaskItem extends Item {
         PlayerInventory playerInventory = user.getInventory();
 
         if (playerInventory.count(ItemRegistry.HEALTH_FLASK) > FLASKS_CONFIG.maxHeldHealingFlasks()) {
-            user.sendMessage(Text.literal("The Power of Too Many Flasks is Too Strong For You").formatted(Formatting.DARK_RED), true);
+            user.sendMessage(Text.translatable("text.eldenflasks.cannot_drink_message").formatted(Formatting.DARK_RED), true);
             return TypedActionResult.fail(user.getStackInHand(hand));
         }
 
@@ -126,7 +120,7 @@ public class HealingFlaskItem extends Item {
             Hand hand = player.getActiveHand();
             ItemStack stack = player.getStackInHand(hand);
 
-            if(!EldenFlasks.canRechargeFlask(player)){
+            if (!EldenFlasks.canRechargeFlask(player)) {
                 player.sendMessage(Text.translatable("message.incombat.recharge_unavailable").formatted(Formatting.RED), true);
                 return ActionResult.PASS;
             }
@@ -156,7 +150,7 @@ public class HealingFlaskItem extends Item {
 
     @Override
     public int getMaxUseTime(ItemStack stack) {
-        return stack.getNbt().getInt("drinkTime");
+        return FLASKS_CONFIG.drinkTime();
     }
 
     @Override
@@ -165,7 +159,6 @@ public class HealingFlaskItem extends Item {
         if (stack.hasNbt()) {
             int maxCharges = stack.getNbt().getInt("maxCharges");
             int charges = stack.getNbt().getInt("charges");
-            int drinkSpeed = stack.getNbt().getInt("drinkTime");
             int kills = stack.getNbt().getInt("kills");
             int killRequirement = stack.getNbt().getInt("killRequirement");
             float healing = stack.getNbt().getFloat("healing");
@@ -180,18 +173,18 @@ public class HealingFlaskItem extends Item {
             }
             //Other Stats
             tooltip.add(Text.literal("Healing: " + (int) healing + " HP").formatted(Formatting.GRAY));
-//            tooltip.add(Text.literal("Drink Speed: " + (float) drinkSpeed / 20 + " Sec").formatted(Formatting.GRAY));
             // Kills to Recharge
             tooltip.add(Text.literal(kills + "/" + killRequirement + " kills for Flask Recharge").formatted(Formatting.GRAY));
-            if(FLASKS_CONFIG.rechargeTooltip()) tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));
+            if (FLASKS_CONFIG.rechargeTooltip())
+                tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));
         }
         //Fallback
         else {
             tooltip.add(Text.literal("Charges: " + FLASKS_CONFIG.maxCharges() + "/" + FLASKS_CONFIG.maxCharges()).formatted(Formatting.GOLD));
             tooltip.add(Text.literal("Healing: " + (int) FLASKS_CONFIG.healing() + " HP").formatted(Formatting.GRAY));
-//            tooltip.add(Text.literal("Drink Speed: " + (float) FLASKS_CONFIG.drinkTime() / 20 + " Sec").formatted(Formatting.GRAY));
             tooltip.add(Text.literal("0/" + FLASKS_CONFIG.rechargeKillRequirement() + " kills for Flask Recharge").formatted(Formatting.GRAY));
-            if(FLASKS_CONFIG.rechargeTooltip()) tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));
+            if (FLASKS_CONFIG.rechargeTooltip())
+                tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));
         }
     }
 

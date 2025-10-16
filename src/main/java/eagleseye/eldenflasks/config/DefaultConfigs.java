@@ -5,8 +5,8 @@ import java.util.List;
 import static eagleseye.eldenflasks.EldenFlasks.FLASKS_CONFIG;
 
 public class DefaultConfigs {
-    private static void setFullyRechargeEntities(){
-        if(FLASKS_CONFIG.firstLoad()) {
+    private static void setFullyRechargeEntities() {
+        if (FLASKS_CONFIG.firstLoad()) {
             List<String> rechargeList = FLASKS_CONFIG.fullyRechargeEntities();
             rechargeList.add("minecraft:wither");
             rechargeList.add("minecraft:ender_dragon");
@@ -22,12 +22,12 @@ public class DefaultConfigs {
             rechargeList.add("cataclysm:ancient_remnant");
             rechargeList.add("cataclysm:harbinger");
             rechargeList.add("cataclysm:scylla");
-            
+
             FLASKS_CONFIG.firstLoad(false);
         }
     }
 
-    public static void init(){
+    public static void init() {
         setFullyRechargeEntities();
     }
 }

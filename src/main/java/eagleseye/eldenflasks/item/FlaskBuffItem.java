@@ -4,7 +4,6 @@ import eagleseye.eldenflasks.buff.BuffManager;
 import eagleseye.eldenflasks.buff.FlaskBuff;
 import eagleseye.eldenflasks.util.FlaskBuffUtils;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -17,12 +16,13 @@ import java.util.List;
 
 public class FlaskBuffItem extends Item {
     private final String buffId;
+
     public FlaskBuffItem(Settings settings, String buffId) {
         super(settings.rarity(Rarity.RARE).maxCount(1));
         this.buffId = buffId;
     }
 
-    public String getBuffId(){
+    public String getBuffId() {
         return this.buffId;
     }
 

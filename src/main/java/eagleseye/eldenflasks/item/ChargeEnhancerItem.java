@@ -18,13 +18,13 @@ public class ChargeEnhancerItem extends Item {
     private static String loreString;
 
     public ChargeEnhancerItem(Settings settings, int modifier, int maxModifier, String str) {
-        super(settings.rarity(Rarity.RARE).maxCount(8));
+        super(settings.rarity(Rarity.RARE));
         loreString = str;
 
-         lore = Text.literal(loreString)
+        lore = Text.literal(loreString)
                 .formatted(Formatting.GOLD, Formatting.ITALIC);
-         desc = Text.literal("+" + modifier + " Charge to Flask of Healing"
-                 + " (Max: " + maxModifier + ")").formatted(Formatting.GRAY);
+        desc = Text.literal("+" + modifier + " Charge to Flask of Healing"
+                + " (Max: " + maxModifier + ")").formatted(Formatting.GRAY);
     }
 
     @Override

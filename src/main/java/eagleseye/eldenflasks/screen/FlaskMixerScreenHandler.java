@@ -1,36 +1,27 @@
 package eagleseye.eldenflasks.screen;
 
-import eagleseye.eldenflasks.block.entity.FlaskMixerBlockEntity;
 import eagleseye.eldenflasks.registry.ScreenHandlerRegistry;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.ArrayPropertyDelegate;
-import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
 public class FlaskMixerScreenHandler extends ScreenHandler {
     private final Inventory inventory;
-    private final PropertyDelegate propertyDelegate;
 
-    public FlaskMixerScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf){
-        this(syncId, inventory, inventory.player.getWorld().getBlockEntity(buf.readBlockPos()),
-                new ArrayPropertyDelegate(2));
+    public FlaskMixerScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
+        this(syncId, inventory, inventory.player.getWorld().getBlockEntity(buf.readBlockPos()));
     }
 
-    public FlaskMixerScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity,
-                                   PropertyDelegate arrayPropertyDelegate) {
+    public FlaskMixerScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity) {
         super(ScreenHandlerRegistry.FLASK_MIXER_SCREEN_SCREEN_HANDLER, syncId);
         checkSize(((Inventory) blockEntity), 2);
         this.inventory = ((Inventory) blockEntity);
         playerInventory.onOpen(playerInventory.player);
-        this.propertyDelegate = arrayPropertyDelegate;
-        FlaskMixerBlockEntity blockEntity1 = ((FlaskMixerBlockEntity) blockEntity);
 
         this.addSlot(new Slot(this.inventory, 0, 55, 19));
         this.addSlot(new Slot(this.inventory, 1, 107, 19));
@@ -38,20 +29,6 @@ public class FlaskMixerScreenHandler extends ScreenHandler {
 
         addPlayerHotbar(playerInventory);
         addPlayerInventory(playerInventory);
-
-        addProperties(arrayPropertyDelegate);
-    }
-
-    public boolean isMixing(){
-        return propertyDelegate.get(0) > 0;
-    }
-
-    public int getScaledProgress() {
-        int progress = this.propertyDelegate.get(0);
-        int maxProgress = this.propertyDelegate.get(1);  // Max Progress
-        int progressArrowSize = 26; // This is the width in pixels of your arrow
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
     @Override

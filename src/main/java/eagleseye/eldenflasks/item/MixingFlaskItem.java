@@ -85,54 +85,43 @@ public class MixingFlaskItem extends Item {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable("item.eldenflasks.mixing_flask.desc").formatted(Formatting.DARK_GRAY));
         if (stack.hasNbt()) {
-            int maxCharges = stack.getNbt().getInt("maxCharges");
-            int charges = stack.getNbt().getInt("charges");
             int duration = stack.getNbt().getInt("duration");
             String slot1 = stack.getNbt().getString("slot1");
             String slot2 = stack.getNbt().getString("slot2");
 
-//            Charges
-//            if (charges == maxCharges) {
-//                tooltip.add(Text.literal("Charges: " + charges + "/" + maxCharges).formatted(Formatting.GOLD));
-//            } else if (charges < maxCharges && charges > 0) {
-//                tooltip.add(Text.literal("Charges: " + charges + "/" + maxCharges).formatted(Formatting.GRAY));
-//            } else {
-//                tooltip.add(Text.literal("Flask Empty").formatted(Formatting.RED));
-//            }
             //Duration
             tooltip.add(Text.literal("Duration: " + duration).formatted(Formatting.GRAY));
             //Slots
             if (BuffManager.getBuff(slot1) != null) {
                 tooltip.add(Text.literal("Slot 1: ").formatted(Formatting.AQUA).append(Text.translatable(BuffManager.getBuff(slot1).getName())));
                 tooltip.add(FlaskBuffUtils.createBuffDescription(BuffManager.getBuff(slot1)));
-            } else if (slot1 == "empty"){
+            } else if (slot1 == "empty") {
                 tooltip.add(Text.literal("Slot 1: Empty").formatted(Formatting.AQUA));
-            }
-            else {
+            } else {
                 tooltip.add(Text.translatable("buff.invalid.desc", "buff not found"));
             }
 
             if (BuffManager.getBuff(slot2) != null) {
                 tooltip.add(Text.literal("Slot 2: ").formatted(Formatting.AQUA).append(Text.translatable(BuffManager.getBuff(slot2).getName())));
                 tooltip.add(FlaskBuffUtils.createBuffDescription(BuffManager.getBuff(slot2)));
-            } else if (slot1 == "empty"){
+            } else if (slot1 == "empty") {
                 tooltip.add(Text.literal("Slot 2: Empty").formatted(Formatting.AQUA));
-            }
-            else {
+            } else {
                 tooltip.add(Text.translatable("buff.invalid.desc", "buff not found"));
             }
             // Recharge tooltip
-            if(FLASKS_CONFIG.rechargeTooltip()) tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));
+            if (FLASKS_CONFIG.rechargeTooltip())
+                tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));
         }
         //Fallback
         else {
-//            tooltip.add(Text.literal("Charges: 1/1").formatted(Formatting.GOLD));
             tooltip.add(Text.literal("Duration: 30 Sec").formatted(Formatting.GRAY));
             //Slots
             tooltip.add(Text.literal("Slot 1: Empty").formatted(Formatting.AQUA));
             tooltip.add(Text.literal("Slot 2: Empty").formatted(Formatting.AQUA));
             // Recharge tooltip
-            if(FLASKS_CONFIG.rechargeTooltip()) tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));
+            if (FLASKS_CONFIG.rechargeTooltip())
+                tooltip.add(Text.translatable("tooltip.eldenflasks.recharging.desc").formatted(Formatting.DARK_GRAY));
         }
     }
 }

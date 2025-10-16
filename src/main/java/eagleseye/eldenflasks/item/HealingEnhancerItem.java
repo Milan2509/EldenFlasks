@@ -18,7 +18,7 @@ public class HealingEnhancerItem extends Item {
     private static String loreString;
 
     public HealingEnhancerItem(Settings settings, float modifier, float maxModifier, String str) {
-        super(settings.rarity(Rarity.RARE).maxCount(8));
+        super(settings.rarity(Rarity.RARE));
         loreString = str;
 
         lore = Text.literal(loreString)

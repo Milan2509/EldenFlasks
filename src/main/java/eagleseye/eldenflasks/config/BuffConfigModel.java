@@ -1,4 +1,5 @@
 package eagleseye.eldenflasks.config;
+
 import blue.endless.jankson.Comment;
 import io.wispforest.owo.config.annotation.Config;
 

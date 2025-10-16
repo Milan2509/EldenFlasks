@@ -111,5 +111,6 @@
   "item.eldenflasks.orb_roll_count": "Orb of Multi-Roll",
   "buff.eldenflasks.roll_count": "Multi-Roll",
   "buff.eldenflasks.roll_count.desc": "Increases roll count with %1$s",
-  "text.eldenflasks.button_mix": "Mix"
+  "text.eldenflasks.button_mix": "Mix",
+  "text.eldenflasks.cannot_drink_message": "The Power of Too Many Flasks is Too Strong For You"
 }

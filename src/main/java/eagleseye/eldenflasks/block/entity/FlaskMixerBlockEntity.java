@@ -15,7 +15,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -33,38 +32,10 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
     private static final int ADDITION_SLOT = 1;
     private static final int OUTPUT_SLOT = 2;
 
-    protected final PropertyDelegate propertyDelegate;
-    private int progress = 0;
-    private int maxProgress = 72;
-
     private static boolean canMix = false;
 
     public FlaskMixerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLASK_MIXER_BLOCK_ENTITY, pos, state);
-        // Handels mixing progress time
-        this.propertyDelegate = new PropertyDelegate() {
-            @Override
-            public int get(int index) {
-                return switch (index) {
-                    case 0 -> FlaskMixerBlockEntity.this.progress;
-                    case 1 -> FlaskMixerBlockEntity.this.maxProgress;
-                    default -> 0;
-                };
-            }
-
-            @Override
-            public void set(int index, int value) {
-                switch (index) {
-                    case 0 -> FlaskMixerBlockEntity.this.progress = value;
-                    case 1 -> FlaskMixerBlockEntity.this.maxProgress = value;
-                }
-            }
-
-            @Override
-            public int size() {
-                return 2; //Number of integers that are handeled
-            }
-        };
     }
 
     @Override
@@ -86,19 +57,17 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("flaskMixer.progress", progress);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("flaskMixer.progress");
     }
 
     @Override
     public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new FlaskMixerScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+        return new FlaskMixerScreenHandler(syncId, playerInventory, this);
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
@@ -108,14 +77,9 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
             if (!canMix) return;
             if (this.hasRecipe()) {
                 this.createFlask(world);
-                this.resetProgress();
-                setCanMix(false);
             }
+            setCanMix(false);
         }
-    }
-
-    private void resetProgress() {
-        this.progress = 0;
     }
 
     private void createFlask(World world) {
@@ -141,24 +105,24 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
 
         int maxCharges = originalNbt.getInt("maxCharges");
         float healing = originalNbt.getFloat("healing");
-        int drinkTime = originalNbt.getInt("drinkTime");
+
 
         if (addition instanceof ChargeEnhancerItem) {
             maxCharges += EldenFlasks.FLASKS_CONFIG.maxChargeModifier();
         } else if (addition instanceof HealingEnhancerItem) {
             healing += EldenFlasks.FLASKS_CONFIG.healingModifier();
-        } else if (addition instanceof DrinkEnhancerItem) {
-            drinkTime -= EldenFlasks.FLASKS_CONFIG.drinkTimeModifier();
         }
 
         newNbt.putInt("charges", maxCharges);
         newNbt.putInt("maxCharges", maxCharges);
         newNbt.putFloat("healing", healing);
-        newNbt.putInt("drinkTime", drinkTime);
 
         return result;
     }
 
+    // WARNING!!
+    // Do not remove the method below, for some reason this breaks stuff, I don't know why.
+    // The mixing no longer functions at all.
     private ItemStack mixingFlaskResult(ItemStack flask, Item addition) {
         ItemStack result = new ItemStack(ItemRegistry.HEALTH_FLASK);
         NbtCompound originalNbt = flask.getNbt();
@@ -166,20 +130,17 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
 
         int maxCharges = originalNbt.getInt("maxCharges");
         float healing = originalNbt.getFloat("healing");
-        int drinkTime = originalNbt.getInt("drinkTime");
+
 
         if (addition instanceof ChargeEnhancerItem) {
             maxCharges += EldenFlasks.FLASKS_CONFIG.maxChargeModifier();
         } else if (addition instanceof HealingEnhancerItem) {
             healing += EldenFlasks.FLASKS_CONFIG.healingModifier();
-        } else if (addition instanceof DrinkEnhancerItem) {
-            drinkTime -= EldenFlasks.FLASKS_CONFIG.drinkTimeModifier();
         }
 
         newNbt.putInt("charges", maxCharges);
         newNbt.putInt("maxCharges", maxCharges);
         newNbt.putFloat("healing", healing);
-        newNbt.putInt("drinkTime", drinkTime);
 
         return result;
     }
@@ -193,17 +154,14 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
 
         int chargeLimit = EldenFlasks.FLASKS_CONFIG.maxChargeLimit();
         float healingLimit = EldenFlasks.FLASKS_CONFIG.healingLimit();
-        int drinkTimeLimit = EldenFlasks.FLASKS_CONFIG.drinkTimeLimit();
 
         if (input.hasNbt()) {
             NbtCompound nbt = input.getNbt();
             int currentMaxCharges = nbt.getInt("maxCharges");
             float currentHealing = nbt.getFloat("healing");
-            int currentDrinkTime = nbt.getInt("drinkTime");
 
             if (enhancerItem instanceof ChargeEnhancerItem && currentMaxCharges < chargeLimit) hasValidEnhancer = true;
             if (enhancerItem instanceof HealingEnhancerItem && currentHealing < healingLimit) hasValidEnhancer = true;
-            if (enhancerItem instanceof DrinkEnhancerItem && currentDrinkTime > drinkTimeLimit) hasValidEnhancer = true;
         }
 
         return hasFlask && hasValidEnhancer;
