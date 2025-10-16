@@ -3,6 +3,7 @@ package eagleseye.eldenflasks.screen;
 import eagleseye.eldenflasks.block.entity.FlaskMixerBlockEntity;
 import eagleseye.eldenflasks.registry.ScreenHandlerRegistry;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;

@@ -2,24 +2,35 @@ package eagleseye.eldenflasks.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import eagleseye.eldenflasks.EldenFlasks;
+import eagleseye.eldenflasks.block.entity.FlaskMixerBlockEntity;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class FlaskMixerScreen  extends HandledScreen<FlaskMixerScreenHandler> {
+public class FlaskMixerScreen extends HandledScreen<FlaskMixerScreenHandler> {
     private static final Identifier TEXTURE = new Identifier(EldenFlasks.MOD_ID, "textures/gui/mixer.png");
+
+    public ButtonWidget mixButton;
 
     public FlaskMixerScreen(FlaskMixerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
 
-//    @Override
-//    protected void init() {
-//        super.init();
-//    }
+    @Override
+    protected void init() {
+        super.init();
+
+        mixButton = ButtonWidget.builder(Text.translatable("text.eldenflasks.button_mix"), button -> {
+                    FlaskMixerBlockEntity.setCanMix(true);
+                }).dimensions(width / 2 - 205, 20, 200, 20)
+                .build();
+
+        addDrawableChild(mixButton);
+    }
 
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
@@ -35,7 +46,7 @@ public class FlaskMixerScreen  extends HandledScreen<FlaskMixerScreenHandler> {
     }
 
     private void renderProgressArrow(DrawContext context, int x, int y) {
-        if(handler.isMixing()){
+        if (handler.isMixing()) {
             context.drawTexture(TEXTURE, x + 84, y + 29, 176, 0, 8, handler.getScaledProgress());
         }
     }
@@ -44,6 +55,6 @@ public class FlaskMixerScreen  extends HandledScreen<FlaskMixerScreenHandler> {
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
-        drawMouseoverTooltip(context, mouseX,  mouseY);
+        drawMouseoverTooltip(context, mouseX, mouseY);
     }
 }

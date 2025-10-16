@@ -27,8 +27,8 @@ public class PlayerInventoryMixin {
 
     @Shadow @Final public PlayerEntity player;
 
-    @Inject(method = "dropAll", at = @At(value = "HEAD", target = ""))
-    private void keepHealingFlaskInInventory(CallbackInfo ci) {
-
-    }
+//    @Inject(method = "dropAll", at = @At(value = "HEAD", target = ""))
+//    private void keepHealingFlaskInInventory(CallbackInfo ci) {
+//
+//    }
 }

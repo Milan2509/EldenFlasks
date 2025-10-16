@@ -110,5 +110,6 @@
 
   "item.eldenflasks.orb_roll_count": "Orb of Multi-Roll",
   "buff.eldenflasks.roll_count": "Multi-Roll",
-  "buff.eldenflasks.roll_count.desc": "Increases roll count with %1$s"
+  "buff.eldenflasks.roll_count.desc": "Increases roll count with %1$s",
+  "text.eldenflasks.button_mix": "Mix"
 }

@@ -35,7 +35,9 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
-    private  int maxProgress = 72;
+    private int maxProgress = 72;
+
+    private static boolean canMix = false;
 
     public FlaskMixerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLASK_MIXER_BLOCK_ENTITY, pos, state);
@@ -43,7 +45,7 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
-                return switch (index){
+                return switch (index) {
                     case 0 -> FlaskMixerBlockEntity.this.progress;
                     case 1 -> FlaskMixerBlockEntity.this.maxProgress;
                     default -> 0;
@@ -52,7 +54,7 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
 
             @Override
             public void set(int index, int value) {
-                switch (index){
+                switch (index) {
                     case 0 -> FlaskMixerBlockEntity.this.progress = value;
                     case 1 -> FlaskMixerBlockEntity.this.maxProgress = value;
                 }
@@ -102,18 +104,12 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
     public void tick(World world, BlockPos pos, BlockState state) {
         if (world.isClient()) return;
 
-        if(getStack(OUTPUT_SLOT).isEmpty()) {
+        if (getStack(OUTPUT_SLOT).isEmpty()) {
+            if (!canMix) return;
             if (this.hasRecipe()) {
-                this.increaseProgress();
-                markDirty(world, pos, state);
-
-                if (hasMixingFinished()) {
-                    this.createFlask(world);
-                    this.resetProgress();
-                }
-            } else {
+                this.createFlask(world);
                 this.resetProgress();
-                markDirty(world, pos, state);
+                setCanMix(false);
             }
         }
     }
@@ -127,8 +123,8 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
         ItemStack addition = getStack(ADDITION_SLOT);
         ItemStack result = null;
 
-        if(input.getItem() instanceof HealingFlaskItem) result = healingFlaskResult(input, addition.getItem());
-        if(input.getItem() instanceof MixingFlaskItem) result = healingFlaskResult(input, addition.getItem());
+        if (input.getItem() instanceof HealingFlaskItem) result = healingFlaskResult(input, addition.getItem());
+        if (input.getItem() instanceof MixingFlaskItem) result = healingFlaskResult(input, addition.getItem());
 
         this.removeStack(INPUT_SLOT, 1);
         this.removeStack(ADDITION_SLOT, 1);
@@ -138,7 +134,7 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
                 SoundCategory.BLOCKS, 1f, 1f);
     }
 
-    private ItemStack healingFlaskResult(ItemStack flask, Item addition){
+    private ItemStack healingFlaskResult(ItemStack flask, Item addition) {
         ItemStack result = new ItemStack(ItemRegistry.HEALTH_FLASK);
         NbtCompound originalNbt = flask.getNbt();
         NbtCompound newNbt = result.getOrCreateNbt();
@@ -147,13 +143,11 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
         float healing = originalNbt.getFloat("healing");
         int drinkTime = originalNbt.getInt("drinkTime");
 
-        if(addition instanceof ChargeEnhancerItem){
+        if (addition instanceof ChargeEnhancerItem) {
             maxCharges += EldenFlasks.FLASKS_CONFIG.maxChargeModifier();
-        }
-        else if (addition instanceof HealingEnhancerItem) {
+        } else if (addition instanceof HealingEnhancerItem) {
             healing += EldenFlasks.FLASKS_CONFIG.healingModifier();
-        }
-        else if (addition instanceof DrinkEnhancerItem) {
+        } else if (addition instanceof DrinkEnhancerItem) {
             drinkTime -= EldenFlasks.FLASKS_CONFIG.drinkTimeModifier();
         }
 
@@ -165,7 +159,7 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
         return result;
     }
 
-    private ItemStack mixingFlaskResult(ItemStack flask, Item addition){
+    private ItemStack mixingFlaskResult(ItemStack flask, Item addition) {
         ItemStack result = new ItemStack(ItemRegistry.HEALTH_FLASK);
         NbtCompound originalNbt = flask.getNbt();
         NbtCompound newNbt = result.getOrCreateNbt();
@@ -174,13 +168,11 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
         float healing = originalNbt.getFloat("healing");
         int drinkTime = originalNbt.getInt("drinkTime");
 
-        if(addition instanceof ChargeEnhancerItem){
+        if (addition instanceof ChargeEnhancerItem) {
             maxCharges += EldenFlasks.FLASKS_CONFIG.maxChargeModifier();
-        }
-        else if (addition instanceof HealingEnhancerItem) {
+        } else if (addition instanceof HealingEnhancerItem) {
             healing += EldenFlasks.FLASKS_CONFIG.healingModifier();
-        }
-        else if (addition instanceof DrinkEnhancerItem) {
+        } else if (addition instanceof DrinkEnhancerItem) {
             drinkTime -= EldenFlasks.FLASKS_CONFIG.drinkTimeModifier();
         }
 
@@ -190,14 +182,6 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
         newNbt.putInt("drinkTime", drinkTime);
 
         return result;
-    }
-
-    private boolean hasMixingFinished() {
-        return progress >= maxProgress;
-    }
-
-    private void increaseProgress() {
-        progress++;
     }
 
     private boolean hasRecipe() {
@@ -224,4 +208,10 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
 
         return hasFlask && hasValidEnhancer;
     }
+
+    public static void setCanMix(boolean canMix) {
+        FlaskMixerBlockEntity.canMix = canMix;
+    }
+
+
 }
