@@ -29,6 +29,8 @@ public class ItemRegistry {
     public static final Item RUNE = register("rune", new HealingEnhancerItem(new FabricItemSettings(),
             healingModifier, healingLimit, "A rune forged by the dwarves and inscribed by powerful mages."));
 
+    //TODO: re-add pearl, now increasing the duration of the mixing flask
+
 
     //Buff Items
     private static Item register(String id, Item item) {

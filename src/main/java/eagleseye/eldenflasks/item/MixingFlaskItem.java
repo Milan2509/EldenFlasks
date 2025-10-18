@@ -96,23 +96,25 @@ public class MixingFlaskItem extends Item {
             String slot2 = stack.getNbt().getString("slot2");
 
             //Duration
-            tooltip.add(Text.literal("Duration: " + duration/20 + "Seconds").formatted(Formatting.GRAY));
+            tooltip.add(Text.literal("Duration: " + duration/20 + " Seconds").formatted(Formatting.GRAY));
             //Slots
-            if (BuffManager.getBuff(slot1) != null) {
+            if (slot1 == "empty") {
+                tooltip.add(Text.literal("Slot 1: Empty").formatted(Formatting.AQUA));
+            }
+            else if (BuffManager.getBuff(slot1) != null) {
                 tooltip.add(Text.literal("Slot 1: ").formatted(Formatting.AQUA).append(Text.translatable(BuffManager.getBuff(slot1).getName())));
                 tooltip.add(FlaskBuffUtils.createBuffDescription(BuffManager.getBuff(slot1)));
-            } else if (slot1 == "empty") {
-                tooltip.add(Text.literal("Slot 1: Empty").formatted(Formatting.AQUA));
             } else {
                 tooltip.add(Text.translatable("buff.invalid.desc", "buff not found"));
             }
 
-            if (BuffManager.getBuff(slot2) != null) {
+            if (slot1 == "empty") {
+                tooltip.add(Text.literal("Slot 2: Empty").formatted(Formatting.AQUA));
+            }
+            else if (BuffManager.getBuff(slot2) != null) {
                 tooltip.add(Text.literal("Slot 2: ").formatted(Formatting.AQUA).append(Text.translatable(BuffManager.getBuff(slot2).getName())));
                 tooltip.add(FlaskBuffUtils.createBuffDescription(BuffManager.getBuff(slot2)));
-            } else if (slot1 == "empty") {
-                tooltip.add(Text.literal("Slot 2: Empty").formatted(Formatting.AQUA));
-            } else {
+            }  else {
                 tooltip.add(Text.translatable("buff.invalid.desc", "buff not found"));
             }
             // Recharge tooltip
@@ -121,7 +123,7 @@ public class MixingFlaskItem extends Item {
         }
         //Fallback
         else {
-            tooltip.add(Text.literal("Duration: 30 Sec").formatted(Formatting.GRAY));
+            tooltip.add(Text.literal("Duration: 30 Seconds").formatted(Formatting.GRAY));
             //Slots
             tooltip.add(Text.literal("Slot 1: Empty").formatted(Formatting.AQUA));
             tooltip.add(Text.literal("Slot 2: Empty").formatted(Formatting.AQUA));

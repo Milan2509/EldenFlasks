@@ -85,14 +85,17 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
     private void createFlask(World world) {
         ItemStack input = getStack(INPUT_SLOT);
         ItemStack addition = getStack(ADDITION_SLOT);
-        ItemStack result = null;
+        ItemStack resultHealing = null;
+        ItemStack resultMixing = null;
 
-        if (input.getItem() instanceof HealingFlaskItem) result = healingFlaskResult(input, addition.getItem());
-        if (input.getItem() instanceof MixingFlaskItem) result = healingFlaskResult(input, addition.getItem());
+        if (input.getItem() instanceof HealingFlaskItem) resultHealing = healingFlaskResult(input, addition.getItem());
+        if (input.getItem() instanceof MixingFlaskItem) resultMixing = mixingFlaskResult(input, addition.getItem());
+
+        if(getValidFlask(input) == 1) this.setStack(OUTPUT_SLOT, resultHealing);
+        if(getValidFlask(input) == 2) this.setStack(OUTPUT_SLOT, resultMixing);
 
         this.removeStack(INPUT_SLOT, 1);
         this.removeStack(ADDITION_SLOT, 1);
-        this.setStack(OUTPUT_SLOT, result);
 
         world.playSound(null, pos, SoundEvents.BLOCK_BREWING_STAND_BREW,
                 SoundCategory.BLOCKS, 1f, 1f);
@@ -120,27 +123,28 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
         return result;
     }
 
-    // WARNING!!
-    // Do not remove the method below, for some reason this breaks stuff, I don't know why.
-    // The mixing no longer functions at all.
     private ItemStack mixingFlaskResult(ItemStack flask, Item addition) {
-        ItemStack result = new ItemStack(ItemRegistry.HEALTH_FLASK);
+        ItemStack result = new ItemStack(ItemRegistry.MIXING_FLASK);
         NbtCompound originalNbt = flask.getNbt();
         NbtCompound newNbt = result.getOrCreateNbt();
 
-        int maxCharges = originalNbt.getInt("maxCharges");
-        float healing = originalNbt.getFloat("healing");
+        String slot1 = originalNbt.getString("slot1");
+        String slot2 = originalNbt.getString("slot2");
 
-
-        if (addition instanceof ChargeEnhancerItem) {
-            maxCharges += EldenFlasks.FLASKS_CONFIG.healingFlaskStats.maxChargeModifier();
-        } else if (addition instanceof HealingEnhancerItem) {
-            healing += EldenFlasks.FLASKS_CONFIG.healingFlaskStats.healingModifier();
+        // Buff adding
+        if(addition instanceof FlaskBuffItem){
+            if(slot1 == "empty"){
+                newNbt.putString("slot1", ((FlaskBuffItem) addition).getBuffId());
+            }
+            else if(slot2 == "empty"){
+                newNbt.putString("slot2", ((FlaskBuffItem) addition).getBuffId());
+            }
+            else {
+                result = flask;
+            }
         }
-
-        newNbt.putInt("charges", maxCharges);
-        newNbt.putInt("maxCharges", maxCharges);
-        newNbt.putFloat("healing", healing);
+//        else if (addition instanceof DurationEnhancerItem)
+//        else if (addition instanceof FlaskBuffRemoverItem)
 
         return result;
     }
@@ -149,23 +153,40 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
         ItemStack input = getStack(INPUT_SLOT);
         Item enhancerItem = getStack(ADDITION_SLOT).getItem();
 
-        boolean hasFlask = input.getItem() == ItemRegistry.HEALTH_FLASK;
-        boolean hasValidEnhancer = false;
+        boolean hasRecipe = false;
 
         int chargeLimit = EldenFlasks.FLASKS_CONFIG.healingFlaskStats.maxChargeLimit();
         float healingLimit = EldenFlasks.FLASKS_CONFIG.healingFlaskStats.healingLimit();
 
-        if (input.hasNbt()) {
+        if (input.hasNbt() && getValidFlask(input) == 1) {
             NbtCompound nbt = input.getNbt();
             int currentMaxCharges = nbt.getInt("maxCharges");
             float currentHealing = nbt.getFloat("healing");
 
-            if (enhancerItem instanceof ChargeEnhancerItem && currentMaxCharges < chargeLimit) hasValidEnhancer = true;
-            if (enhancerItem instanceof HealingEnhancerItem && currentHealing < healingLimit) hasValidEnhancer = true;
+            if (enhancerItem instanceof ChargeEnhancerItem && currentMaxCharges < chargeLimit) hasRecipe = true;
+            if (enhancerItem instanceof HealingEnhancerItem && currentHealing < healingLimit) hasRecipe = true;
         }
 
-        return hasFlask && hasValidEnhancer;
+        if (input.hasNbt() && getValidFlask(input) == 2) {
+            NbtCompound nbt = input.getNbt();
+            String slot1 = nbt.getString("slot1");
+            String slot2 = nbt.getString("slot1");
+
+            if (slot1 == "empty" || slot2 == "empty") hasRecipe = true;
+            else return false;
+        }
+
+        return hasRecipe;
     }
+    // Returns int based on if a valid flask is present
+    // 0 -> no valid flask
+    // 1 -> healing flask
+    // 2 -> mixing flask
+    private int getValidFlask(ItemStack input){
+        if(input.getItem() == ItemRegistry.HEALTH_FLASK) return 1;
+        else if (input.getItem() == ItemRegistry.MIXING_FLASK) return 2;
+        else return 0;
+    };
 
     public static void setCanMix(boolean canMix) {
         FlaskMixerBlockEntity.canMix = canMix;
