@@ -22,13 +22,13 @@ public class FlaskGroup {
                     .icon(() -> new ItemStack(ItemRegistry.HEALTH_FLASK)).entries((displayContext, entries) -> {
                         entries.add(BlockRegistry.MIXER);
                         entries.add(ItemRegistry.HEALTH_FLASK);
-                        entries.add(ItemRegistry.MIXING_FLASK);
+//                        entries.add(ItemRegistry.MIXING_FLASK);
                         entries.add(ItemRegistry.SACRED_TEARS);
                         entries.add(ItemRegistry.RUNE);
                         // Add buff items to group
-                        for (Item item : buffItems) {
-                            entries.add(item);
-                        }
+//                        for (Item item : buffItems) {
+//                            entries.add(item);
+//                        }
                     }).build());
 
     public static void init() {

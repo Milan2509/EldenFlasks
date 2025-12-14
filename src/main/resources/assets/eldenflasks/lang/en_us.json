@@ -10,7 +10,7 @@
   "text.config.eldenflasks/flasks_v2.title": "Elden Flasks Config",
 
   "text.config.eldenflasks/flasks_v2.section.healingFlask": "Healing Flask",
-  "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.maxHeldHealingFlasks": "Maximum Healing Flasks in Inventory",
+  "text.config.eldenflasks/flasks_v2.option.maxHeldHealingFlasks": "Maximum Healing Flasks in Inventory",
   "text.config.eldenflasks/flasks_v2.option.rechargeKillRequirement": "Amount of kills required for flask recharge",
   "text.config.eldenflasks/flasks_v2.option.entityKillBlacklist": "Entity recharge kill blacklist",
   "text.config.eldenflasks/flasks_v2.option.fullyRechargeEntities": "Entities that fully recharge the flask",
@@ -20,7 +20,7 @@
   "text.config.eldenflasks/flasks_v2.section.healingFlaskStats.baseStats": "Base Stats",
   "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.maxCharges": "Max Charges (Base)",
   "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.healing": "Healing (Base)",
-  "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.drinkTime": "Drink Time (Base)",
+  "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.drinkTime": "Drink Time",
 
   "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.maxChargeLimit": "Max Charges (Limit)",
   "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.healingLimit": "Healing (Limit)",
@@ -28,14 +28,14 @@
   "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.maxChargeModifier": "Charges Modifier Amount (Enhancer Item)",
   "text.config.eldenflasks/flasks_v2.option.healingFlaskStats.healingModifier": "Healing Modifier Amount (Enhancer Item)",
 
-  "text.config.eldenflasks/flasks_v2.section.mixedFlask": "Mixed Flask",
-  "text.config.eldenflasks/flasks_v2.option.maxHeldMixedFlasks": "Max Held Mixed Flasks",
-  "text.config.eldenflasks/flasks_v2.option.buffDuration": "Buffed Effect Duration (in Ticks)",
+  "text.config.eldenflasks/flasks_v2.section.mixedFlask": "Mixed Flask [WIP]",
+  "text.config.eldenflasks/flasks_v2.option.maxHeldMixedFlasks": "Max Held Mixed Flasks [WIP]",
+  "text.config.eldenflasks/flasks_v2.option.buffDuration": "Buffed Effect Duration (in Ticks) [WIP]",
 
   "text.config.eldenflasks/flasks_v2.section.modIntegrations": "Mod Integrations",
   "text.config.eldenflasks/flasks_v2.option.inCombatIntegration": "In Combat",
 
-  "item.eldenflasks.mixing_flask": "Flask of Mixed Wonders",
+  "item.eldenflasks.mixing_flask": "Flask of Mixed Wonders [WIP]",
   "item.eldenflasks.mixing_flask.desc": "Applies buffs when consumed",
   "effect.eldenflasks.buffed": "Buffed",
   "buff.invalid.desc": "Invalid BuffId: %1$s",
@@ -45,95 +45,95 @@
   "item.eldenflasks.health_flask.desc": "Heals you when consumed",
   "tooltip.eldenflasks.recharging.desc": "Recharge at a campfire",
 
-  "item.eldenflasks.orb_movement_speed": "Orb of Swiftness",
+  "item.eldenflasks.orb_movement_speed": "Orb of Swiftness [WIP]",
   "buff.eldenflasks.movement_speed": "Swiftness",
   "buff.eldenflasks.movement_speed.desc": "Increases movement speed with %1$s",
 
-  "item.eldenflasks.orb_attack_damage": "Orb of Physical Damage",
+  "item.eldenflasks.orb_attack_damage": "Orb of Physical Damage [WIP]",
   "buff.eldenflasks.attack_damage": "Physical Damage",
   "buff.eldenflasks.attack_damage.desc": "Increases attack damage with %1$s",
 
-  "item.eldenflasks.orb_armor": "Orb of Defense",
+  "item.eldenflasks.orb_armor": "Orb of Defense [WIP]",
   "buff.eldenflasks.armor": "Defense",
   "buff.eldenflasks.armor.desc": "Increases armor with %1$s",
 
-  "item.eldenflasks.orb_toughness": "Orb of Toughness",
+  "item.eldenflasks.orb_toughness": "Orb of Toughness [WIP]",
   "buff.eldenflasks.toughness": "Toughness",
   "buff.eldenflasks.toughness.desc": "Increases armor toughness with %1$s",
 
-  "item.eldenflasks.orb_max_health": "Orb of Vitality",
+  "item.eldenflasks.orb_max_health": "Orb of Vitality [WIP]",
   "buff.eldenflasks.max_health": "Vitality",
   "buff.eldenflasks.max_health.desc": "Increases max health with %1$s",
 
-  "item.eldenflasks.orb_attack_speed": "Orb of Haste",
+  "item.eldenflasks.orb_attack_speed": "Orb of Haste [WIP]",
   "buff.eldenflasks.attack_speed": "Haste",
   "buff.eldenflasks.attack_speed.desc": "Increases attack speed with %1$s",
 
-  "item.eldenflasks.orb_luck": "Orb of Luck",
+  "item.eldenflasks.orb_luck": "Orb of Luck [WIP]",
   "buff.eldenflasks.luck": "Luck",
   "buff.eldenflasks.luck.desc": "Increases luck with %1$s",
 
-  "item.eldenflasks.orb_knockback_resist": "Orb of the Immovable",
+  "item.eldenflasks.orb_knockback_resist": "Orb of the Immovable [WIP]",
   "buff.eldenflasks.knockback_resist": "Immovable",
   "buff.eldenflasks.knockback_resist.desc": "Become completely immune to knockback",
 
-  "item.eldenflasks.orb_fire_power": "Orb of Fire Power",
+  "item.eldenflasks.orb_fire_power": "Orb of Fire Power [WIP]",
   "buff.eldenflasks.fire_power": "Fire Power",
   "buff.eldenflasks.fire_power.desc": "Increases fire spell power with %1$s",
 
-  "item.eldenflasks.orb_frost_power": "Orb of Frost Power",
+  "item.eldenflasks.orb_frost_power": "Orb of Frost Power [WIP]",
   "buff.eldenflasks.frost_power": "Frost Power",
   "buff.eldenflasks.frost_power.desc": "Increases frost spell power with %1$s",
 
-  "item.eldenflasks.orb_arcane_power": "Orb of Arcane Power",
+  "item.eldenflasks.orb_arcane_power": "Orb of Arcane Power [WIP]",
   "buff.eldenflasks.arcane_power": "Arcane Power",
   "buff.eldenflasks.arcane_power.desc": "Increases arcane spell power with %1$s",
 
-  "item.eldenflasks.orb_healing_power": "Orb of Healing Power",
+  "item.eldenflasks.orb_healing_power": "Orb of Healing Power [WIP]",
   "buff.eldenflasks.healing_power": "Healing Power",
   "buff.eldenflasks.healing_power.desc": "Increases healing spell power with %1$s",
 
-  "item.eldenflasks.orb_unholy_power": "Orb of Unholy Power",
+  "item.eldenflasks.orb_unholy_power": "Orb of Unholy Power [WIP]",
   "buff.eldenflasks.unholy_power": "Unholy Power",
   "buff.eldenflasks.unholy_power.desc": "Increases unholy spell power with %1$s",
 
-  "item.eldenflasks.orb_blood_power": "Orb of Blood Power",
+  "item.eldenflasks.orb_blood_power": "Orb of Blood Power [WIP]",
   "buff.eldenflasks.blood_power": "Blood Power",
   "buff.eldenflasks.blood_power.desc": "Increases blood power with %1$s",
 
-  "item.eldenflasks.orb_ranged_damage": "Orb of Heavy Shots",
+  "item.eldenflasks.orb_ranged_damage": "Orb of Heavy Shots [WIP]",
   "buff.eldenflasks.ranged_damage": "Heavy Shots",
   "buff.eldenflasks.ranged_damage.desc": "Increases ranged damage with %1$s",
 
-  "item.eldenflasks.orb_draw_speed": "Orb of Hasty Shots",
+  "item.eldenflasks.orb_draw_speed": "Orb of Hasty Shots [WIP]",
   "buff.eldenflasks.draw_speed": "Hasty Shots",
   "buff.eldenflasks.draw_speed.desc": "Increases draw speed with %1$s",
 
-  "item.eldenflasks.orb_roll_recharge": "Orb of Fast Rolls",
+  "item.eldenflasks.orb_roll_recharge": "Orb of Fast Rolls [WIP]",
   "buff.eldenflasks.roll_recharge": "Fast Rolls",
   "buff.eldenflasks.roll_recharge.desc": "Increases roll recharge with %1$s",
 
-  "item.eldenflasks.orb_roll_count": "Orb of Multi-Roll",
+  "item.eldenflasks.orb_roll_count": "Orb of Multi-Roll [WIP]",
   "buff.eldenflasks.roll_count": "Multi-Roll",
   "buff.eldenflasks.roll_count.desc": "Increases roll count with %1$s",
 
-  "item.eldenflasks.orb_corruption": "Orb of the Corrupted",
+  "item.eldenflasks.orb_corruption": "Orb of the Corrupted [WIP]",
   "buff.eldenflasks.corruption": "Corrupted",
   "buff.eldenflasks.corruption.desc": "Increases your corruption with %1$s",
 
-  "item.eldenflasks.orb_corruption_resist": "Orb of Anti-Corruption",
+  "item.eldenflasks.orb_corruption_resist": "Orb of Anti-Corruption [WIP]",
   "buff.eldenflasks.corruption_resist": "Corruption Resistant",
   "buff.eldenflasks.corruption_resist.desc": "Increases your corruption resistance with %1$s",
 
-  "item.eldenflasks.orb_spell_haste": "Orb of Quick Casting",
+  "item.eldenflasks.orb_spell_haste": "Orb of Quick Casting [WIP]",
   "buff.eldenflasks.spell_haste": "Spell Haste",
   "buff.eldenflasks.spell_haste.desc": "Increases your spell haste with %1$s",
 
-  "item.eldenflasks.orb_spell_crit_chance": "Orb of Magical Chance",
+  "item.eldenflasks.orb_spell_crit_chance": "Orb of Magical Chance [WIP]",
   "buff.eldenflasks.spell_crit_chance": "Spell Critical Chance",
   "buff.eldenflasks.spell_crit_chance.desc": "Increases your spell critical chance with %1$s",
 
-  "item.eldenflasks.orb_spell_crit_damage": "Orb of Lucky Damage",
+  "item.eldenflasks.orb_spell_crit_damage": "Orb of Lucky Damage [WIP]",
   "buff.eldenflasks.spell_crit_damage": "Spell Critical Damage",
   "buff.eldenflasks.spell_crit_damage.desc": "Increases your spell critical damage with %1$s",
 

@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -32,10 +33,38 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
     private static final int ADDITION_SLOT = 1;
     private static final int OUTPUT_SLOT = 2;
 
-    private static boolean canMix = false;
+    protected final PropertyDelegate propertyDelegate;
+    private int progress = 0;
+    private int maxProgress = 72;
+
+//    private static boolean canMix = false;
 
     public FlaskMixerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLASK_MIXER_BLOCK_ENTITY, pos, state);
+        // Handles mixing progress time
+        this.propertyDelegate = new PropertyDelegate() {
+            @Override
+            public int get(int index) {
+                return switch (index) {
+                    case 0 -> FlaskMixerBlockEntity.this.progress;
+                    case 1 -> FlaskMixerBlockEntity.this.maxProgress;
+                    default -> 0;
+                };
+            }
+
+            @Override
+            public void set(int index, int value) {
+                switch (index) {
+                    case 0 -> FlaskMixerBlockEntity.this.progress = value;
+                    case 1 -> FlaskMixerBlockEntity.this.maxProgress = value;
+                }
+            }
+
+            @Override
+            public int size() {
+                return 2;
+            }
+        };
     }
 
     @Override
@@ -57,29 +86,41 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
+        nbt.putInt("flaskMixer.progress", progress);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
+        progress = nbt.getInt("flaskMixer.progress");
     }
 
     @Override
     public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new FlaskMixerScreenHandler(syncId, playerInventory, this);
+        return new FlaskMixerScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
         if (world.isClient()) return;
 
         if (getStack(OUTPUT_SLOT).isEmpty()) {
-            if (!canMix) return;
+
             if (this.hasRecipe()) {
-                this.createFlask(world);
+                this.increaseProgress();
+                markDirty(world, pos, state);
+
+                if (hasMixingFinished()) {
+                    this.createFlask(world);
+                    this.resetProgress();
+                }
+            } else {
+                this.resetProgress();
+                markDirty(world, pos, state);
             }
-            setCanMix(false);
+
         }
+
     }
 
     private void createFlask(World world) {
@@ -94,11 +135,15 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
         if(getValidFlask(input) == 1) this.setStack(OUTPUT_SLOT, resultHealing);
         if(getValidFlask(input) == 2) this.setStack(OUTPUT_SLOT, resultMixing);
 
-        this.removeStack(INPUT_SLOT, 1);
-        this.removeStack(ADDITION_SLOT, 1);
+        this.removeInputItems();
 
         world.playSound(null, pos, SoundEvents.BLOCK_BREWING_STAND_BREW,
                 SoundCategory.BLOCKS, 1f, 1f);
+    }
+
+    private void removeInputItems(){
+        this.removeStack(INPUT_SLOT, 1);
+        this.removeStack(ADDITION_SLOT, 1);
     }
 
     private ItemStack healingFlaskResult(ItemStack flask, Item addition) {
@@ -188,9 +233,23 @@ public class FlaskMixerBlockEntity extends BlockEntity implements ExtendedScreen
         else return 0;
     };
 
-    public static void setCanMix(boolean canMix) {
-        FlaskMixerBlockEntity.canMix = canMix;
+    private boolean hasMixingFinished() {
+        return progress >= maxProgress;
     }
+
+    private void increaseProgress() {
+        progress++;
+    }
+
+    private void resetProgress() {
+        progress = 0;
+    }
+
+
+
+//    public static void setCanMix(boolean canMix) {
+//        FlaskMixerBlockEntity.canMix = canMix;
+//    }
 
 
 }

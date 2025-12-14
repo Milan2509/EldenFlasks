@@ -22,6 +22,8 @@ public class DefaultConfigs {
             rechargeList.add("cataclysm:ancient_remnant");
             rechargeList.add("cataclysm:harbinger");
             rechargeList.add("cataclysm:scylla");
+            rechargeList.add("mowziesmobs:frostmaw");
+            rechargeList.add("mowziesmobs:ferrous_wraughtnaut");
 
             FLASKS_CONFIG.firstLoad(false);
         }
