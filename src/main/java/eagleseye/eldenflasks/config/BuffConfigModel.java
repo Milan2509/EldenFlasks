@@ -6,6 +6,8 @@ import io.wispforest.owo.config.annotation.Config;
 @Config(name = "eldenflasks/buffs_v1", wrapperName = "EldenFlasksBuffConfig")
 public class BuffConfigModel {
     @Comment("""
+            NOTE: THIS IS STILL A WORK IN PROGRESS, AND IS NOT YET IMPLEMENTED!
+            
             The config for all buffs available.
             The following can be configured
             

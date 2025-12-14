@@ -13,9 +13,11 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
+
 public class EnhancerLootInjections {
-    private static final String[] tearsLootTables = EldenFlasks.LOOT_CONFIG.tearsLootTable();
-    private static final String[] runeLootTables = EldenFlasks.LOOT_CONFIG.runeLootTable();
+    private static final List<String> tearsLootTables = EldenFlasks.LOOT_CONFIG.tearsLootTable();
+    private static final List<String> runeLootTables = EldenFlasks.LOOT_CONFIG.runeLootTable();
 
     public static void parseLootTableConfig() {
         for (String table : tearsLootTables) {

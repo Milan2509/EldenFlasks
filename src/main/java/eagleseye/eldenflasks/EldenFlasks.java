@@ -2,7 +2,6 @@ package eagleseye.eldenflasks;
 
 import eagleseye.eldenflasks.buff.BuffEffect;
 import eagleseye.eldenflasks.buff.BuffManager;
-import eagleseye.eldenflasks.config.DefaultConfigs;
 import eagleseye.eldenflasks.config.EldenFlasksBuffConfig;
 import eagleseye.eldenflasks.registry.*;
 import eagleseye.eldenflasks.config.EldenFlasksFlaskConfig;
@@ -35,7 +34,7 @@ public class EldenFlasks implements ModInitializer {
     public static boolean canRechargeFlask(PlayerEntity player) {
         if (!FabricLoader.getInstance().isModLoaded("incombat")) return true;
 
-        if (CombatCheck.isPlayerInCombat(player) && FLASKS_CONFIG.inCombatIntegration()) {
+        else if (CombatCheck.isPlayerInCombat(player) && FLASKS_CONFIG.inCombatIntegration()) {
             return false;
 
         } else return true;
@@ -60,9 +59,6 @@ public class EldenFlasks implements ModInitializer {
 
         //Config
         EnhancerLootInjections.parseLootTableConfig();
-
-        //Defaults
-        DefaultConfigs.init();
 
         LOGGER.info("Successfully Initialized: " + MOD_ID);
     }

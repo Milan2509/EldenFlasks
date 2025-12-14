@@ -35,6 +35,8 @@
   "text.config.eldenflasks/flasks_v2.section.modIntegrations": "Mod Integrations",
   "text.config.eldenflasks/flasks_v2.option.inCombatIntegration": "In Combat",
 
+  "text.config.eldenflasks/flasks_v2.option.rechargeTooltip": "Enable recharge tooltip",
+
   "item.eldenflasks.mixing_flask": "Flask of Mixed Wonders [WIP]",
   "item.eldenflasks.mixing_flask.desc": "Applies buffs when consumed",
   "effect.eldenflasks.buffed": "Buffed",

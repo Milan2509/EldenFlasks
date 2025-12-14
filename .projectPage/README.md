@@ -9,21 +9,22 @@
 **Requires**
 - [oωo (owo-lib)](https://modrinth.com/mod/owo-lib)
 - [Fabric API](https://modrinth.com/mod/fabric-api)
+
+**Recommended**
+- [In Combat](https://modrinth.com/mod/in-combat)
 # Features ✨
 ### Healing Flask
-The healing flask is used to quickly heal yourself in the midst of battle. It has various enhanceable stats.
+The healing flask is used to quickly heal yourself in the midst of battle.
 
-**Charges**
-- The amount of uses the flask has before it needs to be recharged
-- Can be recharged at campfires
+**How does the flask work?**
+- Healing
+  - When consumed the flask will heal the player based on the flask's heal stat
+- Charges
+  - Charges are required to use the Healing Flask, when no charges are left you can no longer heal
+  - Flask can be recharged at campfires
+  - Flask can be recharged by killing mobs
 
-**Healing**
-- The amount of healing done when the flask is used
-
-**Drink Time**
-- How long it takes for the flask to be consumed
-
-![image of lask with tooltip](https://raw.githubusercontent.com/Milan2509/EldenFlasks/1.20.1/.projectPage/images/healthFlaskTooltip.png)
+![image of flask with tooltip](https://raw.githubusercontent.com/Milan2509/EldenFlasks/1.20.1/.projectPage/images/healthFlaskTooltip.png)
 ### Enhancer Items
 These items can be applied in the Flask Mixer to the Healing Flask. These can be found in various loot chests.
 
@@ -32,14 +33,17 @@ These items can be applied in the Flask Mixer to the Healing Flask. These can be
     - Dropped by bosses and found in end-game loot chests
 - Ancient Rune (Healing Enhancer)
     - Increases the amount of healing done
-- Pearl of a Thousand Souls (Drink Time Enhancer)
-    - Lowers the amount of time required to drink the flask
+    - Found in loot chests
 
 
 ![Image of all the enhancer items](https://raw.githubusercontent.com/Milan2509/EldenFlasks/1.20.1/.projectPage/images/enhancerItemsAllTooltips.png)
 ### Flask Mixer
 The flask mixer is used to enhance your Healing Flask.
 ![Replace this with a description](https://raw.githubusercontent.com/Milan2509/EldenFlasks/1.20.1/.projectPage/images/mixer.png)
+
+# Mod Integrations
+- [In Combat](https://modrinth.com/mod/in-combat)
+  - Prevents flask recharging at campfires while in combat, prevents cheesing!
 
 # Configuration ⚙️
 Nearly everything is configurable. Custom loot table injections can be added for all enhancer items and the Healing Flask is fully configurable, from base stats to maximum stats. The enhancer items' strength is also configurable.
@@ -49,4 +53,4 @@ Nearly everything is configurable. Custom loot table injections can be added for
 - General improvements, this is my first mod so i'm still learning things.
 
 # Technical Info 🔧
-Custom enhancer items can be created by extending ```ChargeEnhancerItem```, ```HealingEnhancerItem``` or ```DrinkEnhancerItem```. The modifier amount can also be passed.
+Custom enhancer items can be created by extending ```ChargeEnhancerItem``` or ```HealingEnhancerItem```. The modifier amount can also be passed.

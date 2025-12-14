@@ -39,7 +39,33 @@ public class FlasksConfigModel {
     @Comment("Which entities won't count towards the kill flask recharging")
     public List<String> entityKillBlacklist = new ArrayList<>();
     @Comment("Which entities should fully recharge the healing flasks charges on death")
-    public List<String> fullyRechargeEntities = new ArrayList<>();
+    public List<String> fullyRechargeEntities = List.of(
+            "minecraft:wither",
+            "minecraft:ender_dragon",
+
+            "minecells:concierge",
+            "minecraft:conjunctivius",
+
+            "bosses_of_mass_destruction:lich",
+            "bosses_of_mass_destruction:gauntlet",
+            "bosses_of_mass_destruction:void_blossom",
+
+            "cataclysm:ignis",
+            "cataclysm:ender_golem",
+            "cataclysm:netherite_monstrosity",
+            "cataclysm:leviathan",
+            "cataclysm:ancient_remnant",
+            "cataclysm:harbinger",
+            "cataclysm:scylla",
+
+            "mowziesmobs:frostmaw",
+            "mowziesmobs:ferrous_wraughtnaut"
+            
+    );
+
+    //TODO: remove this and replace it with a tooltip only showing when shift is held.
+    @Comment("enable/disable the how to recharge tooltip")
+    public boolean rechargeTooltip = true;
 
     @SectionHeader("mixedFlask")
     @Comment("When more mixed flasks are held then the flasks aren't usable.")
@@ -48,13 +74,10 @@ public class FlasksConfigModel {
     public int buffDuration = 1200;
 
     @SectionHeader("modIntegrations")
+    @Comment("Integration with the In Combat mod, stops the player from recharging the flask at a campfire while in combat")
     public boolean inCombatIntegration = true;
 
-    //TODO: remove this and replace it with a tooltip only showing when shift is held.
-    @Comment("enable/disable the how to recharge tooltip")
-    public boolean rechargeTooltip = true;
-
-    @ExcludeFromScreen
-    @Comment("DO NOT TOUCH PLS")
-    public boolean firstLoad = true;
+//    @ExcludeFromScreen
+//    @Comment("DO NOT TOUCH PLS")
+//    public boolean firstLoad = true;
 }
