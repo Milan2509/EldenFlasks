@@ -37,6 +37,8 @@ public class FlaskMixerScreenHandler extends ScreenHandler {
 
         addPlayerHotbar(playerInventory);
         addPlayerInventory(playerInventory);
+
+        addProperties(arrayPropertyDelegate);
     }
 
     @Override
