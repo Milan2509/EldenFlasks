@@ -1,13 +1,18 @@
 package eagleseye.elden_flasks.internals.item.custom;
 
 import eagleseye.elden_flasks.EldenFlasks;
+import eagleseye.elden_flasks.internals.component.ComponentUtil;
 import eagleseye.elden_flasks.internals.component.EldenFlaskComponents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.registry.Registries;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
@@ -42,48 +47,58 @@ public class HealingFlaskItem extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        int currentUses = getCurrentUses(stack);
+        int currentUses = ComponentUtil.getCurrentUses(stack);
 
         if (currentUses <= 0 ) {
             user.sendMessage(Text.translatable("message.elden_flasks.no_uses_left").formatted(Formatting.RED));
             return stack;
         }
 
-        user.heal(getHealAmount(stack));
+        user.heal(ComponentUtil.getHealAmount(stack));
         stack.set(EldenFlaskComponents.FLASK_CURRENT_USES, currentUses - 1);
+        sendHealingVisuals(user);
 
         return super.finishUsing(stack, world, user);
     }
 
     @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        if(!isRechargeBlock(Registries.BLOCK.getId(context.getWorld().getBlockState(context.getBlockPos()).getBlock()).toString())) {
+            return ActionResult.PASS;
+        }
+
+        context.getStack().set(EldenFlaskComponents.FLASK_CURRENT_USES, ComponentUtil.getMaxUses(context.getStack()));
+        sendRechargeVisuals(context.getPlayer());
+
+        return ActionResult.PASS;
+    }
+
+    @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        tooltip.add(Text.literal("Uses: " + getCurrentUses(stack) + " / " + getMaxUses(stack)));
-        tooltip.add(Text.literal("Healing: " + (int)getHealAmount(stack)));
+        MutableText usesText = Text.literal("Uses: " + ComponentUtil.getCurrentUses(stack) + "/" + ComponentUtil.getMaxUses(stack));
+        if(ComponentUtil.getCurrentUses(stack) <= 0){
+            tooltip.add(usesText.formatted(Formatting.RED));
+        } else {
+            tooltip.add(usesText.formatted(Formatting.GOLD));
+        }
+        tooltip.add(Text.literal("Healing: " + (int) ComponentUtil.getHealAmount(stack)  + " HP").formatted(Formatting.GOLD));
 
         super.appendTooltip(stack, context, tooltip, type);
     }
 
-    private float getHealAmount(ItemStack stack) {
-        if (stack.get(EldenFlaskComponents.HEAL_AMOUNT) != null){
-            return stack.get(EldenFlaskComponents.HEAL_AMOUNT);
-        } else {
-            return 0;
+    private boolean isRechargeBlock(String blockId){
+        return EldenFlasks.flasksConfig.healing_flask.recharge_blocks.contains(blockId);
+    }
+
+    private void sendHealingVisuals(LivingEntity user){
+        if(user instanceof PlayerEntity player){
+//            player.playSound(SoundEvents);
         }
     }
 
-    private int getMaxUses(ItemStack stack) {
-        if (stack.get(EldenFlaskComponents.FLASK_MAX_USES) != null){
-            return stack.get(EldenFlaskComponents.FLASK_MAX_USES);
-        } else {
-            return 0;
-        }
-    }
-
-    private int getCurrentUses(ItemStack stack) {
-        if (stack.get(EldenFlaskComponents.FLASK_CURRENT_USES) != null){
-            return stack.get(EldenFlaskComponents.FLASK_CURRENT_USES);
-        } else {
-            return 0;
+    private void sendRechargeVisuals(LivingEntity user){
+        if(user instanceof PlayerEntity player){
+//            player.playSound(SoundEvents);
         }
     }
 }
