@@ -1,7 +1,6 @@
 package eagleseye.elden_flasks.mixin;
 
-import eagleseye.elden_flasks.internals.component.ComponentUtil;
-import eagleseye.elden_flasks.internals.item.EldenFlasksItems;
+import eagleseye.elden_flasks.internals.util.ComponentUtils;
 import eagleseye.elden_flasks.internals.item.custom.HealingFlaskItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -30,7 +29,7 @@ public class LivingEntityMixin {
 
         for (ItemStack stack : player.getInventory().main) {
             if (stack.getItem() instanceof HealingFlaskItem) {
-                ComponentUtil.incrementFlaskKillCount(stack);
+                ComponentUtils.incrementFlaskKillCount(stack);
             }
         }
     }

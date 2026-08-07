@@ -1,4 +1,11 @@
 {
   "item.elden_flasks.healing_flask": "Flask of Healing",
-  "message.elden_flasks.no_uses_left": "Flask is Empty!"
+  "message.elden_flasks.no_uses_left": "Flask is Empty!",
+  "enhancer_type.uses": "Charges",
+  "enhancer_type.healing": "Healing",
+  "tooltip.elden_flasks.enhancer_item.usage_info": "Apply by Right-Clicking with a Flask of Healing in your Offhand",
+  "message.elden_flasks.cancel_enhancer_usage": "The enhancer could not be applied...",
+  "message.elden_flasks.enhancer_flask_maxed": "Flask of Healing has reached its full %s potential...",
+  "tooltip.elden_flasks.enhancer_item.uses": "+%1$s Charges to Flask of Healing (Max: %2$s)",
+  "tooltip.elden_flasks.enhancer_item.healing": "+%1$s Healing to Flask of Healing (Max: %2$s HP)"
 }

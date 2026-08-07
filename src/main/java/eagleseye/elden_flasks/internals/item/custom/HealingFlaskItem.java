@@ -1,8 +1,9 @@
 package eagleseye.elden_flasks.internals.item.custom;
 
 import eagleseye.elden_flasks.EldenFlasks;
-import eagleseye.elden_flasks.internals.component.ComponentUtil;
+import eagleseye.elden_flasks.internals.util.ComponentUtils;
 import eagleseye.elden_flasks.internals.component.EldenFlaskComponents;
+import eagleseye.elden_flasks.internals.util.VisualsUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,7 +13,6 @@ import net.minecraft.item.ItemUsage;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
@@ -50,16 +50,18 @@ public class HealingFlaskItem extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        int currentUses = ComponentUtil.getCurrentUses(stack);
+        int currentUses = ComponentUtils.getCurrentUses(stack);
 
-        if (currentUses <= 0 ) {
-            user.sendMessage(Text.translatable("message.elden_flasks.no_uses_left").formatted(Formatting.RED));
+        if (currentUses <= 0) {
+            if(user instanceof PlayerEntity player) {
+                player.sendMessage(Text.translatable("message.elden_flasks.no_uses_left").formatted(Formatting.RED), true);
+            }
             return stack;
         }
 
-        user.heal(ComponentUtil.getHealAmount(stack));
+        user.heal(ComponentUtils.getHealAmount(stack));
         stack.set(EldenFlaskComponents.FLASK_CURRENT_USES, currentUses - 1);
-        sendHealingVisuals(user);
+        VisualsUtils.sendHealingVisuals(user);
 
         return super.finishUsing(stack, world, user);
     }
@@ -70,8 +72,8 @@ public class HealingFlaskItem extends Item {
             return ActionResult.PASS;
         }
 
-        context.getStack().set(EldenFlaskComponents.FLASK_CURRENT_USES, ComponentUtil.getMaxUses(context.getStack()));
-        sendRechargeVisuals(context.getPlayer());
+        context.getStack().set(EldenFlaskComponents.FLASK_CURRENT_USES, ComponentUtils.getMaxUses(context.getStack()));
+        VisualsUtils.sendRechargeVisuals(context.getPlayer());
 
         return ActionResult.PASS;
     }
@@ -81,28 +83,28 @@ public class HealingFlaskItem extends Item {
         super.inventoryTick(stack, world, entity, slot, selected);
 
         if(hasReachedKillRequirement(stack)) {
-            ComponentUtil.setCurrentUses(stack, ComponentUtil.getCurrentUses(stack) + EldenFlasks.flasksConfig.healing_flask.recharge_from_kill_amount);
-            ComponentUtil.setCurrentKillCount(stack, ComponentUtil.getCurrentKillCount(stack) - ComponentUtil.getRequiredKillCount(stack));
+            ComponentUtils.setCurrentUses(stack, ComponentUtils.getCurrentUses(stack) + EldenFlasks.flasksConfig.healing_flask.recharge_from_kill_amount);
+            ComponentUtils.setCurrentKillCount(stack, ComponentUtils.getCurrentKillCount(stack) - ComponentUtils.getRequiredKillCount(stack));
             if (entity instanceof PlayerEntity player) {
-                sendRechargeVisuals(player);
+                VisualsUtils.sendRechargeVisuals(player);
             }
         }
 
-        if(ComponentUtil.getCurrentUses(stack) > ComponentUtil.getMaxUses(stack)) {
-            ComponentUtil.setCurrentUses(stack, ComponentUtil.getMaxUses(stack));
+        if(ComponentUtils.getCurrentUses(stack) > ComponentUtils.getMaxUses(stack)) {
+            ComponentUtils.setCurrentUses(stack, ComponentUtils.getMaxUses(stack));
         }
     }
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        MutableText usesText = Text.literal("Charges: " + ComponentUtil.getCurrentUses(stack) + "/" + ComponentUtil.getMaxUses(stack));
-        if(ComponentUtil.getCurrentUses(stack) <= 0){
+        MutableText usesText = Text.literal("Charges: " + ComponentUtils.getCurrentUses(stack) + "/" + ComponentUtils.getMaxUses(stack));
+        if(ComponentUtils.getCurrentUses(stack) <= 0){
             tooltip.add(usesText.formatted(Formatting.RED));
         } else {
             tooltip.add(usesText.formatted(Formatting.GOLD));
         }
-        tooltip.add(Text.literal("Healing: " + (int) ComponentUtil.getHealAmount(stack)  + " HP").formatted(Formatting.GOLD));
-        tooltip.add(Text.literal("Kills for Recharge: " + ComponentUtil.getCurrentKillCount(stack)  + "/" + ComponentUtil.getRequiredKillCount(stack)).formatted(Formatting.GRAY));
+        tooltip.add(Text.literal("Healing: " + (int) ComponentUtils.getHealAmount(stack)  + " HP").formatted(Formatting.GOLD));
+        tooltip.add(Text.literal("Kills for Recharge: " + ComponentUtils.getCurrentKillCount(stack)  + "/" + ComponentUtils.getRequiredKillCount(stack)).formatted(Formatting.GRAY));
         super.appendTooltip(stack, context, tooltip, type);
     }
 
@@ -111,24 +113,12 @@ public class HealingFlaskItem extends Item {
     }
 
     private boolean hasReachedKillRequirement(ItemStack stack){
-        return ComponentUtil.getCurrentKillCount(stack) >= ComponentUtil.getRequiredKillCount(stack);
+        return ComponentUtils.getCurrentKillCount(stack) >= ComponentUtils.getRequiredKillCount(stack);
     }
 
     private void rechargeFlask(ItemStack stack, boolean rechargeFully){
         if(rechargeFully){
 
-        }
-    }
-
-    private void sendHealingVisuals(LivingEntity user){
-        if(user instanceof PlayerEntity player){
-//            player.playSound(SoundEvents);
-        }
-    }
-
-    private void sendRechargeVisuals(LivingEntity user){
-        if(user instanceof PlayerEntity player){
-//            player.playSound(SoundEvents);
         }
     }
 }

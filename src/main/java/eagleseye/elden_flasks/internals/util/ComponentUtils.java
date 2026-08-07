@@ -1,8 +1,9 @@
-package eagleseye.elden_flasks.internals.component;
+package eagleseye.elden_flasks.internals.util;
 
+import eagleseye.elden_flasks.internals.component.EldenFlaskComponents;
 import net.minecraft.item.ItemStack;
 
-public class ComponentUtil {
+public class ComponentUtils {
     public static float getHealAmount(ItemStack stack) {
         if (stack.get(EldenFlaskComponents.HEAL_AMOUNT) != null){
             return stack.get(EldenFlaskComponents.HEAL_AMOUNT);
