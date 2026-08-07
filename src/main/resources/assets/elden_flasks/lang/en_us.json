@@ -1,5 +1,7 @@
 {
   "item.elden_flasks.healing_flask": "Flask of Healing",
+  "item.elden_flasks.enhancer_uses": "Rune of Divine Healing",
+  "item.elden_flasks.enhancer_healing": "Goblet of Divine Tears",
   "message.elden_flasks.no_uses_left": "Flask is Empty!",
   "enhancer_type.uses": "Charges",
   "enhancer_type.healing": "Healing",
