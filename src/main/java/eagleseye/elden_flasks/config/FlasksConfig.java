@@ -5,7 +5,9 @@ import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Config(name = "flasks")
 public class FlasksConfig implements ConfigData {
@@ -25,8 +27,8 @@ public class FlasksConfig implements ConfigData {
         public int recharge_kill_requirement = 5;
         @Comment("Amount of uses recharged from reaching the recharge_kill_requirement")
         public int recharge_from_kill_amount = 1;
-        @Comment("Blocks that will recharge the healing flask when right clicked")
-        public List<String> recharge_blocks = new ArrayList<>(){
+        @Comment("Blocks that will recharge the healing flask when right-clicked")
+        public Set<String> recharge_blocks = new LinkedHashSet<>(){
             {
                 add("minecraft:campfire");
                 add("minecraft:soul_campfire");

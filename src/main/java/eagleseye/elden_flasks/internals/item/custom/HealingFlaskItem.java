@@ -4,6 +4,7 @@ import eagleseye.elden_flasks.EldenFlasks;
 import eagleseye.elden_flasks.internals.util.ComponentUtils;
 import eagleseye.elden_flasks.internals.component.EldenFlaskComponents;
 import eagleseye.elden_flasks.internals.util.VisualsUtils;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -106,6 +107,17 @@ public class HealingFlaskItem extends Item {
         tooltip.add(Text.literal("Healing: " + (int) ComponentUtils.getHealAmount(stack)  + " HP").formatted(Formatting.GOLD));
         tooltip.add(Text.literal("Kills for Recharge: " + ComponentUtils.getCurrentKillCount(stack)  + "/" + ComponentUtils.getRequiredKillCount(stack)).formatted(Formatting.GRAY));
         super.appendTooltip(stack, context, tooltip, type);
+
+        if(Screen.hasShiftDown()) {
+            for(String rechargeBlock : EldenFlasks.flasksConfig.healing_flask.recharge_blocks) {
+                Identifier blockId = Identifier.of(rechargeBlock);
+                if(Registries.BLOCK.containsId(blockId)) {
+                    tooltip.add(Text.translatable(Registries.BLOCK.get(blockId).getTranslationKey()).formatted(Formatting.DARK_GRAY));
+                }
+            }
+        } else {
+            tooltip.add(Text.translatable("tooltip.elden_flasks.healing_flask.recharge_blocks").formatted(Formatting.DARK_GRAY));
+        }
     }
 
     private boolean isRechargeBlock(String blockId){
@@ -114,11 +126,5 @@ public class HealingFlaskItem extends Item {
 
     private boolean hasReachedKillRequirement(ItemStack stack){
         return ComponentUtils.getCurrentKillCount(stack) >= ComponentUtils.getRequiredKillCount(stack);
-    }
-
-    private void rechargeFlask(ItemStack stack, boolean rechargeFully){
-        if(rechargeFully){
-
-        }
     }
 }
