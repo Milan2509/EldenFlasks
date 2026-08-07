@@ -32,5 +32,6 @@ public class EldenFlasks implements ModInitializer {
 
         // Register
         EldenFlasksItems.register();
+        EldenFlasksItems.register();
     }
 }

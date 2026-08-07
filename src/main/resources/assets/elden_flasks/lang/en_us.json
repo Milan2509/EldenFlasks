@@ -13,5 +13,6 @@
   "tooltip.elden_flasks.healing_flask.recharge_blocks": "Hold Shift to view Recharge Blocks",
   "tooltip.elden_flasks.healing_flask.uses": "Charges: %1$s/%2$s",
   "tooltip.elden_flasks.healing_flask.healing": "Healing: %s HP",
-  "tooltip.elden_flasks.healing_flask.recharge": "Kills for Recharge: %1$s/%2$s"
+  "tooltip.elden_flasks.healing_flask.recharge": "Kills for Recharge: %1$s/%2$s",
+  "itemgroup.elden_flasks.generic": "Elden Flasks"
 }

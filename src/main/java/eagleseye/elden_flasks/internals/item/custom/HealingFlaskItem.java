@@ -46,7 +46,7 @@ public class HealingFlaskItem extends Item {
 
     @Override
     public int getMaxUseTime(ItemStack stack, LivingEntity user) {
-        return 40;
+        return EldenFlasks.flasksConfig.healing_flask.drink_time;
     }
 
     @Override
