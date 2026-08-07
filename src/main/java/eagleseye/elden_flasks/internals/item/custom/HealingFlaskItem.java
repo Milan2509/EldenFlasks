@@ -98,14 +98,14 @@ public class HealingFlaskItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        MutableText usesText = Text.literal("Charges: " + ComponentUtils.getCurrentUses(stack) + "/" + ComponentUtils.getMaxUses(stack));
+        MutableText usesText = Text.translatable("tooltip.elden_flasks.healing_flask.uses", ComponentUtils.getCurrentUses(stack), ComponentUtils.getMaxUses(stack));
         if(ComponentUtils.getCurrentUses(stack) <= 0){
             tooltip.add(usesText.formatted(Formatting.RED));
         } else {
             tooltip.add(usesText.formatted(Formatting.GOLD));
         }
-        tooltip.add(Text.literal("Healing: " + (int) ComponentUtils.getHealAmount(stack)  + " HP").formatted(Formatting.GOLD));
-        tooltip.add(Text.literal("Kills for Recharge: " + ComponentUtils.getCurrentKillCount(stack)  + "/" + ComponentUtils.getRequiredKillCount(stack)).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("tooltip.elden_flasks.healing_flask.healing", (int)ComponentUtils.getHealAmount(stack)).formatted(Formatting.GOLD));
+        tooltip.add(Text.translatable("tooltip.elden_flasks.healing_flask.recharge", ComponentUtils.getCurrentKillCount(stack), ComponentUtils.getRequiredKillCount(stack)).formatted(Formatting.GRAY));
         super.appendTooltip(stack, context, tooltip, type);
 
         if(Screen.hasShiftDown()) {
