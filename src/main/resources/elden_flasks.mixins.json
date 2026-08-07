@@ -3,7 +3,7 @@
 	"package": "eagleseye.elden_flasks.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-
+		"LivingEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

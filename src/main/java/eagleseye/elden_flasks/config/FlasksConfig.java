@@ -18,7 +18,9 @@ public class FlasksConfig implements ConfigData {
         @Comment("Base amount of half hearths healed by the healing flask (requires restart to take effect)")
         public float base_healing_amount = 4;
         @Comment("Amount of kills needed to recharge 1 charge of the flask")
-        public int recharge_kill_amount = 5;
+        public int recharge_kill_requirement = 5;
+        @Comment("Amount of uses recharged from reaching the recharge_kill_requirement")
+        public int recharge_from_kill_amount = 1;
         @Comment("Blocks that will recharge the healing flask when right clicked")
         public List<String> recharge_blocks = new ArrayList<>(){
             {
