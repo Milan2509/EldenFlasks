@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"main": [
 			"eagleseye.elden_flasks.EldenFlasks"
+		],
+		"client": [
+			"eagleseye.elden_flasks.EldenFlasksClient"
 		]
 	},
 	"mixins": [

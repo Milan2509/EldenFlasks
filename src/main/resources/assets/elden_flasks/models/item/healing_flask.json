@@ -2,5 +2,31 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "elden_flasks:item/healing_flask"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "elden_flasks:uses": 0.0
+      },
+      "model": "elden_flasks:item/healing_flask_empty"
+    },
+    {
+      "predicate": {
+        "elden_flasks:uses": 0.5
+      },
+      "model": "elden_flasks:item/healing_flask_half"
+    },
+    {
+      "predicate": {
+        "elden_flasks:uses": 0.75
+      },
+      "model": "elden_flasks:item/healing_flask_missing"
+    },
+    {
+      "predicate": {
+        "elden_flasks:uses": 1
+      },
+      "model": "elden_flasks:item/healing_flask"
+    }
+  ]
 }

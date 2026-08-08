@@ -3,6 +3,8 @@ package eagleseye.elden_flasks;
 import eagleseye.elden_flasks.config.EnhancersConfig;
 import eagleseye.elden_flasks.config.FlasksConfig;
 import eagleseye.elden_flasks.config.EldenFlasksConfigWrapper;
+import eagleseye.elden_flasks.internals.client.ModelPredicates;
+import eagleseye.elden_flasks.internals.item.EldenFlasksGroup;
 import eagleseye.elden_flasks.internals.item.EldenFlasksItems;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
@@ -32,6 +34,7 @@ public class EldenFlasks implements ModInitializer {
 
         // Register
         EldenFlasksItems.register();
-        EldenFlasksItems.register();
+        EldenFlasksGroup.register();
+
     }
 }
