@@ -7,6 +7,7 @@ import eagleseye.elden_flasks.internals.EldenFlasksEvents;
 import eagleseye.elden_flasks.internals.client.ModelPredicates;
 import eagleseye.elden_flasks.internals.item.EldenFlasksGroup;
 import eagleseye.elden_flasks.internals.item.EldenFlasksItems;
+import eagleseye.elden_flasks.internals.util.LootInjections;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
@@ -37,5 +38,6 @@ public class EldenFlasks implements ModInitializer {
         EldenFlasksItems.register();
         EldenFlasksGroup.register();
         EldenFlasksEvents.register();
+        LootInjections.register();
     }
 }
