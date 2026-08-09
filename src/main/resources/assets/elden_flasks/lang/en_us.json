@@ -14,5 +14,6 @@
   "tooltip.elden_flasks.healing_flask.uses": "Charges: %1$s/%2$s",
   "tooltip.elden_flasks.healing_flask.healing": "Healing: %s HP",
   "tooltip.elden_flasks.healing_flask.recharge": "Kills for Recharge: %1$s/%2$s",
-  "itemgroup.elden_flasks.generic": "Elden Flasks"
+  "itemgroup.elden_flasks.generic": "Elden Flasks",
+  "message.elden_flasks.in_combat_recharge_fail": "Cannot Recharge While In Combat"
 }

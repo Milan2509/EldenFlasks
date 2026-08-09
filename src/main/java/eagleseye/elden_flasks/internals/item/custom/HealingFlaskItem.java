@@ -4,6 +4,7 @@ import eagleseye.elden_flasks.EldenFlasks;
 import eagleseye.elden_flasks.internals.util.ComponentUtils;
 import eagleseye.elden_flasks.internals.component.EldenFlaskComponents;
 import eagleseye.elden_flasks.internals.util.VisualsUtils;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -54,7 +55,7 @@ public class HealingFlaskItem extends Item {
         int currentUses = ComponentUtils.getCurrentUses(stack);
 
         if (currentUses <= 0) {
-            if(user instanceof PlayerEntity player) {
+            if (user instanceof PlayerEntity player) {
                 player.sendMessage(Text.translatable("message.elden_flasks.no_uses_left").formatted(Formatting.RED), true);
             }
             return stack;
@@ -69,7 +70,13 @@ public class HealingFlaskItem extends Item {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if(!isRechargeBlock(Registries.BLOCK.getId(context.getWorld().getBlockState(context.getBlockPos()).getBlock()).toString())) {
+        if (!isRechargeBlock(Registries.BLOCK.getId(context.getWorld().getBlockState(context.getBlockPos()).getBlock()).toString())) {
+            return ActionResult.PASS;
+        }
+
+        if (isInCombat()) {
+            context.getPlayer().sendMessage(Text.translatable("message.elden_flasks.in_combat_recharge_fail")
+                    .formatted(Formatting.RED), true);
             return ActionResult.PASS;
         }
 
@@ -83,7 +90,7 @@ public class HealingFlaskItem extends Item {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
 
-        if(hasReachedKillRequirement(stack)) {
+        if (hasReachedKillRequirement(stack)) {
             ComponentUtils.setCurrentUses(stack, ComponentUtils.getCurrentUses(stack) + EldenFlasks.flasksConfig.healing_flask.recharge_from_kill_amount);
             ComponentUtils.setCurrentKillCount(stack, ComponentUtils.getCurrentKillCount(stack) - ComponentUtils.getRequiredKillCount(stack));
             if (entity instanceof PlayerEntity player) {
@@ -91,7 +98,7 @@ public class HealingFlaskItem extends Item {
             }
         }
 
-        if(ComponentUtils.getCurrentUses(stack) > ComponentUtils.getMaxUses(stack)) {
+        if (ComponentUtils.getCurrentUses(stack) > ComponentUtils.getMaxUses(stack)) {
             ComponentUtils.setCurrentUses(stack, ComponentUtils.getMaxUses(stack));
         }
     }
@@ -99,19 +106,19 @@ public class HealingFlaskItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         MutableText usesText = Text.translatable("tooltip.elden_flasks.healing_flask.uses", ComponentUtils.getCurrentUses(stack), ComponentUtils.getMaxUses(stack));
-        if(ComponentUtils.getCurrentUses(stack) <= 0){
+        if (ComponentUtils.getCurrentUses(stack) <= 0) {
             tooltip.add(usesText.formatted(Formatting.RED));
         } else {
             tooltip.add(usesText.formatted(Formatting.GOLD));
         }
-        tooltip.add(Text.translatable("tooltip.elden_flasks.healing_flask.healing", (int)ComponentUtils.getHealAmount(stack)).formatted(Formatting.GOLD));
+        tooltip.add(Text.translatable("tooltip.elden_flasks.healing_flask.healing", (int) ComponentUtils.getHealAmount(stack)).formatted(Formatting.GOLD));
         tooltip.add(Text.translatable("tooltip.elden_flasks.healing_flask.recharge", ComponentUtils.getCurrentKillCount(stack), ComponentUtils.getRequiredKillCount(stack)).formatted(Formatting.GRAY));
         super.appendTooltip(stack, context, tooltip, type);
 
-        if(Screen.hasShiftDown()) {
-            for(String rechargeBlock : EldenFlasks.flasksConfig.healing_flask.recharge_blocks) {
+        if (Screen.hasShiftDown()) {
+            for (String rechargeBlock : EldenFlasks.flasksConfig.healing_flask.recharge_blocks) {
                 Identifier blockId = Identifier.of(rechargeBlock);
-                if(Registries.BLOCK.containsId(blockId)) {
+                if (Registries.BLOCK.containsId(blockId)) {
                     tooltip.add(Text.translatable(Registries.BLOCK.get(blockId).getTranslationKey()).formatted(Formatting.DARK_GRAY));
                 }
             }
@@ -120,11 +127,15 @@ public class HealingFlaskItem extends Item {
         }
     }
 
-    private boolean isRechargeBlock(String blockId){
+    private boolean isRechargeBlock(String blockId) {
         return EldenFlasks.flasksConfig.healing_flask.recharge_blocks.contains(blockId);
     }
 
-    private boolean hasReachedKillRequirement(ItemStack stack){
+    private boolean hasReachedKillRequirement(ItemStack stack) {
         return ComponentUtils.getCurrentKillCount(stack) >= ComponentUtils.getRequiredKillCount(stack);
+    }
+
+    private boolean isInCombat() {
+        return FabricLoader.getInstance().isModLoaded("in_combat") && EldenFlasks.flasksConfig.compat.cannot_recharge_in_combat;
     }
 }

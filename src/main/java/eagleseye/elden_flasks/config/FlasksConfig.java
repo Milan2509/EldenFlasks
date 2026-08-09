@@ -13,6 +13,8 @@ import java.util.Set;
 public class FlasksConfig implements ConfigData {
     @Comment("Config options for the Healing Flask")
     public HealingFlaskConfig healing_flask = new HealingFlaskConfig();
+    @Comment("Config options that require other mods to be installed")
+    public CompatConfig compat = new CompatConfig();
 
     public static class HealingFlaskConfig {
         @Comment("Base amount of charges the flask has before needing to recharge")
@@ -30,11 +32,21 @@ public class FlasksConfig implements ConfigData {
         @Comment("Amount of uses recharged from reaching the recharge_kill_requirement")
         public int recharge_from_kill_amount = 1;
         @Comment("Blocks that will recharge the healing flask when right-clicked")
-        public Set<String> recharge_blocks = new LinkedHashSet<>(){
+        public Set<String> recharge_blocks = new LinkedHashSet<>() {
             {
                 add("minecraft:campfire");
                 add("minecraft:soul_campfire");
             }
         };
+
+        @Comment("If the flask should be fully recharged when the player dies")
+        public boolean death_recharge_flask = true;
+    }
+
+    public static class CompatConfig {
+        @Comment("When 'In Combat' is installed the flask cannot be recharged through 'recharge_blocks'")
+        public boolean cannot_recharge_in_combat = true;
+//        @Comment("When 'Waystones' is installed, upon teleporting the flask should be fully recharged")
+//        public boolean waystones_teleport_recharge = true;
     }
 }

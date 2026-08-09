@@ -13,6 +13,9 @@ repositories {
     maven {
         url "https://maven.terraformersmc.com/releases/"
     }
+    maven {
+        url "https://api.modrinth.com/maven"
+    }
 }
 
 dependencies {
@@ -27,6 +30,10 @@ dependencies {
     // Config
     modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
     modImplementation "blue.endless:jankson:1.2.3"
+
+    // Compat
+//    modImplementation "maven.modrinth:waystones:${project.waystones_version}+neoforge-1.21.1"
+    modImplementation "maven.modrinth:in-combat:${project.in_combat_version}+1.21.1"
 }
 
 processResources {
