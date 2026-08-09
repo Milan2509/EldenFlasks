@@ -4,6 +4,7 @@ import eagleseye.elden_flasks.EldenFlasks;
 import eagleseye.elden_flasks.internals.util.ComponentUtils;
 import eagleseye.elden_flasks.internals.component.EldenFlaskComponents;
 import eagleseye.elden_flasks.internals.util.VisualsUtils;
+import eagleseye.in_combat.api.InCombatAPI;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.Entity;
@@ -15,6 +16,7 @@ import net.minecraft.item.ItemUsage;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
@@ -74,7 +76,7 @@ public class HealingFlaskItem extends Item {
             return ActionResult.PASS;
         }
 
-        if (isInCombat()) {
+        if (isInCombat(context.getPlayer())) {
             context.getPlayer().sendMessage(Text.translatable("message.elden_flasks.in_combat_recharge_fail")
                     .formatted(Formatting.RED), true);
             return ActionResult.PASS;
@@ -135,7 +137,9 @@ public class HealingFlaskItem extends Item {
         return ComponentUtils.getCurrentKillCount(stack) >= ComponentUtils.getRequiredKillCount(stack);
     }
 
-    private boolean isInCombat() {
-        return FabricLoader.getInstance().isModLoaded("in_combat") && EldenFlasks.flasksConfig.compat.cannot_recharge_in_combat;
+    private boolean isInCombat(PlayerEntity player) {
+        if(!(player instanceof ServerPlayerEntity serverPlayer)) return false;
+        if(!FabricLoader.getInstance().isModLoaded("in_combat")) return false;
+        else return EldenFlasks.flasksConfig.compat.cannot_recharge_in_combat && InCombatAPI.isInCombat(serverPlayer);
     }
 }
